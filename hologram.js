@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   NICO TRADES — 3-D Brain Hologram v10
+   BEPO TRADES — 3-D Brain Hologram v10
    One connected body + cerebellum.
    Temporal lobe = downward stretch deformation of the
    main cerebrum, separated by a Sylvian fissure notch.

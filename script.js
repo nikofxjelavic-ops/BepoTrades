@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════
-   NICO TRADES — Premium Animation Engine v2
+   BEPO TRADES — Premium Animation Engine v2
    ══════════════════════════════════════════════ */
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);

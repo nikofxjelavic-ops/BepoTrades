@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   NICO TRADES — Fixed Background Canvas
+   BEPO TRADES — Fixed Background Canvas
    Constellation particle network — stays fixed behind the
    whole page. Speeds up on scroll to transition sections.
 ═══════════════════════════════════════════════════════ */
