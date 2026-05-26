@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nico Trades Course</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <meta name="description" content="The private trading Course built to help serious traders master structure, liquidity, execution, and consistency.">
+
+  <!-- Open Graph / iMessage / WhatsApp / Snapchat -->
+  <meta property="og:type"         content="website">
+  <meta property="og:url"          content="https://nicotrades.com/">
+  <meta property="og:title"        content="Nico Trades Course">
+  <meta property="og:description"  content="The private trading Course built to help serious traders master structure, liquidity, execution, and consistency.">
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="Nico Trades Course">
+  <meta name="twitter:description" content="The private trading Course built to help serious traders master structure, liquidity, execution, and consistency.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+
+  <!-- TOP-RIGHT FIXED WIDGET -->
+  <div class="tr-widget" id="trWidget">
+    <div class="tr-spots">
+      <span class="tr-dot"></span>
+      <span><strong id="trSpotsNum">30</strong> spots left</span>
+    </div>
+    <a href="#" id="btnTrClaim" class="btn-primary tr-btn">Get Access for $0</a>
+  </div>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="c-cube" id="cCube"></div>
+
+  <!-- FIXED BACKGROUND   aurora + particles, always visible behind all sections -->
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hb-b1"></div>
+    <div class="hb-b2"></div>
+    <div class="hb-b3"></div>
+    <div class="hb-grid"></div>
+    <div class="hb-scan"></div>
+    <canvas id="heroBgCanvas" class="hero-bg-canvas"></canvas>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero page-section" id="hero">
+
+    <!-- decorative star nodes -->
+    <span class="hero-star" style="--x:18%;--y:22%;--s:2.5px;--d:0s;--o:0.7"></span>
+    <span class="hero-star" style="--x:35%;--y:8%;--s:1.5px;--d:0.6s;--o:0.5"></span>
+    <span class="hero-star" style="--x:62%;--y:15%;--s:2px;--d:1.1s;--o:0.6"></span>
+    <span class="hero-star" style="--x:80%;--y:30%;--s:1.8px;--d:0.3s;--o:0.4"></span>
+    <span class="hero-star" style="--x:72%;--y:72%;--s:2.2px;--d:1.8s;--o:0.55"></span>
+    <span class="hero-star" style="--x:48%;--y:85%;--s:1.5px;--d:0.9s;--o:0.45"></span>
+    <span class="hero-star" style="--x:12%;--y:68%;--s:2px;--d:2.2s;--o:0.6"></span>
+    <span class="hero-star" style="--x:55%;--y:42%;--s:1.2px;--d:1.4s;--o:0.35"></span>
+
+
+    <div class="hero-layout">
+
+      <div class="hero-left" id="heroLeft">
+        <div class="hero-label">[ ONLY <span id="currSpots">30</span> SPOTS REMAINING ]</div>
+        <h1 class="hero-h1">
+          <span class="h1-line">The Course That</span>
+          <span class="h1-line">Took Me 4 Years</span>
+          <span class="h1-line">To Build.</span>
+        </h1>
+
+        <p class="hero-sub">I was a car mechanic who figured out trading the hard way, years of pain, failed strategies, and blown accounts. Everything that actually works, packed into one course.</p>
+
+        <div class="ho" id="heroOffer">
+
+          <!-- ambient glow node behind $0 -->
+          <div class="ho-glow" aria-hidden="true"></div>
+
+          <!-- price strip -->
+          <div class="ho-price">
+            <div class="ho-was-wrap">
+              <span class="ho-was">$499</span>
+              <span class="ho-strike" id="hoStrike" aria-hidden="true"></span>
+            </div>
+            <span class="ho-arr" aria-hidden="true">→</span>
+            <span class="ho-zero" id="hoZero">$0</span>
+            <span class="ho-badge">100% OFF</span>
+          </div>
+
+          <!-- spots line -->
+          <p class="ho-spots">
+            <span class="ho-dot"></span>
+            <span><strong id="spotsNum">30</strong> spots left · No card required</span>
+          </p>
+
+          <a href="#" id="btnClaim" class="btn-primary btn-hero">Get Access</a>
+
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-n">4+</span><span class="stat-l">Years Trading</span></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-n">6-Fig</span><span class="stat-l">Profits Made</span></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-n">10</span><span class="stat-l">Modules</span></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-n">2hrs</span><span class="stat-l">Full Course</span></div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true"><div class="sh-track"></div></div>
+  </section>
+
+
+  <!-- ═══ STORY ═══ -->
+  <section class="sec sec-story page-section" id="story">
+    <div class="scroll-hint" aria-hidden="true"><div class="sh-track"></div></div>
+    <div class="container">
+
+      <div class="sec-tag">[ MY STORY ]</div>
+      <h2 class="story-h2">I Was a Car Mechanic.<br>Then I <span class="story-grad">Figured Out the Market.</span></h2>
+
+      <!-- Journey stats -->
+      <div class="story-journey">
+        <div class="sj-item">
+          <span class="sj-n">$40K</span>
+          <span class="sj-l">Lost following gurus</span>
+        </div>
+        <div class="sj-sep"></div>
+        <div class="sj-item">
+          <span class="sj-n">4 Years</span>
+          <span class="sj-l">Of painful trial & error</span>
+        </div>
+        <div class="sj-sep"></div>
+        <div class="sj-item">
+          <span class="sj-n">1 System</span>
+          <span class="sj-l">That changed everything</span>
+        </div>
+      </div>
+
+      <!-- Before / After -->
+      <div class="story-contrast">
+        <div class="sc-col sc-before">
+          <div class="sc-chip sc-chip-before">THE STRUGGLE</div>
+          <ul class="sc-list">
+            <li><span class="sc-x">×</span>Hundreds of hours staring at losing trades</li>
+            <li><span class="sc-x">×</span>$40K lost following the wrong people</li>
+            <li><span class="sc-x">×</span>Every indicator, every guru. Nothing worked</li>
+          </ul>
+        </div>
+        <div class="sc-arrow-wrap">
+          <div class="sc-arrow-pill">→</div>
+        </div>
+        <div class="sc-col sc-after">
+          <div class="sc-chip sc-chip-after">THE BREAKTHROUGH</div>
+          <ul class="sc-list">
+            <li><span class="sc-check">✓</span> Stopped chasing signals. Started reading price.</li>
+            <li><span class="sc-check">✓</span> Built one repeatable system</li>
+            <li><span class="sc-check">✓</span> Six figures. Consistent. No guesswork.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Closing quote -->
+      <div class="story-closer">
+        "This course is the 4-year shortcut I never had. Every mistake I made, every concept that actually works, packed into 2 hours."
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ CURRICULUM ═══ -->
+  <section class="sec sec-curriculum page-section" id="course">
+    <div class="scroll-hint" aria-hidden="true"><div class="sh-track"></div></div>
+    <div class="container">
+
+      <!-- Header -->
+      <div class="curr-head">
+        <div class="sec-tag">[ THE COURSE ]</div>
+        <h2>10 Modules. Zero Fluff.<br><span class="curr-grad">Everything That Actually Works.</span></h2>
+        <div class="curr-meta">
+          <span>⏱ 2 hours total</span>
+          <span>◎ Beginner to advanced</span>
+          <span>✓ Instant access</span>
+        </div>
+      </div>
+
+      <!-- Progress bar row -->
+      <div class="curr-progress-row">
+        <div class="curr-progress-bar"><div class="curr-progress-fill"></div></div>
+        <span class="curr-counter">1 / 10</span>
+      </div>
+
+      <!-- Stage: one pair visible at a time -->
+      <div class="curr-stage">
+
+        <div class="mod-pair">
+          <div class="mod-card"><div class="mod-num">1</div><div class="mod-body"><span class="mod-tag tag-found">FOUNDATION</span><h3>Why Most Traders Stay Stuck</h3><canvas class="mod-canvas" data-anim="surge"   data-color="#4ade80"></canvas></div></div>
+          <div class="mod-card"><div class="mod-num">2</div><div class="mod-body"><span class="mod-tag tag-core">CORE CONCEPT</span><h3>Mastering Liquidity</h3><canvas class="mod-canvas" data-anim="pool"    data-color="#60a5fa"></canvas></div></div>
+        </div>
+
+        <div class="mod-pair">
+          <div class="mod-card"><div class="mod-num">3</div><div class="mod-body"><span class="mod-tag tag-core">CORE CONCEPT</span><h3>Fair Value Gaps</h3><canvas class="mod-canvas" data-anim="gap"     data-color="#60a5fa"></canvas></div></div>
+          <div class="mod-card"><div class="mod-num">4</div><div class="mod-body"><span class="mod-tag tag-strat">STRATEGY</span><h3>Daily Bias &amp; Top Down Analysis</h3><canvas class="mod-canvas" data-anim="bias"    data-color="#fbbf24"></canvas></div></div>
+        </div>
+
+        <div class="mod-pair">
+          <div class="mod-card"><div class="mod-num">5</div><div class="mod-body"><span class="mod-tag tag-strat">STRATEGY</span><h3>The Exact Entry Model</h3><canvas class="mod-canvas" data-anim="check"   data-color="#fbbf24"></canvas></div></div>
+          <div class="mod-card"><div class="mod-num">6</div><div class="mod-body"><span class="mod-tag tag-scale">SCALING</span><h3>Prop Firms &amp; Getting Funded</h3><canvas class="mod-canvas" data-anim="count"   data-color="#c084fc"></canvas></div></div>
+        </div>
+
+        <div class="mod-pair">
+          <div class="mod-card"><div class="mod-num">7</div><div class="mod-body"><span class="mod-tag tag-core">CORE CONCEPT</span><h3>Risk Management That Actually Works</h3><canvas class="mod-canvas" data-anim="rr"      data-color="#60a5fa"></canvas></div></div>
+          <div class="mod-card"><div class="mod-num">8</div><div class="mod-body"><span class="mod-tag tag-found">FOUNDATION</span><h3>Trading Psychology &amp; Discipline</h3><canvas class="mod-canvas" data-anim="wave"    data-color="#4ade80"></canvas></div></div>
+        </div>
+
+        <div class="mod-pair">
+          <div class="mod-card"><div class="mod-num">9</div><div class="mod-body"><span class="mod-tag tag-strat">STRATEGY</span><h3>Live Trade Walkthroughs</h3><canvas class="mod-canvas" data-anim="candles" data-color="#fbbf24"></canvas></div></div>
+          <div class="mod-card"><div class="mod-num">10</div><div class="mod-body"><span class="mod-tag tag-scale">SCALING</span><h3>Your First 90 Days: The Roadmap</h3><canvas class="mod-canvas" data-anim="path"    data-color="#c084fc"></canvas></div></div>
+        </div>
+
+      </div><!-- /.curr-stage -->
+
+      <!-- Dot nav -->
+      <div class="curr-dots">
+        <span class="curr-dot active" data-pair="0"></span>
+        <span class="curr-dot" data-pair="1"></span>
+        <span class="curr-dot" data-pair="2"></span>
+        <span class="curr-dot" data-pair="3"></span>
+        <span class="curr-dot" data-pair="4"></span>
+      </div>
+
+      <!-- CTA -->
+      <div class="curr-cta">
+        <div class="curr-checkout">
+          <div class="cc-spots">
+            <span class="spots-dot"></span>
+            <span><strong id="overlaySpots">30</strong> spots left at $0</span>
+          </div>
+          <div class="cc-divider"></div>
+          <div class="cc-price">
+            <span class="cc-old">$499</span>
+            <span class="cc-slash">→</span>
+            <span class="cc-free">$0</span>
+          </div>
+          <a href="#" id="btnCurrClaim" class="btn-primary cc-btn">Get Access for $0 →</a>
+        </div>
+        <p class="cta-note">Takes 30 seconds · No credit card · Instant access</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ TRANSFORM ═══ -->
+  <section class="sec sec-transform page-section">
+    <div class="scroll-hint" aria-hidden="true"><div class="sh-track"></div></div>
+    <div class="container">
+      <div class="sec-head text-c" data-reveal="up">
+        <div class="sec-tag">[ THE OUTCOME ]</div>
+        <h2>After This Course,<br>You'll <span class="tf-grad">Never Trade Blind</span> Again.</h2>
+        <p class="sec-sub">This is what changes after you watch the full 2 hours.</p>
+      </div>
+      <div class="tf-grid">
+        <div class="tf-card" data-float><div class="tf-icon">◎</div><h3>You'll See The Market Clearly</h3><p>No more staring at charts confused. You'll see liquidity, structure, and bias clearly. Every session.</p></div>
+        <div class="tf-card" data-float><div class="tf-icon">▣</div><h3>You'll Have a Real System</h3><p>No more chasing indicators. A structured model with clear entry rules, risk management, and exit criteria.</p></div>
+        <div class="tf-card" data-float><div class="tf-icon">⚡</div><h3>You'll Skip 4 Years of Pain</h3><p>Everything I learned through years of losses. You get it in 2 hours. Start applying it immediately.</p></div>
+        <div class="tf-card" data-float><div class="tf-icon">$</div><h3>You Can Access Funded Capital</h3><p>I'll teach you exactly how to use prop firms to trade $100K–$400K without risking your own money.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="sec sec-testimonials page-section" id="results">
+    <div class="scroll-hint" aria-hidden="true"><div class="sh-track"></div></div>
+    <div class="container">
+      <div class="sec-head text-c" data-reveal="up">
+        <div class="sec-tag">[ RESULTS ]</div>
+        <h2>Trusted By <span class="testi-grad">Traders Worldwide.</span></h2>
+      </div>
+      <div class="scroll-window"><div class="scroll-inner">
+      <div class="testi-grid">
+        <div class="testi-card" data-float><div class="testi-meta"><div class="testi-av">MR</div><div class="testi-info"><strong>Marcus R.</strong><span>Forex Trader</span></div><span class="testi-badge">✓ Verified</span></div><p>Before Nico's course I was randomly entering trades with no system. After watching it once I understood liquidity and structure properly for the first time. Finally making consistent green days.</p><div class="stars">★★★★★</div></div>
+        <div class="testi-card" data-float><div class="testi-meta"><div class="testi-av">JK</div><div class="testi-info"><strong>James K.</strong><span>Futures Trader</span></div><span class="testi-badge">✓ Verified</span></div><p>I spent $2,000 on other courses before this one. Nothing came close to the clarity Nico gives you on how the market actually works. The fair value gaps section alone changed everything.</p><div class="stars">★★★★★</div></div>
+        <div class="testi-card" data-float><div class="testi-meta"><div class="testi-av">SL</div><div class="testi-info"><strong>Sofia L.</strong><span>Funded Trader</span></div><span class="testi-badge">✓ Verified</span></div><p>Passed my first prop firm challenge 3 weeks after watching the course. The top down analysis and daily bias modules are exactly what I was missing. Nico gives you everything, nothing held back.</p><div class="stars">★★★★★</div></div>
+        <div class="testi-card" data-float><div class="testi-meta"><div class="testi-av">DT</div><div class="testi-info"><strong>Daniel T.</strong><span>Day Trader</span></div><span class="testi-badge">✓ Verified</span></div><p>The liquidity module alone is worth more than most $500 courses. Once you see how price actually moves to hunt stops, you can't unsee it. Changed my entire approach to the markets.</p><div class="stars">★★★★★</div></div>
+        <div class="testi-card" data-float><div class="testi-meta"><div class="testi-av">AP</div><div class="testi-info"><strong>Alex P.</strong><span>Crypto Trader</span></div><span class="testi-badge">✓ Verified</span></div><p>Was skeptical it was free at first. Watched it anyway. Best 2 hours I've spent in trading. The daily bias concept alone took my win rate from 40% to over 65%. Highly recommend.</p><div class="stars">★★★★★</div></div>
+        <div class="testi-card" data-float><div class="testi-meta"><div class="testi-av">RN</div><div class="testi-info"><strong>Ryan N.</strong><span>Swing Trader</span></div><span class="testi-badge">✓ Verified</span></div><p>Nico breaks down concepts that took me years to understand in a way that makes complete sense from day one. The prop firm module is pure gold. Already on my second funded challenge.</p><div class="stars">★★★★★</div></div>
+      </div>
+      </div></div><!-- /.scroll-inner /.scroll-window -->
+    </div>
+  </section>
+
+<!-- ═══ FINAL CTA ═══ -->
+  <section class="sec sec-final page-section">
+    <div class="final-scene">
+
+      <div class="final-card" data-float>
+
+        <!-- ambient corner glow + top catchlight via ::before / ::after -->
+
+        <div class="sec-tag text-c">[ ONE LAST THING ]</div>
+
+        <h2 class="text-c final-h2">
+          The Spot Won't<br>
+          <span class="final-grad">Wait For You.</span>
+        </h2>
+
+        <p class="final-body text-c">
+          Only <span id="finalSpots2">30</span> spots remain at $0.
+          When they're gone, the price locks back at $499. No waitlist. No second chance.
+        </p>
+
+        <!-- value reminder row -->
+        <div class="final-stats">
+          <div class="fstat"><span class="fstat-n">2 hrs</span><span class="fstat-l">Full Course</span></div>
+          <div class="fstat-div"></div>
+          <div class="fstat"><span class="fstat-n">10</span><span class="fstat-l">Modules</span></div>
+          <div class="fstat-div"></div>
+          <div class="fstat"><span class="fstat-n">$499</span><span class="fstat-l">Normal Price</span></div>
+          <div class="fstat-div"></div>
+          <div class="fstat"><span class="fstat-n final-fstat-zero">$0</span><span class="fstat-l">Your Price</span></div>
+        </div>
+
+        <!-- price display -->
+        <div class="final-price">
+          <span class="fp-old">$499</span>
+          <span class="fp-arrow">→</span>
+          <span class="fp-free">$0</span>
+        </div>
+
+        <!-- spots -->
+        <div class="final-urgency">
+          <div class="fu-label">
+            <span class="spots-dot"></span>
+            <span><strong id="finalSpots">30</strong> spots remaining at $0</span>
+          </div>
+        </div>
+
+        <a href="#" id="btnFinalClaim" class="btn-primary btn-final">Complete Order for $0 →</a>
+
+        <p class="cta-note text-c">Takes 30 seconds · No credit card · Order total: $0.00</p>
+
+      </div><!-- /.final-card -->
+
+    </div><!-- /.final-scene -->
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <a href="#" class="nav-logo">NICO<span>TRADES</span></a>
+          <p>© 2025 Nico Trades. All rights reserved.</p>
+          <p class="footer-disc">Trading involves substantial risk. Past performance is not indicative of future results.</p>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ═══ OVERLAY ═══ -->
+  <div id="overlay" class="overlay">
+    <div class="overlay-backdrop" id="overlayBackdrop"></div>
+    <div class="overlay-panel">
+      <button class="overlay-close" id="overlayClose">✕</button>
+
+      <!-- Savings banner -->
+      <div class="op-savings-banner">
+        <span class="op-sb-dot"></span>
+        <span>You're saving <strong>$499</strong>, only <strong id="overlaySpots2">30</strong> spots left at this price</span>
+      </div>
+
+      <!-- Heading -->
+      <h2 class="op-h2">Claim Your Free<br><span class="op-grad">Spot Now</span></h2>
+
+      <!-- Price hero -->
+      <div class="op-price-hero">
+        <div class="op-ph-was">
+          <span class="op-ph-label">Normal Price</span>
+          <span class="op-ph-old">$499</span>
+        </div>
+        <div class="op-ph-divider"></div>
+        <div class="op-ph-now">
+          <span class="op-ph-label">Your Price Today</span>
+          <span class="op-ph-free">$0</span>
+        </div>
+      </div>
+
+      <!-- Includes -->
+      <div class="op-includes">
+        <div class="op-inc"><span class="op-inc-icon">✓</span> Full 2-hour trading course</div>
+        <div class="op-inc"><span class="op-inc-icon">✓</span> 10 strategy modules</div>
+        <div class="op-inc"><span class="op-inc-icon">✓</span> Instant lifetime access</div>
+      </div>
+
+      <!-- Form -->
+      <form id="claimForm" class="claim-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="claimName">Your Name</label>
+            <input type="text" id="claimName" placeholder="Enter your name" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="claimEmail">Email Address</label>
+            <input type="email" id="claimEmail" placeholder="Enter your email" required autocomplete="email">
+          </div>
+        </div>
+        <button type="submit" id="btnSubmit" class="btn-primary btn-submit">
+          <span id="btnSubmitText">Get Instant Access for $0 →</span>
+        </button>
+        <div class="op-trust">
+          <span>🔒 Secure</span>
+          <span>⚡ Instant Access</span>
+          <span>No Credit Card</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollToPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/motion@12.0.0/dist/motion.js"></script>
+  <script src="script.js"></script>
+  <script src="bg.js"></script>
+</body>
+</html>

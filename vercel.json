@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "framework": null,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/og-image.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" },
+        { "key": "Content-Type", "value": "image/png" }
+      ]
+    }
+  ],
+  "routes": [
+    { "src": "/og-image.png", "dest": "/og-image.png" },
+    { "src": "/preview.png",  "dest": "/preview.png"  },
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/course", "dest": "/course.html" },
+    { "src": "/confirm", "dest": "/confirm.html" },
+    { "src": "/mentorship", "dest": "/mentorship.html" },
+    { "src": "/(.*\\.(css|js|png|jpg|jpeg|svg|ico|woff|woff2|mp4|webm))", "dest": "/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
