@@ -256,10 +256,10 @@ module.exports = async function handler(req, res) {
       attendee: {
         name,
         email,
-        timeZone: timeZone || 'Europe/Zagreb',
+        timeZone: timeZone || 'UTC',
         language: 'en',
       },
-      timeZone:    timeZone || 'Europe/Zagreb',
+      timeZone:    timeZone || 'UTC',
       language:    'en',
       metadata:    {},
       responses:   { name, email, notes: initialNotes },
