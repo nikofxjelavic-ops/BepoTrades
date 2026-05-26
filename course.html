@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nico Trades Course</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <meta name="description" content="The private trading Course built to help serious traders master structure, liquidity, execution, and consistency.">
+
+  <!-- Open Graph / iMessage / WhatsApp / Snapchat -->
+  <meta property="og:type"         content="website">
+  <meta property="og:url"          content="https://nicotrades.com/course.html">
+  <meta property="og:title"        content="Nico Trades Course">
+  <meta property="og:description"  content="The private trading Course built to help serious traders master structure, liquidity, execution, and consistency.">
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="Nico Trades Course">
+  <meta name="twitter:description" content="The private trading Course built to help serious traders master structure, liquidity, execution, and consistency.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://fast.wistia.net/player.js" async></script>
+  <style>
+    /* ══ COURSE PAGE   Premium Glass System ══ */
+    html, body { background: #04081e; }
+
+    /* ── NAVBAR OVERRIDES ── */
+    .navbar {
+      background: transparent !important;
+      border-bottom: 1px solid transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .navbar.scrolled {
+      background: rgba(4, 8, 30, 0.60) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+    }
+    .nav-inner { padding: 0 48px !important; }
+    .nav-course-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-m);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.40);
+      transition: color 0.2s;
+    }
+    .nav-course-link:hover { color: rgba(255,255,255,0.70); }
+    .nav-course-icon {
+      width: 20px; height: 20px;
+      border-radius: 6px;
+      background: rgba(96,165,250,0.12);
+      border: 1px solid rgba(96,165,250,0.25);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-course-icon svg { display: block; }
+    .nav-divider {
+      width: 1px; height: 16px;
+      background: rgba(255,255,255,0.10);
+    }
+    .nav-mentorship-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.90) !important;
+      font-family: var(--font-m);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(96,165,250,0.10);
+      border: 1px solid rgba(96,165,250,0.28);
+      border-radius: 99px;
+      padding: 6px 16px 6px 10px;
+      transition: background 0.25s, border-color 0.25s !important;
+    }
+    .nav-mentorship-link:hover {
+      background: rgba(96,165,250,0.18) !important;
+      border-color: rgba(96,165,250,0.50) !important;
+      color: #fff !important;
+    }
+    .nav-mentorship-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #60a5fa;
+      box-shadow: 0 0 6px #60a5fa, 0 0 14px rgba(96,165,250,0.55);
+      flex-shrink: 0;
+      animation: dot-pulse 2s ease-in-out infinite;
+    }
+    @keyframes dot-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.50; transform: scale(0.72); }
+    }
+    .nav-cta-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 24px;
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: #fff;
+      background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+      border-radius: 99px;
+      border: 1px solid rgba(255,255,255,0.14);
+      overflow: hidden;
+      box-shadow: 0 4px 22px rgba(59,130,246,0.40);
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+    .nav-cta-pill:hover {
+      box-shadow: 0 6px 30px rgba(59,130,246,0.60);
+      transform: translateY(-1px);
+    }
+    .nav-cta-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.20) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ── HERO ── */
+    .course-hero {
+      padding: 100px 0 70px;
+      background: transparent;
+      text-align: center;
+    }
+    .course-welcome {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-m);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: rgba(74,222,128,0.9);
+      background: rgba(74,222,128,0.08);
+      border: 1px solid rgba(74,222,128,0.20);
+      border-radius: 99px;
+      padding: 5px 14px;
+      margin-bottom: 24px;
+    }
+    .course-welcome svg { color: rgba(74,222,128,0.9); }
+    .course-h1 {
+      font-family: var(--font-h);
+      font-size: clamp(36px, 5.5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+    .course-h1 span {
+      background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 55%, #c084fc 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .course-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.50);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+    .email-notice {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 22px;
+      background: rgba(74, 222, 128, 0.06);
+      border: 1px solid rgba(74, 222, 128, 0.35);
+      border-radius: 99px;
+      padding: 8px 18px;
+      font-family: var(--font-m);
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 18px rgba(74, 222, 128, 0.12), inset 0 0 12px rgba(74, 222, 128, 0.04);
+    }
+    .email-notice svg { opacity: 0.8; color: #4ade80; }
+    .email-notice span { color: #86efac; font-weight: 600; }
+
+    /* ── VIDEO ── */
+    .sec-video { padding: 0 0 80px; background: transparent; }
+    .video-wrap {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(4,8,30,0.80);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset,
+                  0 0 80px rgba(96,165,250,0.10),
+                  0 40px 100px rgba(0,0,0,0.60);
+    }
+    .video-aspect { position: relative; padding-bottom: 56.25%; height: 0; }
+    .video-aspect iframe, .video-aspect video {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+    }
+    .video-scroll-guard {
+      position: absolute; inset: 0; z-index: 2; cursor: pointer;
+    }
+    .video-scroll-guard.unlocked { pointer-events: none; }
+    .video-placeholder {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+      background: linear-gradient(145deg, rgba(96,165,250,0.05) 0%, rgba(4,8,30,0.95) 60%);
+    }
+    .vp-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 40px rgba(96,165,250,0.45), 0 0 80px rgba(99,102,241,0.25);
+      cursor: pointer; transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .vp-icon:hover { transform: scale(1.10); box-shadow: 0 0 60px rgba(96,165,250,0.65); }
+    .vp-label { font-family: var(--font-m); font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.30); }
+    .vp-notice { font-size: 12px; color: rgba(255,255,255,0.22); font-family: var(--font-m); max-width: 280px; text-align: center; line-height: 1.6; }
+    .video-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 22px; border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .vm-title { font-family: var(--font-h); font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.80); }
+    .vm-meta { display: flex; align-items: center; gap: 16px; }
+    .vm-tag { font-family: var(--font-m); font-size: 10.5px; color: rgba(255,255,255,0.35); display: flex; align-items: center; gap: 5px; letter-spacing: 0.03em; }
+
+    /* ── MENTORSHIP DIVIDER ── */
+    .mentorship-divider {
+      padding: 90px 0 80px; background: transparent; text-align: center;
+      position: relative; overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .md-glow { display: none; }
+    .md-eyebrow {
+      display: inline-block;
+      font-family: var(--font-m); font-size: 9.5px; letter-spacing: 0.20em;
+      color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 99px;
+      padding: 5px 14px; margin-bottom: 22px;
+    }
+    .md-h2 {
+      font-family: var(--font-h); font-size: clamp(30px, 4.5vw, 54px);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.10; margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 30%, rgba(147,197,253,0.85) 70%, rgba(192,132,252,0.80) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .md-sub { font-size: 16px; color: rgba(255,255,255,0.45); max-width: 520px; margin: 0 auto; line-height: 1.75; }
+
+    /* ── MENTORSHIP SECTION ── */
+    .sec-mentorship { padding: 80px 0 100px; background: transparent; }
+
+    /* guarantee banner */
+    .guarantee-banner {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(4,8,30,0.95) 55%, rgba(99,102,241,0.08) 100%);
+      border-radius: 32px; padding: 52px 56px;
+      display: flex; align-items: center; gap: 60px; margin-bottom: 64px;
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      box-shadow:
+        0 0 0 1px rgba(96,165,250,0.30),
+        0 0 0 4px rgba(96,165,250,0.06),
+        0 16px 80px rgba(59,130,246,0.22),
+        0 0 140px rgba(99,102,241,0.10);
+    }
+    /* animated shimmer border */
+    .guarantee-banner::before {
+      content: ''; position: absolute; inset: -1px; border-radius: 33px;
+      background: linear-gradient(105deg,
+        transparent 30%,
+        rgba(147,197,253,0.55) 50%,
+        transparent 70%);
+      background-size: 300% 300%;
+      animation: gb-shimmer 4s linear infinite;
+      pointer-events: none; z-index: 0;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      padding: 1px;
+    }
+    @keyframes gb-shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    /* left blue glow */
+    .guarantee-banner .gb-glow-l {
+      position: absolute; top: -100px; left: -80px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.30) 0%, transparent 68%);
+      filter: blur(50px); pointer-events: none; z-index: 0;
+    }
+    /* right purple glow */
+    .guarantee-banner .gb-glow-r {
+      position: absolute; bottom: -80px; right: -40px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(167,139,250,0.22) 0%, transparent 68%);
+      filter: blur(50px); pointer-events: none; z-index: 0;
+    }
+    .gb-icon {
+      display: none !important;
+    }
+    .gb-icon-hidden {
+      position: relative; z-index: 1;
+      width: 80px; height: 80px; border-radius: 24px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(96,165,250,0.22), rgba(99,102,241,0.16));
+      border: 1px solid rgba(96,165,250,0.45);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 36px rgba(96,165,250,0.40), 0 0 80px rgba(96,165,250,0.12);
+    }
+    .gb-content { flex: 1; position: relative; z-index: 1; }
+    .gb-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-m); font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(96,165,250,0.90);
+      background: rgba(96,165,250,0.10); border: 1px solid rgba(96,165,250,0.28);
+      border-radius: 99px; padding: 5px 14px; margin-bottom: 16px;
+    }
+    .gb-eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #60a5fa;
+      box-shadow: 0 0 8px #60a5fa, 0 0 16px rgba(96,165,250,0.5); flex-shrink: 0;
+      animation: dot-pulse 2s ease-in-out infinite;
+    }
+    .gb-content h3 {
+      font-family: var(--font-h); font-size: 28px; font-weight: 900;
+      margin-bottom: 16px; letter-spacing: -0.03em; line-height: 1.15;
+      background: linear-gradient(135deg, #fff 30%, #93c5fd 65%, #c084fc 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .gb-bullets { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-direction: column; gap: 9px; }
+    .gb-bullets li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.55;
+    }
+    .gb-bullets li .gb-check {
+      width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+      background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.35);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 10px rgba(74,222,128,0.20);
+    }
+    .gb-guarantee-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 4px;
+      font-family: var(--font-m); font-size: 10px; letter-spacing: 0.12em;
+      color: rgba(74,222,128,0.85); text-transform: uppercase;
+      background: rgba(74,222,128,0.07); border: 1px solid rgba(74,222,128,0.20);
+      border-radius: 99px; padding: 5px 14px;
+    }
+    .gb-guarantee-tag svg { flex-shrink: 0; }
+    .gb-badge {
+      flex-shrink: 0; text-align: center; position: relative; z-index: 1;
+      padding: 32px 44px;
+      background: linear-gradient(145deg, rgba(96,165,250,0.12), rgba(99,102,241,0.08));
+      border: 1px solid rgba(96,165,250,0.28);
+      border-radius: 24px;
+      box-shadow: 0 0 40px rgba(96,165,250,0.15) inset;
+    }
+    .gb-badge-num {
+      font-family: var(--font-h); font-size: 64px; font-weight: 900; letter-spacing: -0.04em;
+      display: block; line-height: 1;
+      background: linear-gradient(135deg, #bfdbfe 0%, #60a5fa 45%, #a78bfa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 30px rgba(96,165,250,0.70));
+    }
+    .gb-badge-label {
+      font-family: var(--font-m); font-size: 9px; color: rgba(255,255,255,0.30);
+      letter-spacing: 0.16em; display: block; margin-top: 10px; text-transform: uppercase;
+    }
+    .gb-badge-sub {
+      font-family: var(--font-m); font-size: 11px; font-weight: 600;
+      color: rgba(74,222,128,0.85); letter-spacing: 0.06em;
+      display: block; margin-top: 6px; text-transform: uppercase;
+    }
+
+    /* section header */
+    .mentorship-header { margin-bottom: 44px; }
+    .sec-label { font-family: var(--font-m); font-size: 9.5px; letter-spacing: 0.20em; color: rgba(255,255,255,0.32); margin-bottom: 14px; }
+    .sec-h2 { font-family: var(--font-h); font-size: clamp(28px, 3.8vw, 46px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; }
+
+    /* mentorship section header */
+    .mentorship-header { margin-bottom: 56px; }
+    .sec-label {
+      display: inline-block;
+      font-family: var(--font-m); font-size: 10px; letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.32); margin-bottom: 16px;
+    }
+    .sec-h2 {
+      font-family: var(--font-h); font-size: clamp(32px, 4vw, 52px);
+      font-weight: 900; letter-spacing: -0.03em; line-height: 1.10;
+      background: linear-gradient(135deg, #fff 30%, #93c5fd 65%, #c084fc 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* mentorship grid */
+    .mentorship-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 64px; }
+    .m-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.035) 0%, rgba(4,8,30,0.92) 100%);
+      border: 1px solid rgba(255,255,255,0.07); border-radius: 24px;
+      padding: 26px 28px; display: flex; gap: 18px; align-items: flex-start;
+      transition: border-color 0.30s, box-shadow 0.30s, background 0.30s, transform 0.30s;
+      position: relative; overflow: hidden; box-sizing: border-box;
+    }
+    .m-card:hover {
+      border-color: rgba(96,165,250,0.22);
+      background: linear-gradient(145deg, rgba(96,165,250,0.07) 0%, rgba(4,8,30,0.92) 70%);
+      box-shadow: 0 0 40px rgba(96,165,250,0.08), inset 3px 0 0 rgba(96,165,250,0.50);
+    }
+    .m-num {
+      position: absolute; top: 20px; right: 22px;
+      font-family: var(--font-h); font-size: 11px; font-weight: 700;
+      color: rgba(255,255,255,0.08); letter-spacing: 0.05em;
+    }
+    .m-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      background: rgba(96,165,250,0.10); border: 1px solid rgba(96,165,250,0.22);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 16px rgba(96,165,250,0.10);
+      transition: box-shadow 0.3s, background 0.3s;
+    }
+    .m-card:hover .m-icon { background: rgba(96,165,250,0.16); box-shadow: 0 0 20px rgba(96,165,250,0.22); }
+    .m-card-content h3 { font-family: var(--font-h); font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.90); margin-bottom: 7px; letter-spacing: -0.02em; }
+    .m-card-content p { font-size: 13.5px; color: rgba(255,255,255,0.42); line-height: 1.70; }
+
+    /* card tilt glare layer */
+    .m-glare {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 2;
+    }
+
+    /* spots badge */
+    .mcta-spots {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-m); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      background: rgba(239,68,68,0.10);
+      border: 1px solid rgba(239,68,68,0.30);
+      border-radius: 99px; padding: 5px 14px;
+    }
+    .mcta-spots strong { color: #f87171; font-weight: 700; }
+    .mcta-spots-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #f87171;
+      box-shadow: 0 0 8px #f87171, 0 0 16px rgba(248,113,113,0.5);
+      animation: dot-pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    /* CTA block */
+    .mentorship-cta-block {
+      text-align: center; padding: 72px 60px;
+      max-width: 780px; margin: 0 auto;
+      background: linear-gradient(155deg, rgba(96,165,250,0.08) 0%, rgba(4,8,30,0.95) 55%);
+      border: 1px solid rgba(96,165,250,0.22); border-radius: 28px;
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      position: relative; overflow: hidden;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        inset 0 -1px 0 rgba(96,165,250,0.08),
+        inset 1px 0 0 rgba(255,255,255,0.04),
+        inset -1px 0 0 rgba(255,255,255,0.04),
+        0 40px 100px rgba(0,0,0,0.55),
+        0 0 120px rgba(96,165,250,0.09);
+    }
+    .mcta-glow {
+      position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(96,165,250,0.18) 0%, rgba(192,132,252,0.08) 50%, transparent 70%);
+      pointer-events: none;
+    }
+    .mcta-label { font-family: var(--font-m); font-size: 9.5px; letter-spacing: 0.22em; color: rgba(74,222,128,0.80); margin-bottom: 16px; position: relative; }
+    .mcta-h2 {
+      font-family: var(--font-h); font-size: clamp(28px, 4vw, 50px);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.10; margin-bottom: 16px; position: relative;
+      background: linear-gradient(135deg, #fff 20%, rgba(147,197,253,0.90) 60%, rgba(192,132,252,0.85) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .mcta-sub { font-size: 15px; color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto 36px; line-height: 1.75; position: relative; }
+    .btn-book {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: #fff; font-family: var(--font-h); font-size: 19px; font-weight: 700;
+      padding: 18px 52px; border-radius: 99px; letter-spacing: -0.01em;
+      transition: transform 0.2s, box-shadow 0.2s; text-decoration: none;
+      box-shadow: 0 4px 30px rgba(99,102,241,0.45), 0 0 60px rgba(96,165,250,0.15);
+      position: relative;
+    }
+    .btn-book:hover { transform: translateY(-3px); box-shadow: 0 8px 50px rgba(99,102,241,0.65), 0 0 80px rgba(96,165,250,0.20); }
+    .mcta-fine { margin-top: 14px; font-family: var(--font-m); font-size: 11px; color: rgba(255,255,255,0.22); position: relative; }
+    .what-included { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 24px auto 0; max-width: 560px; position: relative; }
+    .wi-tag {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 99px; padding: 5px 13px; font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,0.50);
+    }
+
+    @media (max-width: 768px) {
+      .mentorship-grid { grid-template-columns: 1fr; }
+      .guarantee-banner { flex-direction: column; text-align: center; }
+      .gb-badge { margin: 0 auto; }
+      .mentorship-cta-block { padding: 40px 24px; }
+    }
+
+    /* ══ CARD ACCENT TIERS   all breakpoints ══ */
+
+    /* tier-3: purple/violet   8-hr Academy, Live Trading, Trade Review */
+    .mentorship-grid .m-card:nth-child(1),
+    .mentorship-grid .m-card:nth-child(4),
+    .mentorship-grid .m-card:nth-child(5) {
+      border: 1px solid rgba(167,139,250,0.42) !important;
+      background: linear-gradient(145deg, rgba(139,92,246,0.09) 0%, rgba(4,8,30,0.92) 60%, rgba(99,102,241,0.05) 100%) !important;
+      box-shadow: 0 0 0 1px rgba(167,139,250,0.07) inset, 0 6px 28px rgba(139,92,246,0.16) !important;
+    }
+    .mentorship-grid .m-card:nth-child(1) .m-icon,
+    .mentorship-grid .m-card:nth-child(4) .m-icon,
+    .mentorship-grid .m-card:nth-child(5) .m-icon {
+      background: rgba(167,139,250,0.10) !important;
+      border: 1px solid rgba(167,139,250,0.30) !important;
+      box-shadow: 0 0 14px rgba(139,92,246,0.22) !important;
+    }
+
+    /* tier-2: gold/amber   Private Calls, Personal Number */
+    .mentorship-grid .m-card:nth-child(2),
+    .mentorship-grid .m-card:nth-child(6) {
+      border: 1px solid rgba(251,191,36,0.40) !important;
+      background: linear-gradient(145deg, rgba(251,191,36,0.07) 0%, rgba(4,8,30,0.92) 60%, rgba(245,158,11,0.04) 100%) !important;
+      box-shadow: 0 0 0 1px rgba(251,191,36,0.06) inset, 0 6px 32px rgba(251,191,36,0.13) !important;
+    }
+    .mentorship-grid .m-card:nth-child(2) .m-icon,
+    .mentorship-grid .m-card:nth-child(6) .m-icon {
+      background: rgba(251,191,36,0.10) !important;
+      border: 1px solid rgba(251,191,36,0.30) !important;
+      box-shadow: 0 0 14px rgba(251,191,36,0.20) !important;
+    }
+
+    /* tier-1: green   $100K Guarantee */
+    .mentorship-grid .m-card:nth-child(8) {
+      border: 1px solid rgba(74,222,128,0.40) !important;
+      background: linear-gradient(145deg, rgba(74,222,128,0.07) 0%, rgba(4,8,30,0.92) 60%, rgba(59,130,246,0.04) 100%) !important;
+      box-shadow: 0 0 0 1px rgba(74,222,128,0.07) inset, 0 6px 32px rgba(74,222,128,0.14) !important;
+    }
+    .mentorship-grid .m-card:nth-child(8) .m-icon {
+      background: rgba(74,222,128,0.10) !important;
+      border: 1px solid rgba(74,222,128,0.30) !important;
+      box-shadow: 0 0 14px rgba(74,222,128,0.20) !important;
+    }
+
+    /* ══ MOBILE   600px ══ */
+    @media (max-width: 600px) {
+
+      /* ── GLOBAL ── */
+      .container { padding: 0 24px; }
+      .c-cube { display: none; }
+      #heroBgCanvas { display: none; }
+
+      /* ── NAVBAR ── */
+      .navbar { display: none !important; }
+
+      /* ── HERO ── */
+      .course-hero { padding: 62px 0 36px; text-align: center; }
+      .course-welcome {
+        font-family: 'Space Mono', monospace;
+        font-size: 9px; letter-spacing: 0.12em;
+        padding: 5px 14px; margin-bottom: 18px;
+        background: rgba(74,222,128,0.06);
+        border: 1px solid rgba(74,222,128,0.18);
+        border-radius: 99px; gap: 7px;
+      }
+      .course-welcome svg { width: 11px; height: 11px; }
+      .course-h1 {
+        font-size: 36px; line-height: 1.06;
+        letter-spacing: -0.03em; margin-bottom: 14px;
+      }
+      .course-sub {
+        font-size: 14px; line-height: 1.65;
+        color: rgba(255,255,255,0.5);
+        max-width: 300px; margin: 0 auto;
+      }
+      .email-notice {
+        font-size: 11px; padding: 8px 16px; gap: 6px; margin-top: 18px;
+        background: rgba(74,222,128,0.04);
+        border: 1px solid rgba(74,222,128,0.15);
+        border-radius: 16px;
+        box-shadow: none; backdrop-filter: none;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 100%;
+      }
+      .email-notice svg { width: 12px; height: 12px; }
+      .email-notice #welcomeEmail { margin-left: 0 !important; color: #86efac; font-weight: 600; word-break: break-all; }
+
+      /* ── VIDEO ── */
+      .sec-video { padding: 0 0 0; }
+      .video-wrap {
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.45);
+        backdrop-filter: none; -webkit-backdrop-filter: none;
+      }
+      .video-meta { padding: 12px 16px; }
+      .vm-title { font-size: 12px; color: rgba(255,255,255,0.7); }
+      .vm-meta { display: none; }
+
+      /* ── GUARANTEE STRIP   hidden on mobile (full banner below has same info) ── */
+      .guarantee-strip { display: none !important; }
+
+      /* ── MENTORSHIP SECTION ── */
+      .sec-mentorship { padding: 52px 0 64px; }
+
+      /* guarantee banner → clean centered card */
+      .guarantee-banner::before { display: none !important; }
+      .guarantee-banner .gb-glow-l,
+      .guarantee-banner .gb-glow-r { display: none !important; }
+      .guarantee-banner {
+        flex-direction: column !important;
+        background: linear-gradient(145deg, rgba(59,130,246,0.07) 0%, rgba(4,8,30,0.92) 60%, rgba(99,102,241,0.05) 100%) !important;
+        border: 1px solid rgba(96,165,250,0.25) !important;
+        box-shadow: 0 0 0 1px rgba(96,165,250,0.06) inset, 0 8px 40px rgba(59,130,246,0.15), 0 0 80px rgba(99,102,241,0.08) !important;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        border-radius: 22px;
+        padding: 28px 24px;
+        gap: 24px;
+        margin-bottom: 40px;
+        text-align: left;
+      }
+      .gb-eyebrow {
+        font-family: 'Space Mono', monospace !important;
+        font-size: 9px !important; letter-spacing: 0.1em !important;
+        background: none !important; border: none !important; padding: 0 !important;
+        color: rgba(96,165,250,0.7) !important;
+        margin-bottom: 12px; display: block;
+      }
+      .gb-eyebrow-dot { display: none !important; }
+      .gb-content h3 {
+        font-size: 24px; line-height: 1.08;
+        letter-spacing: -0.025em; margin-bottom: 16px;
+      }
+      .gb-bullets { gap: 10px; }
+      .gb-bullets li { font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.75); }
+      .gb-check {
+        width: 16px; height: 16px; flex-shrink: 0;
+        background: rgba(74,222,128,0.08) !important;
+        border: 1px solid rgba(74,222,128,0.25) !important;
+        box-shadow: none !important;
+      }
+      .gb-guarantee-tag {
+        font-family: 'Space Mono', monospace;
+        font-size: 9px; letter-spacing: 0.08em; padding: 4px 12px; margin-top: 8px;
+        background: none; border: 1px solid rgba(74,222,128,0.2);
+      }
+      /* badge → clean stat block */
+      .gb-badge {
+        background: linear-gradient(145deg, rgba(96,165,250,0.10), rgba(99,102,241,0.06)) !important;
+        border: 1px solid rgba(96,165,250,0.28) !important;
+        box-shadow: 0 0 40px rgba(96,165,250,0.15) inset, 0 4px 24px rgba(59,130,246,0.18) !important;
+        border-radius: 16px; padding: 20px 24px;
+        margin: 0; width: 100%; box-sizing: border-box; text-align: center;
+      }
+      .gb-badge-num {
+        font-size: 52px; font-weight: 900; letter-spacing: -0.04em;
+        filter: drop-shadow(0 0 22px rgba(96,165,250,0.65));
+        background: linear-gradient(135deg, #bfdbfe 0%, #60a5fa 45%, #a78bfa 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      }
+      .gb-badge-label { font-size: 9px; letter-spacing: 0.12em; margin-top: 8px; color: rgba(255,255,255,0.3); }
+      .gb-badge-sub { font-size: 10px; color: rgba(74,222,128,0.8); letter-spacing: 0.05em; }
+
+      /* section header */
+      .mentorship-header { margin-bottom: 32px; text-align: center; }
+      .sec-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 9px; letter-spacing: 0.1em;
+        color: rgba(255,255,255,0.32); margin-bottom: 12px; display: block;
+        background: none; border: none; padding: 0;
+      }
+      .sec-h2 { font-size: 30px; line-height: 1.08; letter-spacing: -0.025em; }
+
+      /* feature cards   glowing cards matching guarantee/CTA style */
+      .mentorship-grid {
+        display: flex !important;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 40px;
+        grid-template-columns: unset !important;
+      }
+      .m-card {
+        background: linear-gradient(145deg, rgba(59,130,246,0.07) 0%, rgba(4,8,30,0.92) 60%, rgba(99,102,241,0.05) 100%) !important;
+        border: 1px solid rgba(96,165,250,0.20) !important;
+        border-radius: 18px !important;
+        padding: 18px 18px;
+        gap: 14px;
+        box-shadow: 0 0 0 1px rgba(96,165,250,0.05) inset, 0 4px 20px rgba(59,130,246,0.10) !important;
+        transition: none !important;
+        overflow: hidden;
+      }
+      .m-card:hover { background: linear-gradient(145deg, rgba(59,130,246,0.07) 0%, rgba(4,8,30,0.92) 60%, rgba(99,102,241,0.05) 100%) !important; transform: none !important; }
+      .m-glare { display: none !important; }
+      .m-num {
+        display: block;
+        top: 18px; right: 16px;
+        font-size: 10px; color: rgba(255,255,255,0.10); font-weight: 700;
+        font-family: 'Space Mono', monospace; letter-spacing: 0.05em;
+      }
+      .m-icon {
+        width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+        background: rgba(96,165,250,0.10) !important;
+        border: 1px solid rgba(96,165,250,0.22) !important;
+        box-shadow: 0 0 12px rgba(96,165,250,0.15) !important;
+      }
+      .m-card-content h3 {
+        font-size: 15px; font-weight: 700; margin-bottom: 6px;
+        color: rgba(255,255,255,0.92); letter-spacing: -0.01em;
+      }
+      .m-card-content p { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,0.45); }
+
+      /* tier-3 cards: purple/violet accent   8-hr Academy, Live Trading, Trade Review */
+      .mentorship-grid .m-card:nth-child(1),
+      .mentorship-grid .m-card:nth-child(4),
+      .mentorship-grid .m-card:nth-child(5) {
+        border: 1px solid rgba(167,139,250,0.42) !important;
+        background: linear-gradient(145deg, rgba(139,92,246,0.09) 0%, rgba(4,8,30,0.92) 60%, rgba(99,102,241,0.05) 100%) !important;
+        box-shadow: 0 0 0 1px rgba(167,139,250,0.07) inset, 0 6px 28px rgba(139,92,246,0.16) !important;
+      }
+      .mentorship-grid .m-card:nth-child(1) .m-icon,
+      .mentorship-grid .m-card:nth-child(4) .m-icon,
+      .mentorship-grid .m-card:nth-child(5) .m-icon {
+        background: rgba(167,139,250,0.10) !important;
+        border: 1px solid rgba(167,139,250,0.30) !important;
+        box-shadow: 0 0 14px rgba(139,92,246,0.22) !important;
+      }
+
+      /* tier-2 cards: gold/amber accent   Private Calls, Personal Number */
+      .mentorship-grid .m-card:nth-child(2),
+      .mentorship-grid .m-card:nth-child(6) {
+        border: 1px solid rgba(251,191,36,0.40) !important;
+        background: linear-gradient(145deg, rgba(251,191,36,0.07) 0%, rgba(4,8,30,0.92) 60%, rgba(245,158,11,0.04) 100%) !important;
+        box-shadow: 0 0 0 1px rgba(251,191,36,0.06) inset, 0 6px 32px rgba(251,191,36,0.13) !important;
+      }
+      .mentorship-grid .m-card:nth-child(2) .m-icon,
+      .mentorship-grid .m-card:nth-child(6) .m-icon {
+        background: rgba(251,191,36,0.10) !important;
+        border: 1px solid rgba(251,191,36,0.30) !important;
+        box-shadow: 0 0 14px rgba(251,191,36,0.20) !important;
+      }
+      /* $100K Guarantee   green accent */
+      .mentorship-grid .m-card:nth-child(8) {
+        border: 1px solid rgba(74,222,128,0.40) !important;
+        background: linear-gradient(145deg, rgba(74,222,128,0.07) 0%, rgba(4,8,30,0.92) 60%, rgba(59,130,246,0.04) 100%) !important;
+        box-shadow: 0 0 0 1px rgba(74,222,128,0.07) inset, 0 6px 32px rgba(74,222,128,0.14) !important;
+      }
+      .mentorship-grid .m-card:nth-child(8) .m-icon {
+        background: rgba(74,222,128,0.10) !important;
+        border: 1px solid rgba(74,222,128,0.30) !important;
+        box-shadow: 0 0 14px rgba(74,222,128,0.20) !important;
+      }
+
+      /* ── CTA BLOCK ── */
+      .mcta-glow { display: none !important; }
+      .mentorship-cta-block {
+        padding: 36px 24px; border-radius: 22px; text-align: center;
+        background: linear-gradient(145deg, rgba(59,130,246,0.07) 0%, rgba(4,8,30,0.92) 60%, rgba(99,102,241,0.05) 100%) !important;
+        border: 1px solid rgba(96,165,250,0.25) !important;
+        box-shadow: 0 0 0 1px rgba(96,165,250,0.06) inset, 0 8px 40px rgba(59,130,246,0.15), 0 0 80px rgba(99,102,241,0.08) !important;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+      }
+      .mcta-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 9px; letter-spacing: 0.1em;
+        color: rgba(74,222,128,0.7); margin-bottom: 14px; display: block;
+      }
+      .mcta-h2 { font-size: 30px; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 12px; }
+      .mcta-sub { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.5); margin: 0 auto 24px; max-width: 290px; }
+      .mcta-spots { font-size: 9px; padding: 5px 14px; letter-spacing: 0.08em; }
+      .btn-book {
+        display: flex; width: 100%; justify-content: center;
+        font-size: 16px; font-weight: 700; padding: 19px 24px;
+        border-radius: 16px; letter-spacing: 0; margin-top: 18px;
+        box-shadow: 0 4px 22px rgba(59,130,246,0.35);
+        transition: none;
+      }
+      .mcta-fine { font-size: 11px; margin-top: 12px; color: rgba(255,255,255,0.22); }
+      .what-included { gap: 6px; margin-top: 18px; }
+      .wi-tag {
+        font-size: 11px; padding: 4px 11px;
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      /* ── MODAL ── */
+      .qf-card { padding: 28px 22px; border-radius: 22px; }
+      .qf-title { font-size: 19px; }
+      .qf-sub { font-size: 12px; margin-bottom: 20px; }
+      .qf-choice { padding: 12px 14px; border-radius: 12px; }
+      .qf-choice-label { font-size: 13px; }
+      .qf-field input { font-size: 14px; padding: 12px 14px; }
+    }
+
+    /* ══ QUALIFICATION MODAL ══ */
+    .qf-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .qf-overlay.open { opacity: 1; pointer-events: all; }
+
+    .qf-card {
+      background: linear-gradient(155deg, rgba(255,255,255,0.04) 0%, rgba(4,8,30,0.97) 100%);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 28px;
+      width: 100%; max-width: 560px;
+      padding: 44px 48px;
+      position: relative;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 80px rgba(96,165,250,0.06);
+      transform: translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.23,1,0.32,1);
+    }
+    .qf-overlay.open .qf-card { transform: translateY(0); }
+
+    .qf-close {
+      position: absolute; top: 18px; right: 20px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.45); font-size: 18px; line-height: 1;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .qf-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    /* progress bar */
+    .qf-progress {
+      display: flex; gap: 6px; margin-bottom: 32px;
+      padding-right: 44px;
+    }
+    .qf-bar {
+      flex: 1; height: 3px; border-radius: 99px;
+      background: rgba(255,255,255,0.08);
+      transition: background 0.4s ease;
+    }
+    .qf-bar.done { background: #3b82f6; }
+    .qf-bar.active { background: linear-gradient(90deg, #3b82f6, #6366f1); }
+
+    /* step label */
+    .qf-step-label {
+      font-family: var(--font-m); font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(96,165,250,0.80);
+      margin-bottom: 10px;
+    }
+    .qf-title {
+      font-family: var(--font-h); font-size: 22px; font-weight: 800;
+      color: #fff; letter-spacing: -0.02em; line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .qf-sub {
+      font-size: 13px; color: rgba(255,255,255,0.38); margin-bottom: 26px; line-height: 1.6;
+    }
+
+    /* choice tiles */
+    .qf-choices { display: flex; flex-direction: column; gap: 10px; }
+    .qf-choice {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.025);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      user-select: none;
+    }
+    .qf-choice:hover { border-color: rgba(96,165,250,0.25); background: rgba(96,165,250,0.05); transform: translateX(3px); }
+    .qf-choice.selected {
+      border-color: rgba(96,165,250,0.55);
+      background: rgba(96,165,250,0.10);
+      box-shadow: inset 3px 0 0 #3b82f6;
+    }
+    .qf-choice-dot {
+      width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+      border: 1.5px solid rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .qf-choice.selected .qf-choice-dot {
+      background: #3b82f6; border-color: #3b82f6;
+    }
+    .qf-choice.selected .qf-choice-dot::after {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff;
+    }
+    .qf-choice-label { font-size: 14px; color: rgba(255,255,255,0.75); font-weight: 500; }
+    .qf-choice.selected .qf-choice-label { color: #fff; }
+
+    /* text inputs (contact step) */
+    .qf-fields { display: flex; flex-direction: column; gap: 14px; }
+    .qf-field {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .qf-field label {
+      font-family: var(--font-m); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.40);
+    }
+    .qf-field input {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 10px; padding: 13px 16px;
+      font-size: 14px; color: #fff; font-family: var(--font-b);
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%; box-sizing: border-box;
+    }
+    .qf-field input::placeholder { color: rgba(255,255,255,0.22); }
+    .qf-field input:focus {
+      border-color: rgba(96,165,250,0.45);
+      box-shadow: 0 0 0 3px rgba(96,165,250,0.10);
+    }
+
+    /* nav buttons */
+    .qf-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 28px; gap: 12px;
+    }
+    .qf-btn-back {
+      font-family: var(--font-m); font-size: 12px; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.35); background: none; border: none;
+      cursor: pointer; padding: 0; transition: color 0.2s;
+    }
+    .qf-btn-back:hover { color: rgba(255,255,255,0.70); }
+    .qf-btn-next {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: #fff; font-family: var(--font-h); font-size: 14px; font-weight: 700;
+      padding: 13px 28px; border-radius: 99px; border: none; cursor: pointer;
+      box-shadow: 0 4px 20px rgba(99,102,241,0.40);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-left: auto;
+    }
+    .qf-btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(99,102,241,0.55); }
+    .qf-btn-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    /* calendar step   expanded card */
+    .qf-card.cal-mode {
+      max-width: 720px;
+      padding: 36px 40px;
+    }
+    .qf-cal-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-m); font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(74,222,128,0.90);
+      background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.22);
+      border-radius: 99px; padding: 5px 16px; margin-bottom: 14px;
+    }
+    .qf-cal-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+      box-shadow: 0 0 8px #4ade80, 0 0 16px rgba(74,222,128,0.5);
+      animation: dot-pulse 2s ease-in-out infinite; flex-shrink: 0;
+    }
+    /* ── Custom Calendar UI ── */
+    .cal-ui { margin-top: 20px; }
+    .cal-days {
+      display: flex; gap: 10px;
+      overflow-x: auto; padding-bottom: 6px;
+      margin-bottom: 22px;
+      scrollbar-width: none;
+    }
+    .cal-days::-webkit-scrollbar { display: none; }
+    .cal-day {
+      flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 3px; padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(96,165,250,0.18);
+      background: rgba(255,255,255,0.03);
+      cursor: pointer; min-width: 60px;
+      transition: all 0.2s ease;
+    }
+    .cal-day:hover { border-color: rgba(96,165,250,0.40); background: rgba(96,165,250,0.08); }
+    .cal-day.selected {
+      border-color: #3b82f6; background: rgba(59,130,246,0.15);
+      box-shadow: 0 0 20px rgba(59,130,246,0.20);
+    }
+    .cal-day-name {
+      font-family: var(--font-m); font-size: 9px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.40);
+    }
+    .cal-day-num {
+      font-family: var(--font-m); font-size: 20px; font-weight: 600;
+      color: rgba(255,255,255,0.85); line-height: 1;
+    }
+    .cal-day-month {
+      font-family: var(--font-m); font-size: 9px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.30);
+    }
+    .cal-day.selected .cal-day-name,
+    .cal-day.selected .cal-day-num { color: #93c5fd; }
+    /* ── Timezone picker ── */
+    .cal-tz-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .cal-slots-label {
+      font-family: var(--font-m); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0;
+    }
+    .cal-tz-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-m); font-size: 10px; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 99px; padding: 5px 12px;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+      position: relative;
+    }
+    .cal-tz-pill:hover { border-color: rgba(96,165,250,0.35); color: rgba(255,255,255,0.80); }
+    .cal-tz-pill svg { flex-shrink: 0; opacity: 0.5; }
+    .cal-tz-dropdown {
+      display: none; position: absolute; right: 0; top: calc(100% + 6px);
+      background: rgba(10,16,48,0.97); border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px; min-width: 230px; z-index: 20;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.60);
+      max-height: 260px; overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparent;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    }
+    .cal-tz-dropdown::-webkit-scrollbar { width: 4px; }
+    .cal-tz-dropdown::-webkit-scrollbar-track { background: transparent; }
+    .cal-tz-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 99px; }
+    .cal-tz-dropdown.open { display: block; animation: qfFadeIn 0.18s ease; }
+    .cal-tz-option {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px; cursor: pointer;
+      font-family: var(--font-m); font-size: 11px; color: rgba(255,255,255,0.55);
+      transition: background 0.15s, color 0.15s; gap: 12px;
+    }
+    .cal-tz-option:hover { background: rgba(96,165,250,0.08); color: rgba(255,255,255,0.85); }
+    .cal-tz-option.active { color: #93c5fd; }
+    .cal-tz-option .tz-city { color: inherit; }
+    .cal-tz-option .tz-offset { color: rgba(255,255,255,0.25); font-size: 10px; flex-shrink: 0; }
+    .cal-slots {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; margin-bottom: 24px;
+    }
+    .cal-slot {
+      padding: 11px 8px; text-align: center;
+      border-radius: 12px; border: 1px solid rgba(96,165,250,0.16);
+      background: rgba(255,255,255,0.03);
+      font-family: var(--font-m); font-size: 13px; color: rgba(255,255,255,0.70);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .cal-slot:hover { border-color: rgba(96,165,250,0.38); background: rgba(96,165,250,0.08); color: #fff; }
+    .cal-slot.selected {
+      border-color: #3b82f6; background: rgba(59,130,246,0.18); color: #93c5fd;
+      box-shadow: 0 0 16px rgba(59,130,246,0.18);
+    }
+    .cal-no-slots {
+      display: none; text-align: center; padding: 24px 0;
+      font-size: 13px; color: rgba(255,255,255,0.35); font-family: var(--font-m);
+    }
+    .cal-confirm-btn {
+      display: none; width: 100%; padding: 15px 24px;
+      background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+      border: none; border-radius: 14px;
+      font-family: var(--font-m); font-size: 13px; letter-spacing: 0.10em;
+      text-transform: uppercase; color: #fff; font-weight: 600;
+      cursor: pointer; transition: all 0.25s ease;
+      box-shadow: 0 4px 24px rgba(59,130,246,0.30);
+    }
+    .cal-confirm-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(59,130,246,0.45); }
+    .cal-confirm-btn.visible { display: block; animation: qfFadeIn 0.3s ease; }
+    .cal-booking-error {
+      display: none; margin-top: 12px; text-align: center;
+      font-family: var(--font-m); font-size: 11px; letter-spacing: 0.08em;
+      color: rgba(248,113,113,0.85);
+    }
+    .cal-booking-error.show { display: block; }
+    .cal-loading {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; padding: 48px 0;
+    }
+    .cal-loading.hidden { display: none; }
+    .cal-spinner {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid rgba(96,165,250,0.15); border-top-color: #3b82f6;
+      animation: calSpin 0.8s linear infinite;
+    }
+    @keyframes calSpin { to { transform: rotate(360deg); } }
+    .cal-loading p {
+      font-family: var(--font-m); font-size: 11px; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.30); text-transform: uppercase;
+    }
+    .cal-error {
+      display: none; text-align: center; padding: 32px;
+      font-size: 13px; color: rgba(255,255,255,0.40); font-family: var(--font-m);
+    }
+    .cal-error.show { display: block; }
+    .qf-cal-success {
+      display: none;
+      margin-top: 20px; padding: 18px 22px;
+      background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.20);
+      border-radius: 14px; text-align: center;
+    }
+    .qf-cal-success.show { display: block; animation: qfFadeIn 0.4s ease; }
+    .qf-cal-success p { font-size: 13px; color: rgba(255,255,255,0.60); line-height: 1.6; }
+    .qf-cal-success strong { color: #4ade80; }
+    @media (max-width: 520px) { .cal-slots { grid-template-columns: repeat(2, 1fr); } }
+
+    /* step transition */
+    .qf-step { display: none; }
+    .qf-step.active { display: block; animation: qfFadeIn 0.28s ease; }
+    @keyframes qfFadeIn {
+      from { opacity: 0; transform: translateX(16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── GUARANTEE DIVIDER STRIP ── */
+    .guarantee-strip {
+      position: relative; overflow: hidden;
+      padding: 52px 0;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(59,130,246,0.07) 20%,
+        rgba(99,102,241,0.10) 50%,
+        rgba(59,130,246,0.07) 80%,
+        transparent 100%);
+      border-top: 1px solid rgba(96,165,250,0.15);
+      border-bottom: 1px solid rgba(96,165,250,0.15);
+    }
+    /* sweeping light line */
+    .guarantee-strip::before {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(147,197,253,0.7), transparent);
+      animation: strip-sweep 4s linear infinite;
+    }
+    @keyframes strip-sweep {
+      0%   { left: -60%; }
+      100% { left: 160%; }
+    }
+    .gs-inner {
+      max-width: 900px; margin: 0 auto; padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between; gap: 40px;
+    }
+    .gs-left { display: flex; align-items: center; gap: 24px; }
+    .gs-icon {
+      width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(99,102,241,0.12));
+      border: 1px solid rgba(96,165,250,0.35);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 28px rgba(96,165,250,0.30);
+    }
+    .gs-text {}
+    .gs-eyebrow {
+      font-family: var(--font-m); font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(96,165,250,0.75); margin-bottom: 6px;
+    }
+    .gs-heading {
+      font-family: var(--font-h); font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #fff 40%, #93c5fd 80%, #c084fc 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .gs-right { display: flex; align-items: center; gap: 24px; flex-shrink: 0; }
+    .gs-stat {
+      text-align: center;
+    }
+    .gs-stat-num {
+      display: block; font-family: var(--font-h); font-size: 32px; font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1;
+      background: linear-gradient(135deg, #93c5fd, #a78bfa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 16px rgba(96,165,250,0.5));
+    }
+    .gs-stat-label {
+      display: block; font-family: var(--font-m); font-size: 9px;
+      color: rgba(255,255,255,0.30); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 4px;
+    }
+    .gs-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.10); }
+    .gs-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 26px; text-decoration: none;
+      font-family: var(--font-b); font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+      color: #fff;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      border-radius: 99px; border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 4px 22px rgba(59,130,246,0.40);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .gs-btn:hover { box-shadow: 0 6px 32px rgba(59,130,246,0.60); transform: translateY(-1px); }
+    .gs-btn-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+      box-shadow: 0 0 6px #4ade80; animation: dot-pulse 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="c-cube" id="cCube"></div>
+
+<!-- FIXED BACKGROUND   same aurora + particles as landing page -->
+<div class="hero-bg" aria-hidden="true">
+  <div class="hb-b1"></div>
+  <div class="hb-b2"></div>
+  <div class="hb-b3"></div>
+  <div class="hb-grid"></div>
+  <div class="hb-scan"></div>
+  <canvas id="heroBgCanvas" class="hero-bg-canvas"></canvas>
+</div>
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner" style="justify-content:space-between;">
+    <nav class="nav-links" style="flex:unset; align-items:center; gap:20px;">
+      <a href="#video" class="nav-course-link">
+        <span class="nav-course-icon">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+        Your Course
+      </a>
+      <span class="nav-divider"></span>
+      <a href="#mentorship" class="nav-mentorship-link">
+        <span class="nav-mentorship-dot"></span>1-on-1 Mentorship
+      </a>
+    </nav>
+    <a href="#mentorship-cta" class="nav-cta-pill" style="text-decoration:none">
+      <span class="nav-cta-glow"></span>
+      Book a Call
+    </a>
+  </div>
+</header>
+
+<!-- ═══ COURSE HERO ═══ -->
+<section class="course-hero">
+  <div class="container">
+    <div class="course-welcome">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      SPOT CLAIMED · YOU'RE IN
+    </div>
+    <h1 class="course-h1">
+      Welcome, <span id="welcomeName">Trader</span>.<br>Your Course Is Ready.
+    </h1>
+    <p class="course-sub">
+      Everything you need to stop losing and start trading with a real system. All in one 2-hour video below.
+    </p>
+    <div class="email-notice">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+      A link to this course has been sent to <span id="welcomeEmail" style="margin-left:4px;"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VIDEO SECTION ═══ -->
+<section class="sec-video" id="video">
+  <div class="container">
+    <div class="video-wrap">
+      <div class="video-aspect">
+
+        <iframe src="https://fast.wistia.net/embed/iframe/6do0gbzhmp?web_component=true&seo=true" title="COURSE Video" allow="autoplay; fullscreen" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" width="100%" height="100%"></iframe>
+        <div class="video-scroll-guard" id="videoGuard"></div>
+
+      </div>
+      <div class="video-meta">
+        <span class="vm-title">Nico Trades: Complete Trading Course</span>
+        <div class="vm-meta">
+          <span class="vm-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            2 hours
+          </span>
+          <span class="vm-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
+            10 modules
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div id="mentorship"></div>
+
+<!-- ═══ GUARANTEE DIVIDER STRIP ═══ -->
+<div class="guarantee-strip">
+  <div class="gs-inner">
+    <div class="gs-left">
+      <div class="gs-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke="#a78bfa" stroke-width="2"/></svg>
+      </div>
+      <div class="gs-text">
+        <div class="gs-eyebrow">Written Guarantee</div>
+        <div class="gs-heading">The $100K Funding Guarantee</div>
+      </div>
+    </div>
+    <div class="gs-right">
+      <div class="gs-stat">
+        <span class="gs-stat-num">$100K</span>
+        <span class="gs-stat-label">Prop Funded</span>
+      </div>
+      <div class="gs-divider"></div>
+      <div class="gs-stat">
+        <span class="gs-stat-num">4mo</span>
+        <span class="gs-stat-label">Or $1K Sent</span>
+      </div>
+      <div class="gs-divider"></div>
+      <a href="#mentorship-cta" class="gs-btn">
+        <span class="gs-btn-dot"></span>
+        Book a Call
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MENTORSHIP SECTION ═══ -->
+<section class="sec-mentorship">
+  <div class="container">
+
+    <!-- guarantee banner -->
+    <div class="guarantee-banner">
+      <div class="gb-glow-l"></div>
+      <div class="gb-glow-r"></div>
+      <div class="gb-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke="#a78bfa" stroke-width="2"/></svg>
+      </div>
+      <div class="gb-content">
+        <div class="gb-eyebrow"><span class="gb-eyebrow-dot"></span>Written Guarantee</div>
+        <h3>The $100K<br>Funding Guarantee</h3>
+        <ul class="gb-bullets">
+          <li>
+            <span class="gb-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Get prop funded with <strong style="color:#fff;">$100,000</strong> within 4 months of working together.</span>
+          </li>
+          <li>
+            <span class="gb-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Miss it, Nico sends you <strong style="color:#fff;">$1,000</strong> cash and keeps coaching until you pass.</span>
+          </li>
+          <li>
+            <span class="gb-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>No other mentor on earth backs their program like this.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="gb-badge">
+        <span class="gb-badge-num">$100K</span>
+        <span class="gb-badge-label">PROP FUNDED</span>
+        <span class="gb-badge-sub">4 months or $1K sent</span>
+      </div>
+    </div>
+
+    <!-- section header -->
+    <div class="mentorship-header">
+      <div class="sec-label">{ WHAT YOU GET }</div>
+      <h2 class="sec-h2">Everything Included in<br>The 1-on-1 Mentorship.</h2>
+    </div>
+
+    <!-- features grid -->
+    <div class="mentorship-grid">
+
+      <div class="m-card">
+        <span class="m-num">01</span>
+        <div class="m-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="m-card-content">
+          <h3>8-Hour Full Academy</h3>
+          <p>A complete deep-dive way beyond the free course. Every concept, every nuance, every edge case. The most comprehensive trading education you'll ever have.</p>
+        </div>
+      </div>
+
+      <div class="m-card">
+        <span class="m-num">02</span>
+        <div class="m-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="m-card-content">
+          <h3>Private 1-on-1 Calls with Nico</h3>
+          <p>Regular private video calls, just you and Nico. Review your trades, fix your mistakes, build your strategy. No group sessions, no wasted time.</p>
+        </div>
+      </div>
+
+      <div class="m-card">
+        <span class="m-num">03</span>
+        <div class="m-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="m-card-content">
+          <h3>Personalized Funding Roadmap</h3>
+          <p>A custom step-by-step plan built for you: your strengths, your schedule, your target account size. You'll always know exactly what to do next.</p>
+        </div>
+      </div>
+
+      <div class="m-card">
+        <span class="m-num">04</span>
+        <div class="m-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="m-card-content">
+          <h3>Live Trading Sessions</h3>
+          <p>Watch Nico trade live and explain every decision in real time. On real charts, not examples, not demos, not replay. Live markets only.</p>
+        </div>
+      </div>
+
+      <div class="m-card">
+        <span class="m-num">05</span>
+        <div class="m-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16"/></svg></div>
+        <div class="m-card-content">
+          <h3>Every Trade Reviewed by Nico</h3>
+          <p>Send your trades and Nico reviews them personally. You'll understand exactly what you did right, what you did wrong, and why.</p>
+        </div>
+      </div>
+
+      <div class="m-card">
+        <span class="m-num">06</span>
+        <div class="m-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.7 17.5"/></svg></div>
+        <div class="m-card-content">
+          <h3>Nico's Personal Number · 24/7</h3>
+          <p>Direct access to Nico's personal phone. Text questions, share setups, get feedback any time. You're never on your own at any point.</p>
+        </div>
+      </div>
+
+      <div class="m-card">
+        <span class="m-num">07</span>
+        <div class="m-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="m-card-content">
+          <h3>Daily Market Insights</h3>
+          <p>Every day before the open, Nico shares his bias, key levels, and what he's watching. You start every session knowing exactly what the plan is.</p>
+        </div>
+      </div>
+
+      <div class="m-card" style="border-color:rgba(96,165,250,0.22); background:linear-gradient(145deg,rgba(96,165,250,0.10) 0%,rgba(4,8,30,0.94) 100%);">
+        <span class="m-num">08</span>
+        <div class="m-icon" style="background:linear-gradient(135deg,rgba(96,165,250,0.25),rgba(99,102,241,0.18));border-color:rgba(96,165,250,0.40);box-shadow:0 0 28px rgba(96,165,250,0.30);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#93c5fd" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke="#a78bfa"/></svg></div>
+        <div class="m-card-content">
+          <h3>The $100K Guarantee</h3>
+          <p>Get prop funded within 4 months. If not, Nico sends you $1,000 cash and keeps working with you until you do. No other mentor on earth offers this.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA block -->
+    <div class="mentorship-cta-block" id="mentorship-cta">
+      <div class="mcta-glow"></div>
+      <div class="mcta-label">{ APPLY NOW }</div>
+      <h2 class="mcta-h2">Ready To Go All In?<br>Book Your Free Strategy Call.</h2>
+      <p class="mcta-sub">The call is free. 30 minutes with Nico. He'll understand where you are, what's holding you back, and exactly how the mentorship will get you funded in 4 months.</p>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:14px; margin-bottom:0;">
+        <div class="mcta-spots">
+          <span class="mcta-spots-dot"></span>
+          Only <strong>4 spots</strong> left
+        </div>
+        <a href="#" class="btn-book">
+          Book a Call
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <p class="mcta-fine">Free 30-minute call. No obligation. Limited spots available.</p>
+      <div class="what-included">
+        <span class="wi-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 8-Hour Academy</span>
+        <span class="wi-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1-on-1 Calls</span>
+        <span class="wi-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> $100K Guarantee</span>
+        <span class="wi-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 24/7 Access</span>
+        <span class="wi-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Trade Reviews</span>
+        <span class="wi-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Daily Insights</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-glow"></div>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">NICO<span>TRADES</span></span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Nico Trades. All rights reserved.</p>
+      <p class="footer-risk">Risk Disclosure: Trading involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="bg.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollToPlugin.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+  /* ── cursor cube ── */
+  (function() {
+    const cube = document.getElementById('cCube');
+    if (!cube) return;
+    let cx = -200, cy = -200, mx = -200, my = -200, visible = false;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; if (!visible) { cube.style.opacity = '1'; visible = true; } }, { passive: true });
+    document.addEventListener('mouseleave', () => { cube.style.opacity = '0'; visible = false; });
+    (function tick() { cx += (mx - cx) * 0.12; cy += (my - cy) * 0.12; cube.style.left = cx + 'px'; cube.style.top = cy + 'px'; requestAnimationFrame(tick); })();
+  })();
+
+  /* smooth scroll */
+  const lenis = new Lenis({ duration: 1.1 });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(time => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+
+  /* personalise with stored name/email */
+  const storedName  = localStorage.getItem('nt_name');
+  const storedEmail = localStorage.getItem('nt_email');
+  if (storedName) {
+    const el = document.getElementById('welcomeName');
+    if (el) el.textContent = storedName.split(' ')[0];
+  }
+  if (storedEmail) {
+    const el = document.getElementById('welcomeEmail');
+    if (el) el.textContent = storedEmail;
+  }
+
+  /* entrance */
+  gsap.from('.course-hero', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' });
+
+  /* ── card row height equalization ── */
+  function equalizeCards() {
+    const cards = Array.from(document.querySelectorAll('.mentorship-grid .m-card'));
+    if (!cards.length) return;
+    /* fully remove inline heights so grid can measure natural content height */
+    cards.forEach(c => { c.style.height = ''; });
+    /* force browser to flush layout */
+    void document.body.offsetHeight;
+    for (let i = 0; i < cards.length; i += 2) {
+      const left = cards[i], right = cards[i + 1];
+      if (!right) continue;
+      const maxH = Math.max(
+        left.getBoundingClientRect().height,
+        right.getBoundingClientRect().height
+      );
+      left.style.height  = maxH + 'px';
+      right.style.height = maxH + 'px';
+    }
+  }
+  /* run after fonts load + two animation frames to guarantee post-paint measurement */
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
+    requestAnimationFrame(() => requestAnimationFrame(equalizeCards));
+  });
+  /* safety net: also run at 400ms and 900ms in case of slow font swap */
+  setTimeout(equalizeCards, 400);
+  setTimeout(equalizeCards, 900);
+  window.addEventListener('resize', equalizeCards, { passive: true });
+
+  /* ── mentorship card tilt ── */
+  (function() {
+    const TILT  = 10;
+    const LIFT  = 14;
+    const GLARE = 0.16;
+
+    document.querySelectorAll('.m-card').forEach(card => {
+      const glare = document.createElement('div');
+      glare.className = 'm-glare';
+      card.appendChild(glare);
+
+      let raf = null, inside = false;
+
+      function applyTilt(e) {
+        const r  = card.getBoundingClientRect();
+        const cx = r.left + r.width  / 2;
+        const cy = r.top  + r.height / 2;
+        const dx = (e.clientX - cx) / (r.width  / 2);
+        const dy = (e.clientY - cy) / (r.height / 2);
+        card.style.transform =
+          `perspective(700px) rotateX(${-dy * TILT}deg) rotateY(${dx * TILT}deg) translateZ(${LIFT}px)`;
+        glare.style.opacity = GLARE.toString();
+        glare.style.background =
+          `radial-gradient(circle at ${(dx+1)/2*100}% ${(dy+1)/2*100}%, rgba(255,255,255,0.18) 0%, transparent 65%)`;
+      }
+
+      card.addEventListener('mouseenter', () => {
+        inside = true;
+        card.style.transition  = 'transform 0.15s ease, box-shadow 0.15s ease';
+        glare.style.transition = 'opacity 0.15s ease';
+      });
+      card.addEventListener('mousemove', e => {
+        if (!inside) return;
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => applyTilt(e));
+      });
+      card.addEventListener('mouseleave', () => {
+        inside = false;
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+        card.style.transition  = 'transform 0.55s cubic-bezier(0.23,1,0.32,1), box-shadow 0.55s ease';
+        glare.style.transition = 'opacity 0.55s ease';
+        card.style.transform   = 'perspective(700px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        glare.style.opacity    = '0';
+      });
+    });
+  })();
+
+  /* ── video scroll guard ── */
+  (function() {
+    const guard = document.getElementById('videoGuard');
+    if (!guard) return;
+    let lockTimer = null;
+
+    guard.addEventListener('wheel', e => {
+      e.preventDefault();
+      lenis.scrollTo(window.scrollY + e.deltaY * 1.5, { duration: 0.6, easing: t => t });
+    }, { passive: false });
+
+    guard.addEventListener('click', () => {
+      guard.classList.add('unlocked');
+      clearTimeout(lockTimer);
+      lockTimer = setTimeout(() => guard.classList.remove('unlocked'), 4000);
+    });
+  })();
+
+  /* smooth anchor scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -80, duration: 1.3 }); }
+    });
+  });
+</script>
+
+<!-- ══ QUALIFICATION MODAL ══ -->
+<div class="qf-overlay" id="qfOverlay">
+  <div class="qf-card">
+    <button class="qf-close" id="qfClose">&#x2715;</button>
+
+    <!-- progress bars -->
+    <div class="qf-progress">
+      <div class="qf-bar active" id="bar0"></div>
+      <div class="qf-bar" id="bar1"></div>
+      <div class="qf-bar" id="bar2"></div>
+      <div class="qf-bar" id="bar3"></div>
+      <div class="qf-bar" id="bar4"></div>
+    </div>
+
+    <!-- STEP 1: Experience -->
+    <div class="qf-step active" id="qfStep0">
+      <div class="qf-step-label">Step 1 of 5 · Background</div>
+      <div class="qf-title">How long have you been trading?</div>
+      <div class="qf-sub">Be honest, there's no wrong answer.</div>
+      <div class="qf-choices">
+        <div class="qf-choice" data-value="Less than 6 months">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Less than 6 months</span>
+        </div>
+        <div class="qf-choice" data-value="6 months – 1 year">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">6 months – 1 year</span>
+        </div>
+        <div class="qf-choice" data-value="1 – 2 years">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">1 – 2 years</span>
+        </div>
+        <div class="qf-choice" data-value="2+ years">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">2+ years</span>
+        </div>
+      </div>
+      <div class="qf-nav">
+        <span></span>
+        <button class="qf-btn-next" id="next0" disabled>Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Situation -->
+    <div class="qf-step" id="qfStep1">
+      <div class="qf-step-label">Step 2 of 5 · Situation</div>
+      <div class="qf-title">Where are you right now?</div>
+      <div class="qf-sub">Pick the option that best describes you today.</div>
+      <div class="qf-choices">
+        <div class="qf-choice" data-value="Complete beginner, just starting out">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Complete beginner, just starting out</span>
+        </div>
+        <div class="qf-choice" data-value="Trading but haven't passed a challenge yet">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Trading but haven't passed a challenge yet</span>
+        </div>
+        <div class="qf-choice" data-value="Passed challenges but can't stay funded">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Passed challenges but can't stay funded</span>
+        </div>
+        <div class="qf-choice" data-value="Currently funded but not consistent">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Currently funded but not consistent</span>
+        </div>
+      </div>
+      <div class="qf-nav">
+        <button class="qf-btn-back" data-prev="0">← Back</button>
+        <button class="qf-btn-next" id="next1" disabled>Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Goal -->
+    <div class="qf-step" id="qfStep2">
+      <div class="qf-step-label">Step 3 of 5 · Your Goal</div>
+      <div class="qf-title">What's your main goal?</div>
+      <div class="qf-sub">What does success look like for you in the next 12 months?</div>
+      <div class="qf-choices">
+        <div class="qf-choice" data-value="Get prop funded for the first time">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Get prop funded for the first time</span>
+        </div>
+        <div class="qf-choice" data-value="Scale my funded account to 6 figures">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Scale my funded account to 6 figures</span>
+        </div>
+        <div class="qf-choice" data-value="Become consistently profitable">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Become consistently profitable</span>
+        </div>
+        <div class="qf-choice" data-value="Replace my income with trading">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Replace my income with trading</span>
+        </div>
+      </div>
+      <div class="qf-nav">
+        <button class="qf-btn-back" data-prev="1">← Back</button>
+        <button class="qf-btn-next" id="next2" disabled>Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Investment -->
+    <div class="qf-step" id="qfStep3">
+      <div class="qf-step-label">Step 4 of 5 · Investment</div>
+      <div class="qf-title">How serious are you about investing in yourself?</div>
+      <div class="qf-sub">This helps Nico know how to structure the call for you.</div>
+      <div class="qf-choices">
+        <div class="qf-choice" data-value="Under $1,000">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">Under $1,000</span>
+        </div>
+        <div class="qf-choice" data-value="$1,000 – $3,000">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">$1,000 – $3,000</span>
+        </div>
+        <div class="qf-choice" data-value="$3,000 – $5,000">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">$3,000 – $5,000</span>
+        </div>
+        <div class="qf-choice" data-value="$5,000+, I'm fully committed">
+          <span class="qf-choice-dot"></span>
+          <span class="qf-choice-label">$5,000+, I'm fully committed</span>
+        </div>
+      </div>
+      <div class="qf-nav">
+        <button class="qf-btn-back" data-prev="2">← Back</button>
+        <button class="qf-btn-next" id="next3" disabled>Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Contact -->
+    <div class="qf-step" id="qfStep4">
+      <div class="qf-step-label">Step 5 of 5 · Your Info</div>
+      <div class="qf-title">Almost there. Who are we talking to?</div>
+      <div class="qf-sub">Your info is used to set up the call, nothing else.</div>
+      <div class="qf-fields">
+        <div class="qf-field">
+          <label>Full Name</label>
+          <input type="text" id="qfName" placeholder="John Smith" autocomplete="name"/>
+        </div>
+        <div class="qf-field">
+          <label>Email Address</label>
+          <input type="email" id="qfEmail" placeholder="john@email.com" autocomplete="email"/>
+        </div>
+        <div class="qf-field">
+          <label>Phone Number</label>
+          <input type="tel" id="qfPhone" placeholder="+1 555 000 0000" autocomplete="tel"/>
+        </div>
+      </div>
+      <div class="qf-nav">
+        <button class="qf-btn-back" data-prev="3">← Back</button>
+        <button class="qf-btn-next" id="next4" disabled>Book My Call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- STEP 6: Custom Calendar -->
+    <!-- Not qualified screen — blocked region -->
+    <div id="qfNotQualified" style="display:none; text-align:center; padding: 12px 0 8px;">
+      <div style="font-size:38px; margin-bottom:16px;">🚫</div>
+      <div class="qf-title" style="font-size:22px; margin-bottom:12px;">Not Qualified</div>
+      <div class="qf-sub" style="color:rgba(255,255,255,0.55); line-height:1.7; max-width:320px; margin:0 auto;">
+        Unfortunately this mentorship is not available in your region at this time.
+      </div>
+    </div>
+
+    <!-- Not qualified screen — budget too low -->
+    <div id="qfNotQualifiedBudget" style="display:none; text-align:center; padding: 12px 0 8px;">
+      <div style="font-size:38px; margin-bottom:16px;">💸</div>
+      <div class="qf-title" style="font-size:22px; margin-bottom:12px;">Not Qualified</div>
+      <div class="qf-sub" style="color:rgba(255,255,255,0.55); line-height:1.7; max-width:320px; margin:0 auto;">
+        This mentorship requires a serious financial commitment. If your budget is under $1,000 this isn't the right fit right now.
+      </div>
+    </div>
+
+    <div class="qf-step" id="qfStep5">
+      <div class="qf-cal-eyebrow"><span class="qf-cal-dot"></span>You're Approved</div>
+      <div class="qf-title">Pick Your Time</div>
+      <div class="qf-sub">30 minutes with Nico. Choose a slot below and lock in your spot.</div>
+
+      <div class="cal-ui">
+        <div class="cal-loading" id="calLoading">
+          <div class="cal-spinner"></div>
+          <p>Finding available times…</p>
+        </div>
+        <div class="cal-error" id="calError">Unable to load availability. Please refresh and try again.</div>
+
+        <div id="calDaysWrap" style="display:none">
+          <div class="cal-days" id="calDays"></div>
+        </div>
+
+        <div id="calSlotsSection" style="display:none">
+          <div class="cal-tz-row">
+            <div class="cal-slots-label">Available times</div>
+            <div class="cal-tz-pill" id="calTzPill">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span id="calTzLabel">UTC+0 · London</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+              <div class="cal-tz-dropdown" id="calTzDropdown"></div>
+            </div>
+          </div>
+          <div class="cal-slots" id="calSlots"></div>
+          <div class="cal-no-slots" id="calNoSlots">No available slots for this day.</div>
+        </div>
+
+        <button class="cal-confirm-btn" id="calConfirmBtn">Confirm My Spot &rarr;</button>
+        <p class="cal-booking-error" id="calBookingError"></p>
+      </div>
+
+      <div class="qf-cal-success" id="calSuccess">
+        <p><strong>You're booked.</strong> Check your email for the confirmation. Nico will see you on the call.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  const overlay  = document.getElementById('qfOverlay');
+  const closeBtn = document.getElementById('qfClose');
+  const answers  = {};
+  let current = 0;
+
+  /* open modal */
+  document.querySelectorAll('.btn-book').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      goToStep(0);
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  /* close modal */
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    document.querySelector('.qf-card').classList.remove('cal-mode');
+  }
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* progress bars */
+  function updateBars(step) {
+    for (let i = 0; i < 5; i++) {
+      const bar = document.getElementById('bar' + i);
+      bar.classList.remove('done', 'active');
+      if (i < step)       bar.classList.add('done');
+      else if (i === step) bar.classList.add('active');
+    }
+  }
+
+  /* navigate to step */
+  function goToStep(n) {
+    document.querySelectorAll('.qf-step').forEach((s, i) => {
+      s.classList.toggle('active', i === n);
+    });
+    updateBars(n);
+    current = n;
+  }
+
+  /* choice tiles */
+  document.querySelectorAll('.qf-step').forEach((step, si) => {
+    const choices = step.querySelectorAll('.qf-choice');
+    const nextBtn = document.getElementById('next' + si);
+    choices.forEach(choice => {
+      choice.addEventListener('click', () => {
+        choices.forEach(c => c.classList.remove('selected'));
+        choice.classList.add('selected');
+        answers['step' + si] = choice.dataset.value;
+        if (nextBtn) nextBtn.disabled = false;
+      });
+    });
+  });
+
+  /* back buttons */
+  document.querySelectorAll('.qf-btn-back').forEach(btn => {
+    btn.addEventListener('click', () => goToStep(parseInt(btn.dataset.prev)));
+  });
+
+  /* next buttons for choice steps */
+  [0,1,2,3].forEach(i => {
+    const btn = document.getElementById('next' + i);
+    if (btn) btn.addEventListener('click', () => goToStep(i + 1));
+  });
+
+  /* contact step validation */
+  const nameInput  = document.getElementById('qfName');
+  const emailInput = document.getElementById('qfEmail');
+  const phoneInput = document.getElementById('qfPhone');
+  const submitBtn  = document.getElementById('next4');
+
+  function validateContact() {
+    const ok = nameInput.value.trim().length > 1
+            && /\S+@\S+\.\S+/.test(emailInput.value.trim())
+            && phoneInput.value.trim().length > 5;
+    submitBtn.disabled = !ok;
+  }
+  [nameInput, emailInput, phoneInput].forEach(el => el.addEventListener('input', validateContact));
+
+  /* detect blocked region phone numbers */
+  const BLOCKED_CODES = [
+    /* Asia */
+    '91',  /* India */
+    '92',  /* Pakistan */
+    '62',  /* Indonesia */
+    /* Africa — full continent */
+    '20',  /* Egypt */
+    '27',  /* South Africa */
+    '212', /* Morocco */
+    '213', /* Algeria */
+    '216', /* Tunisia */
+    '218', /* Libya */
+    '220', /* Gambia */
+    '221', /* Senegal */
+    '222', /* Mauritania */
+    '223', /* Mali */
+    '224', /* Guinea */
+    '225', /* Côte d'Ivoire */
+    '226', /* Burkina Faso */
+    '227', /* Niger */
+    '228', /* Togo */
+    '229', /* Benin */
+    '230', /* Mauritius */
+    '231', /* Liberia */
+    '232', /* Sierra Leone */
+    '233', /* Ghana */
+    '234', /* Nigeria */
+    '235', /* Chad */
+    '236', /* Central African Republic */
+    '237', /* Cameroon */
+    '238', /* Cabo Verde */
+    '239', /* São Tomé & Príncipe */
+    '240', /* Equatorial Guinea */
+    '241', /* Gabon */
+    '242', /* Republic of Congo */
+    '243', /* DR Congo */
+    '244', /* Angola */
+    '245', /* Guinea-Bissau */
+    '247', /* Ascension Island */
+    '248', /* Seychelles */
+    '249', /* Sudan */
+    '250', /* Rwanda */
+    '251', /* Ethiopia */
+    '252', /* Somalia */
+    '253', /* Djibouti */
+    '254', /* Kenya */
+    '255', /* Tanzania */
+    '256', /* Uganda */
+    '257', /* Burundi */
+    '258', /* Mozambique */
+    '260', /* Zambia */
+    '261', /* Madagascar */
+    '262', /* Réunion / Mayotte */
+    '263', /* Zimbabwe */
+    '264', /* Namibia */
+    '265', /* Malawi */
+    '266', /* Lesotho */
+    '267', /* Botswana */
+    '268', /* Eswatini */
+    '269', /* Comoros */
+    '290', /* Saint Helena */
+    '291', /* Eritrea */
+    '297', /* Aruba (not Africa, skip) */
+    '298', /* skip */
+    '299', /* skip */
+    '211', /* South Sudan */
+  ];
+
+  function isBlockedPhone(phone) {
+    const stripped = phone.replace(/[\s\-().+]/g, '');
+    for (const code of BLOCKED_CODES) {
+      if (stripped.startsWith(code)) return true;
+      if (stripped.startsWith('00' + code)) return true;
+    }
+    return false;
+  }
+
+  /* submit contact   send to GHL, then show Calendly */
+  submitBtn.addEventListener('click', async () => {
+    answers.name  = nameInput.value.trim();
+    answers.email = emailInput.value.trim();
+    answers.phone = phoneInput.value.trim();
+
+    /* block restricted region numbers */
+    if (isBlockedPhone(answers.phone)) {
+      document.querySelectorAll('.qf-step').forEach(s => s.style.display = 'none');
+      document.getElementById('qfNotQualified').style.display = 'block';
+      document.querySelector('.qf-progress')?.style.setProperty('display', 'none');
+      return;
+    }
+
+    /* block under $1,000 budget */
+    if (answers.step3 === 'Under $1,000') {
+      document.querySelectorAll('.qf-step').forEach(s => s.style.display = 'none');
+      document.getElementById('qfNotQualifiedBudget').style.display = 'block';
+      document.querySelector('.qf-progress')?.style.setProperty('display', 'none');
+      return;
+    }
+
+    /* send to GHL   non-blocking */
+    fetch('/api/application', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:       answers.name,
+        email:      answers.email,
+        phone:      answers.phone,
+        experience: answers.step0,
+        situation:  answers.step1,
+        goal:       answers.step2,
+        investment: answers.step3,
+      }),
+    }).catch(() => {});
+
+    goToStep(5);
+    updateBars(5);
+
+    /* expand card for calendar */
+    document.querySelector('.qf-card').classList.add('cal-mode');
+
+    /* ── Custom Calendar UI ── */
+    const calBase = 'https://calendly.com/nikofx-jelavic/new-meeting';
+    let calAvailability = {};
+    let calSelectedDate = null;
+    let calSelectedTime = null;
+
+    const calLoading    = document.getElementById('calLoading');
+    const calError      = document.getElementById('calError');
+    const calDaysWrap   = document.getElementById('calDaysWrap');
+    const calDaysEl     = document.getElementById('calDays');
+    const calSlotsSec   = document.getElementById('calSlotsSection');
+    const calSlotsEl    = document.getElementById('calSlots');
+    const calNoSlots    = document.getElementById('calNoSlots');
+    const calConfirmBtn = document.getElementById('calConfirmBtn');
+    const calTzPill     = document.getElementById('calTzPill');
+    const calTzLabel    = document.getElementById('calTzLabel');
+    const calTzDropdown = document.getElementById('calTzDropdown');
+
+    /* ── Timezone data   one entry per major city ── */
+    const TZ_LIST = [
+      { iana:'Pacific/Honolulu',                city:'Honolulu' },
+      { iana:'America/Anchorage',               city:'Anchorage' },
+      { iana:'America/Los_Angeles',             city:'Los Angeles' },
+      { iana:'America/Vancouver',               city:'Vancouver' },
+      { iana:'America/Tijuana',                 city:'Tijuana' },
+      { iana:'America/Phoenix',                 city:'Phoenix' },
+      { iana:'America/Denver',                  city:'Denver' },
+      { iana:'America/Calgary',                 city:'Calgary' },
+      { iana:'America/Chicago',                 city:'Chicago' },
+      { iana:'America/Mexico_City',             city:'Mexico City' },
+      { iana:'America/Winnipeg',                city:'Winnipeg' },
+      { iana:'America/New_York',                city:'New York' },
+      { iana:'America/Toronto',                 city:'Toronto' },
+      { iana:'America/Montreal',                city:'Montreal' },
+      { iana:'America/Lima',                    city:'Lima' },
+      { iana:'America/Bogota',                  city:'Bogotá' },
+      { iana:'America/Panama',                  city:'Panama City' },
+      { iana:'America/Caracas',                 city:'Caracas' },
+      { iana:'America/Halifax',                 city:'Halifax' },
+      { iana:'America/Santiago',                city:'Santiago' },
+      { iana:'America/La_Paz',                  city:'La Paz' },
+      { iana:'America/Sao_Paulo',               city:'São Paulo' },
+      { iana:'America/Argentina/Buenos_Aires',  city:'Buenos Aires' },
+      { iana:'America/Montevideo',              city:'Montevideo' },
+      { iana:'Atlantic/Reykjavik',              city:'Reykjavik' },
+      { iana:'Europe/London',                   city:'London' },
+      { iana:'Europe/Dublin',                   city:'Dublin' },
+      { iana:'Europe/Lisbon',                   city:'Lisbon' },
+      { iana:'Africa/Casablanca',               city:'Casablanca' },
+      { iana:'Africa/Lagos',                    city:'Lagos' },
+      { iana:'Europe/Paris',                    city:'Paris' },
+      { iana:'Europe/Berlin',                   city:'Berlin' },
+      { iana:'Europe/Madrid',                   city:'Madrid' },
+      { iana:'Europe/Rome',                     city:'Rome' },
+      { iana:'Europe/Amsterdam',                city:'Amsterdam' },
+      { iana:'Europe/Brussels',                 city:'Brussels' },
+      { iana:'Europe/Vienna',                   city:'Vienna' },
+      { iana:'Europe/Zurich',                   city:'Zurich' },
+      { iana:'Europe/Warsaw',                   city:'Warsaw' },
+      { iana:'Europe/Prague',                   city:'Prague' },
+      { iana:'Europe/Budapest',                 city:'Budapest' },
+      { iana:'Europe/Stockholm',                city:'Stockholm' },
+      { iana:'Europe/Copenhagen',               city:'Copenhagen' },
+      { iana:'Europe/Oslo',                     city:'Oslo' },
+      { iana:'Europe/Zagreb',                   city:'Zagreb' },
+      { iana:'Europe/Belgrade',                 city:'Belgrade' },
+      { iana:'Europe/Ljubljana',                city:'Ljubljana' },
+      { iana:'Europe/Sarajevo',                 city:'Sarajevo' },
+      { iana:'Europe/Skopje',                   city:'Skopje' },
+      { iana:'Europe/Tirane',                   city:'Tirana' },
+      { iana:'Europe/Athens',                   city:'Athens' },
+      { iana:'Europe/Helsinki',                 city:'Helsinki' },
+      { iana:'Europe/Bucharest',                city:'Bucharest' },
+      { iana:'Europe/Sofia',                    city:'Sofia' },
+      { iana:'Europe/Riga',                     city:'Riga' },
+      { iana:'Europe/Tallinn',                  city:'Tallinn' },
+      { iana:'Europe/Vilnius',                  city:'Vilnius' },
+      { iana:'Europe/Kyiv',                     city:'Kyiv' },
+      { iana:'Europe/Chisinau',                 city:'Chișinău' },
+      { iana:'Africa/Cairo',                    city:'Cairo' },
+      { iana:'Africa/Johannesburg',             city:'Johannesburg' },
+      { iana:'Asia/Jerusalem',                  city:'Jerusalem' },
+      { iana:'Asia/Beirut',                     city:'Beirut' },
+      { iana:'Asia/Amman',                      city:'Amman' },
+      { iana:'Asia/Damascus',                   city:'Damascus' },
+      { iana:'Europe/Istanbul',                 city:'Istanbul' },
+      { iana:'Europe/Moscow',                   city:'Moscow' },
+      { iana:'Asia/Riyadh',                     city:'Riyadh' },
+      { iana:'Asia/Baghdad',                    city:'Baghdad' },
+      { iana:'Asia/Kuwait',                     city:'Kuwait City' },
+      { iana:'Africa/Nairobi',                  city:'Nairobi' },
+      { iana:'Africa/Addis_Ababa',              city:'Addis Ababa' },
+      { iana:'Asia/Tehran',                     city:'Tehran' },
+      { iana:'Asia/Dubai',                      city:'Dubai' },
+      { iana:'Asia/Muscat',                     city:'Muscat' },
+      { iana:'Asia/Baku',                       city:'Baku' },
+      { iana:'Asia/Tbilisi',                    city:'Tbilisi' },
+      { iana:'Asia/Yerevan',                    city:'Yerevan' },
+      { iana:'Asia/Kabul',                      city:'Kabul' },
+      { iana:'Asia/Karachi',                    city:'Karachi' },
+      { iana:'Asia/Tashkent',                   city:'Tashkent' },
+      { iana:'Asia/Kolkata',                    city:'Mumbai / Delhi' },
+      { iana:'Asia/Kathmandu',                  city:'Kathmandu' },
+      { iana:'Asia/Dhaka',                      city:'Dhaka' },
+      { iana:'Asia/Almaty',                     city:'Almaty' },
+      { iana:'Asia/Rangoon',                    city:'Yangon' },
+      { iana:'Asia/Bangkok',                    city:'Bangkok' },
+      { iana:'Asia/Ho_Chi_Minh',                city:'Ho Chi Minh City' },
+      { iana:'Asia/Jakarta',                    city:'Jakarta' },
+      { iana:'Asia/Singapore',                  city:'Singapore' },
+      { iana:'Asia/Kuala_Lumpur',               city:'Kuala Lumpur' },
+      { iana:'Asia/Hong_Kong',                  city:'Hong Kong' },
+      { iana:'Asia/Taipei',                     city:'Taipei' },
+      { iana:'Asia/Shanghai',                   city:'Shanghai / Beijing' },
+      { iana:'Asia/Manila',                     city:'Manila' },
+      { iana:'Australia/Perth',                 city:'Perth' },
+      { iana:'Asia/Seoul',                      city:'Seoul' },
+      { iana:'Asia/Tokyo',                      city:'Tokyo' },
+      { iana:'Australia/Adelaide',              city:'Adelaide' },
+      { iana:'Australia/Darwin',                city:'Darwin' },
+      { iana:'Australia/Sydney',                city:'Sydney' },
+      { iana:'Australia/Melbourne',             city:'Melbourne' },
+      { iana:'Australia/Brisbane',              city:'Brisbane' },
+      { iana:'Pacific/Auckland',                city:'Auckland' },
+      { iana:'Pacific/Fiji',                    city:'Suva (Fiji)' },
+    ];
+
+    /* Compute UTC label dynamically from IANA string */
+    function getOffsetMins(iana) {
+      try {
+        const parts = new Intl.DateTimeFormat('en-US', { timeZone: iana, timeZoneName: 'shortOffset' })
+          .formatToParts(new Date());
+        const tzStr = parts.find(p => p.type === 'timeZoneName').value; // e.g. "GMT+2", "GMT-5:30"
+        const m = tzStr.match(/GMT([+-])(\d+)(?::(\d+))?/);
+        if (!m) return 0;
+        return (m[1] === '+' ? 1 : -1) * (parseInt(m[2]) * 60 + parseInt(m[3] || '0'));
+      } catch { return 0; }
+    }
+    function getUtcLabel(iana) {
+      const off  = getOffsetMins(iana);
+      const sign = off >= 0 ? '+' : '−';
+      const h    = Math.floor(Math.abs(off) / 60);
+      const m    = Math.abs(off) % 60;
+      return 'UTC' + sign + h + (m ? ':' + String(m).padStart(2, '0') : '');
+    }
+
+    /* Auto-detect: exact IANA match → closest UTC offset fallback */
+    const detectedIana = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    function detectTz() {
+      const exact = TZ_LIST.find(z => z.iana === detectedIana);
+      if (exact) return exact;
+      const userOff = getOffsetMins(detectedIana);
+      let best = TZ_LIST[0], bestDiff = Infinity;
+      TZ_LIST.forEach(z => {
+        const diff = Math.abs(getOffsetMins(z.iana) - userOff);
+        if (diff < bestDiff) { bestDiff = diff; best = z; }
+      });
+      return best;
+    }
+    let calTz = detectTz();
+
+    function updateTzLabel() {
+      calTzLabel.textContent = getUtcLabel(calTz.iana) + ' · ' + calTz.city;
+    }
+
+    function buildTzDropdown() {
+      calTzDropdown.innerHTML = TZ_LIST.map(z => `
+        <div class="cal-tz-option${z.iana === calTz.iana ? ' active' : ''}" data-iana="${z.iana}">
+          <span class="tz-city">${z.city}</span>
+          <span class="tz-offset">${getUtcLabel(z.iana)}</span>
+        </div>
+      `).join('');
+      calTzDropdown.querySelectorAll('.cal-tz-option').forEach(opt => {
+        opt.addEventListener('click', e => {
+          e.stopPropagation();
+          calTz = TZ_LIST.find(z => z.iana === opt.dataset.iana);
+          updateTzLabel();
+          calTzDropdown.classList.remove('open');
+          regroupByTimezone();
+        });
+      });
+    }
+
+    calTzPill.addEventListener('click', e => {
+      e.stopPropagation();
+      buildTzDropdown();
+      calTzDropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', () => calTzDropdown.classList.remove('open'));
+
+    updateTzLabel();
+
+    /* ── Slot helpers ── */
+    function dateInTz(iso) {
+      /* Returns YYYY-MM-DD string in the selected timezone */
+      return new Date(iso).toLocaleDateString('en-CA', { timeZone: calTz.iana });
+    }
+
+    function timeInTz(iso) {
+      return new Date(iso).toLocaleTimeString('en-US', {
+        hour: 'numeric', minute: '2-digit', hour12: true, timeZone: calTz.iana
+      });
+    }
+
+    /* After timezone switch, re-group all ISO slots by local date */
+    let allIsoSlots = [];
+
+    function regroupByTimezone() {
+      calAvailability = {};
+      allIsoSlots.forEach(iso => {
+        const d = dateInTz(iso);
+        if (!calAvailability[d]) calAvailability[d] = [];
+        calAvailability[d].push(iso);
+      });
+      const dates = Object.keys(calAvailability).sort();
+      renderCalDays(dates);
+      if (dates.length) selectCalDate(dates[0]);
+    }
+
+    fetch('/api/slots')
+      .then(r => r.json())
+      .then(data => {
+        /* Flatten all ISO strings */
+        const raw = data.availability || {};
+        allIsoSlots = Object.values(raw).flat();
+        regroupByTimezone();
+        calLoading.classList.add('hidden');
+        calDaysWrap.style.display = '';
+        calSlotsSec.style.display = '';
+      })
+      .catch(() => {
+        calLoading.classList.add('hidden');
+        calError.classList.add('show');
+      });
+
+    function renderCalDays(dates) {
+      const dayNames   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      calDaysEl.innerHTML = '';
+      dates.forEach(dateStr => {
+        const d    = new Date(dateStr + 'T12:00:00');
+        const pill = document.createElement('button');
+        pill.className   = 'cal-day';
+        pill.dataset.date = dateStr;
+        pill.innerHTML = `
+          <span class="cal-day-name">${dayNames[d.getDay()]}</span>
+          <span class="cal-day-num">${d.getDate()}</span>
+          <span class="cal-day-month">${monthNames[d.getMonth()]}</span>
+        `;
+        pill.addEventListener('click', () => selectCalDate(dateStr));
+        calDaysEl.appendChild(pill);
+      });
+    }
+
+    function selectCalDate(dateStr) {
+      calSelectedDate = dateStr;
+      calSelectedTime = null;
+      calDaysEl.querySelectorAll('.cal-day').forEach(p => {
+        p.classList.toggle('selected', p.dataset.date === dateStr);
+      });
+      const slots = calAvailability[dateStr] || [];
+      calSlotsEl.innerHTML = '';
+      calNoSlots.style.display = slots.length ? 'none' : 'block';
+      slots.forEach(iso => {
+        const btn = document.createElement('button');
+        btn.className   = 'cal-slot';
+        btn.textContent = timeInTz(iso);
+        btn.dataset.iso = iso;
+        btn.addEventListener('click', () => selectCalTime(iso, btn));
+        calSlotsEl.appendChild(btn);
+      });
+      calConfirmBtn.classList.remove('visible');
+    }
+
+    function selectCalTime(iso, btn) {
+      calSelectedTime = iso;
+      calSlotsEl.querySelectorAll('.cal-slot').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      calConfirmBtn.classList.add('visible');
+    }
+
+    const calBookingError = document.getElementById('calBookingError');
+
+    calConfirmBtn.addEventListener('click', () => {
+      if (!calSelectedDate || !calSelectedTime) return;
+
+      /* Fire booking API in the background   don't wait for it */
+      fetch('/api/book', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          name:      answers.name,
+          email:     answers.email,
+          phone:     answers.phone,
+          startTime: calSelectedTime,
+          timeZone:  calTz.iana,
+          answers: {
+            experience: answers.step0,
+            situation:  answers.step1,
+            goal:       answers.step2,
+            investment: answers.step3,
+          },
+        }),
+      }).catch(() => {});
+
+      /* Redirect instantly */
+      window.location.href = '/confirm';
+    });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  const TILT  = 6;
+  const LIFT  = 12;
+  const GLARE = 0.15;
+
+  document.querySelectorAll('.guarantee-banner').forEach(card => {
+    const glare = document.createElement('div');
+    glare.className = 'sc-glare';
+    glare.style.cssText = 'position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;z-index:2;';
+    card.appendChild(glare);
+
+    let raf = null, inside = false;
+
+    function applyTilt(e) {
+      const r  = card.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width  / 2)) / (r.width  / 2);
+      const dy = (e.clientY - (r.top  + r.height / 2)) / (r.height / 2);
+      card.style.transform = `perspective(1000px) rotateX(${-dy * TILT}deg) rotateY(${dx * TILT}deg) translateZ(${LIFT}px)`;
+      glare.style.opacity = GLARE.toString();
+      glare.style.background = `radial-gradient(circle at ${(dx+1)/2*100}% ${(dy+1)/2*100}%, rgba(255,255,255,0.16) 0%, transparent 65%)`;
+    }
+
+    card.addEventListener('mouseenter', () => {
+      inside = true;
+      card.style.transition = 'transform 0.15s ease';
+      glare.style.transition = 'opacity 0.15s ease';
+    });
+    card.addEventListener('mousemove', e => {
+      if (!inside) return;
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => applyTilt(e));
+    });
+    card.addEventListener('mouseleave', () => {
+      inside = false;
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      card.style.transition = 'transform 0.55s cubic-bezier(0.23,1,0.32,1)';
+      glare.style.transition = 'opacity 0.55s ease';
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+      glare.style.opacity = '0';
+    });
+  });
+})();
+</script>
+</body>
+</html>

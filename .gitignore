@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+_frames/
+_frames2/
+_marketing_temp/
+_repo_temp/
