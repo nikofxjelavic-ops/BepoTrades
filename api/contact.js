@@ -42,7 +42,7 @@ module.exports = async function handler(req, res) {
     email:  email.trim().toLowerCase(),
     phone:  phone?.trim() || undefined,
     tags:   ['free-course', 'website-lead'],
-    source: 'nicotrades-website',
+    source: 'bepotrades-website',
   };
 
   console.log('[contact] upserting GHL contact:', email);
