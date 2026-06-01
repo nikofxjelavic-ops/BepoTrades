@@ -58,7 +58,8 @@ function extractMeetUrl(booking) {
 }
 
 /* cached within the same serverless instance */
-let _eventTypeId = null;
+let _eventTypeId      = null;
+let _ghlCustomFieldMap = null;   // { [displayName]: fieldId }
 
 async function getEventTypeId(apiKey, slug) {
   if (_eventTypeId) return _eventTypeId;
@@ -107,6 +108,38 @@ function ghlHeaders(apiKey) {
   };
 }
 
+/* Fetch GHL custom fields for the location and return a map of
+ * displayName → fieldId. Cached per-serverless-instance.
+ * Logs the full custom-field inventory on first call so we can verify
+ * Bepo's GHL has the field names this code expects. */
+async function getGhlCustomFieldMap(apiKey, locationId) {
+  if (_ghlCustomFieldMap) return _ghlCustomFieldMap;
+
+  console.log('[book] fetching GHL custom fields for location:', locationId);
+  const r = await fetch(
+    `${GHL_BASE}/locations/${locationId}/customFields`,
+    { headers: ghlHeaders(apiKey) }
+  );
+  const raw = await r.text();
+  console.log('[book] GHL customFields status:', r.status);
+  console.log('[book] FULL GHL customFields response:', raw);
+
+  if (!r.ok) {
+    console.warn('[book] GHL custom-fields lookup failed — will fall back to key-based custom fields');
+    return null;
+  }
+
+  const body = JSON.parse(raw);
+  const list = body.customFields || body.data || [];
+  const map  = {};
+  for (const f of list) {
+    if (f && f.name && f.id) map[f.name] = f.id;
+  }
+  console.log('[book] GHL custom field name → id map:', JSON.stringify(map, null, 2));
+  _ghlCustomFieldMap = map;
+  return map;
+}
+
 async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startTime, timeZone, bookingUid, meetUrl, applicationSummary }) {
   const [firstName, ...rest] = (name || '').trim().split(' ');
   const lastName = rest.join(' ') || '';
@@ -117,6 +150,56 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
     timeZone: timeZone || 'UTC',
   });
 
+  /* The five custom fields we want to populate, keyed by GHL display name. */
+  const desiredFields = {
+    'Call Date':            callDate,
+    'Call Timezone':        timeZone || 'UTC',
+    'Cal Booking UID':      String(bookingUid || ''),
+    'Google Meet Link':     meetUrl || '',
+    'Application Answers':  applicationSummary || '',
+  };
+
+  console.log('[book] GHL custom field values to send (by display name):');
+  for (const [n, v] of Object.entries(desiredFields)) {
+    console.log('  ' + n + ' = ' + JSON.stringify(v));
+  }
+
+  /* Resolve display names → field IDs from Bepo's GHL location. */
+  let fieldMap = null;
+  try {
+    fieldMap = await getGhlCustomFieldMap(apiKey, locationId);
+  } catch (e) {
+    console.error('[book] getGhlCustomFieldMap threw:', e.message);
+  }
+
+  /* Build customFields array. Prefer id-based when we have a mapping;
+   * fall back to legacy key-based for any name we couldn't resolve. */
+  const customFields = [];
+  const keyByName = {
+    'Call Date':           'call_date',
+    'Call Timezone':       'call_timezone',
+    'Cal Booking UID':     'cal_booking_uid',
+    'Google Meet Link':    'google_meet_link',
+    'Application Answers': 'application_answers',
+  };
+
+  for (const [displayName, value] of Object.entries(desiredFields)) {
+    if (!value) {
+      console.log('[book] skip "' + displayName + '" — empty value');
+      continue;
+    }
+    const id = fieldMap ? fieldMap[displayName] : null;
+    if (id) {
+      customFields.push({ id, value });
+      console.log('[book] cf → id "' + id + '" (' + displayName + ') = ' + JSON.stringify(value));
+    } else {
+      if (fieldMap) {
+        console.warn('[book] WARNING: no GHL field named "' + displayName + '" — falling back to key "' + keyByName[displayName] + '"');
+      }
+      customFields.push({ key: keyByName[displayName], field_value: value });
+    }
+  }
+
   const body = {
     locationId,
     firstName,
@@ -124,17 +207,13 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
     email: (email || '').trim().toLowerCase(),
     phone: phone || '',
     tags: ['mentorship-applicant', 'mentorship-call-booked'],
-    customFields: [
-      { key: 'call_date',           field_value: callDate },
-      { key: 'call_timezone',       field_value: timeZone || 'UTC' },
-      { key: 'cal_booking_uid',     field_value: String(bookingUid || '') },
-      { key: 'google_meet_link',    field_value: meetUrl || '' },
-      { key: 'application_answers', field_value: applicationSummary || '' },
-    ].filter(f => f.field_value),
+    customFields,
     source: 'mentorship-booking',
   };
 
   console.log('[book] GHL upsert contact:', email);
+  console.log('[book] FULL GHL upsert payload:', JSON.stringify(body, null, 2));
+
   const r = await fetch(`${GHL_BASE}/contacts/upsert`, {
     method:  'POST',
     headers: ghlHeaders(apiKey),
@@ -142,7 +221,8 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
   });
 
   const raw = await r.text();
-  console.log('[book] GHL contact upsert status:', r.status, raw.slice(0, 200));
+  console.log('[book] GHL contact upsert status:', r.status);
+  console.log('[book] FULL GHL contact upsert response:', raw);
 
   if (!r.ok) throw new Error('GHL contact upsert failed: ' + r.status + ' ' + raw);
 
