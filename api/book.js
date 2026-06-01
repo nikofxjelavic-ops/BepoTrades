@@ -174,12 +174,16 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
     timeZone: timeZone || 'UTC',
   });
 
-  /* The five custom fields we want to populate, keyed by GHL display name. */
+  /* The five custom fields we want to populate. Display names should
+   * match the GHL field names exactly; the code will fall back to
+   * fieldKey matching if names don't line up. "Meeting Link" is used
+   * instead of "Google Meet Link" because Bepo uses Cal Video
+   * (https://app.cal.com/video/…), not Google Meet. */
   const desiredFields = {
     'Call Date':            callDate,
     'Call Timezone':        timeZone || 'UTC',
     'Cal Booking UID':      String(bookingUid || ''),
-    'Google Meet Link':     meetUrl || '',
+    'Meeting Link':         meetUrl || '',
     'Application Answers':  applicationSummary || '',
   };
 
@@ -202,7 +206,7 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
     'Call Date':           'call_date',
     'Call Timezone':       'call_timezone',
     'Cal Booking UID':     'cal_booking_uid',
-    'Google Meet Link':    'google_meet_link',
+    'Meeting Link':        'meeting_link',
     'Application Answers': 'application_answers',
   };
 
@@ -225,8 +229,20 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
         fieldKey: expectedKeyByName[displayName],
       }) || null;
 
+    /* Send every shape GHL v2 might accept. Different versions of the
+     * /contacts/upsert endpoint expect different field names — be safe
+     * by including all four:
+     *   id           — UUID reference to the custom field
+     *   key          — the fieldKey (drives {{contact.<key>}} merge tags)
+     *   value        — newer LeadConnector format
+     *   field_value  — legacy GHL v1 / v2 format
+     * GHL ignores keys it doesn't recognize, so sending extra is safe. */
     if (resolved && resolved.id) {
-      const entry = { id: resolved.id, field_value: value };
+      const entry = {
+        id:          resolved.id,
+        value:       value,
+        field_value: value,
+      };
       if (resolved.fieldKey) entry.key = resolved.fieldKey;
       customFields.push(entry);
       console.log(
@@ -243,7 +259,7 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
           ' or fieldKey="' + key + '" — sending bare key form, merge tag may not resolve'
         );
       }
-      customFields.push({ key, field_value: value });
+      customFields.push({ key, value, field_value: value });
     }
   }
 
@@ -273,8 +289,65 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
 
   if (!r.ok) throw new Error('GHL contact upsert failed: ' + r.status + ' ' + raw);
 
-  const data = JSON.parse(raw);
-  return data.contact?.id || data.id;
+  const data      = JSON.parse(raw);
+  const contactId = data.contact?.id || data.id;
+
+  /* ── Verification: GET the contact back and log what GHL actually stored.
+   * If the custom field values we sent are present in the response, the
+   * upsert worked. If they're absent, GHL silently rejected the format
+   * (most common cause: wrong field-value key name for this API version). */
+  if (contactId) {
+    try {
+      const verifyR = await fetch(`${GHL_BASE}/contacts/${contactId}`, {
+        headers: ghlHeaders(apiKey),
+      });
+      const verifyRaw = await verifyR.text();
+      console.log('[book] GHL GET contact status:', verifyR.status);
+      console.log('[book] FULL GHL GET contact response:', verifyRaw);
+
+      if (verifyR.ok) {
+        const v        = JSON.parse(verifyRaw);
+        const contact  = v.contact || v;
+        const stored   = contact.customFields || contact.customField || [];
+        console.log('[book] GHL stored customFields on contact:', JSON.stringify(stored, null, 2));
+
+        /* Cross-check: did each of our five fields actually persist? */
+        const sentIds = customFields.map(f => f.id).filter(Boolean);
+        for (const sentId of sentIds) {
+          const got = stored.find(s => s.id === sentId);
+          console.log(
+            '[book] persisted? id=' + sentId +
+            ' → ' + (got ? JSON.stringify(got.value ?? got.field_value ?? got) : '(MISSING)')
+          );
+        }
+      }
+    } catch (e) {
+      console.error('[book] GHL verification GET failed:', e.message);
+    }
+  }
+
+  /* ── Copy-paste-ready merge tag block ────────────────────────────────────
+   * Uses the actual fieldKeys returned by Bepo's GHL — guaranteed to be
+   * the strings that resolve in the workflow email templates. */
+  if (fieldMap) {
+    const tagLines = [];
+    for (const displayName of Object.keys(desiredFields)) {
+      const resolved =
+        fieldMap.byName?.[displayName] ||
+        (fieldMap.byFieldKey?.[expectedKeyByName[displayName]] && {
+          fieldKey: expectedKeyByName[displayName],
+        });
+      const key = resolved?.fieldKey || expectedKeyByName[displayName] || '?';
+      tagLines.push('  ' + displayName.padEnd(22) + ' {{contact.' + key + '}}');
+    }
+    console.log(
+      '[book] ====== MERGE TAGS TO PASTE IN GHL EMAILS ======\n' +
+      tagLines.join('\n') +
+      '\n[book] ==============================================='
+    );
+  }
+
+  return contactId;
 }
 
 async function ghlCreateOpportunity({ apiKey, locationId, contactId, name, startTime }) {
@@ -401,8 +474,8 @@ module.exports = async function handler(req, res) {
         answers?.investment ? 'Budget: '     + answers.investment : null,
       ].filter(Boolean).join('\n'),
       '',
-      'Google Meet Link:',
-      meetUrl || 'Will appear in Google Calendar event',
+      'Meeting Link:',
+      meetUrl || 'Will appear in the calendar event',
     ].join('\n');
   }
 
@@ -497,32 +570,15 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  console.log('[book] FINAL googleMeetLink before GHL:', meetUrl || '(empty)');
+  console.log('[book] FINAL meetingLink before GHL:', meetUrl || '(empty)');
 
-  /* ── Step 2: PATCH Cal.com booking with full description + meet URL ──────── */
+  /* Build the full application-notes string (used as the
+   * Application Answers custom field in GHL). No longer PATCHed back
+   * to Cal.com — that endpoint 404'd and the notes weren't being read
+   * from there anyway. */
   const fullNotes = buildNotes(meetUrl);
-  try {
-    const patchBody = { description: fullNotes, notes: fullNotes };
-    console.log('[book] FULL Cal.com PATCH payload:', JSON.stringify(patchBody, null, 2));
 
-    const patchR = await fetch(`${CAL_BASE}/bookings/${bookingUid}`, {
-      method:  'PATCH',
-      headers: {
-        'Authorization':   'Bearer ' + CAL_API_KEY,
-        'cal-api-version': CAL_VERSION,
-        'Content-Type':    'application/json',
-      },
-      body: JSON.stringify(patchBody),
-    });
-
-    const patchRaw = await patchR.text();
-    console.log('[book] Cal.com PATCH status:', patchR.status);
-    console.log('[book] Cal.com PATCH response:', patchRaw.slice(0, 400));
-  } catch (patchErr) {
-    console.error('[book] Cal.com PATCH failed (non-fatal):', patchErr.message);
-  }
-
-  /* ── Step 3: GHL contact + opportunity (non-fatal) ────────────────────── */
+  /* ── Step 2: GHL contact + opportunity (non-fatal) ────────────────────── */
   if (hasGhlKey && hasGhlLoc) {
     try {
       const contactId = await ghlUpsertContact({
@@ -553,6 +609,7 @@ module.exports = async function handler(req, res) {
   }
 
   /* ── Step 3: respond — frontend redirects to /confirm ────────────────── */
+  /* (Renumbered since the Cal.com PATCH step was removed.) */
   return res.status(200).json({
     ok:        true,
     bookingId: bookingUid,
