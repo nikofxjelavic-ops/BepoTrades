@@ -19,6 +19,44 @@ const CAL_VERSION = '2024-06-14';
 const GHL_BASE    = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 
+/* ── Meet URL extraction ─────────────────────────────────────────────────
+ * Cal.com returns the conferencing integration ID (e.g.
+ * "integrations:google:meet") in booking.location when the URL hasn't
+ * been resolved yet. The real URL shows up in different fields depending
+ * on conferencing app + API timing — check every candidate and only
+ * accept actual http(s) URLs. */
+function isRealUrl(v) {
+  return typeof v === 'string' && /^https?:\/\//i.test(v);
+}
+
+function extractMeetUrl(booking) {
+  if (!booking || typeof booking !== 'object') return '';
+
+  const loc = booking.location;
+  const locs = Array.isArray(booking.locations) ? booking.locations : [];
+
+  const candidates = [
+    booking.meetingUrl,
+    booking.videoCallUrl,
+    booking.conferencing?.url,
+    booking.metadata?.videoCallUrl,
+    booking.metadata?.meetingUrl,
+    loc && typeof loc === 'object' ? loc.url || loc.link : null,
+    locs[0]?.url,
+    locs[0]?.link,
+    locs[0]?.meetingUrl,
+    booking.responses?.location?.value,
+    booking.responses?.location,
+    // location can itself be a raw URL string for some conferencing types
+    typeof loc === 'string' && isRealUrl(loc) ? loc : null,
+  ];
+
+  for (const c of candidates) {
+    if (isRealUrl(c)) return c;
+  }
+  return '';
+}
+
 /* cached within the same serverless instance */
 let _eventTypeId = null;
 
@@ -281,7 +319,7 @@ module.exports = async function handler(req, res) {
 
     const raw = await r.text();
     console.log('[book] Cal.com response status:', r.status);
-    console.log('[book] Cal.com response body:', raw.slice(0, 600));
+    console.log('[book] FULL Cal.com booking response body:', raw);
 
     if (!r.ok) {
       return res.status(502).json({
@@ -301,7 +339,38 @@ module.exports = async function handler(req, res) {
   }
 
   const bookingUid = booking.uid || String(booking.id);
-  const meetUrl    = booking.meetingUrl || booking.location || '';
+  let   meetUrl    = extractMeetUrl(booking);
+  console.log('[book] meetUrl after initial extraction:', meetUrl || '(empty)');
+  console.log('[book] booking.location was:', JSON.stringify(booking.location));
+
+  /* ── Refetch booking if Google Meet URL hasn't resolved yet ──────────
+   * For Google Meet the URL is created when Cal.com syncs to Google
+   * Calendar — that happens after the booking POST returns. A follow-up
+   * GET usually has the real URL. */
+  if (!meetUrl) {
+    console.log('[book] No meet URL on create response, refetching booking:', bookingUid);
+    try {
+      const getR = await fetch(`${CAL_BASE}/bookings/${bookingUid}`, {
+        headers: {
+          'Authorization':   'Bearer ' + CAL_API_KEY,
+          'cal-api-version': CAL_VERSION,
+        },
+      });
+      const getRaw = await getR.text();
+      console.log('[book] GET booking status:', getR.status);
+      console.log('[book] FULL Cal.com GET booking response:', getRaw);
+      if (getR.ok) {
+        const getBody    = JSON.parse(getRaw);
+        const refreshed  = getBody.data || getBody;
+        meetUrl = extractMeetUrl(refreshed);
+        console.log('[book] meetUrl after refetch:', meetUrl || '(still empty)');
+      }
+    } catch (e) {
+      console.error('[book] booking refetch failed:', e.message);
+    }
+  }
+
+  console.log('[book] FINAL googleMeetLink before GHL:', meetUrl || '(empty)');
 
   /* ── Step 2: PATCH Cal.com booking with full description + meet URL ──────── */
   const fullNotes = buildNotes(meetUrl);
