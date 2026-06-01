@@ -169,29 +169,27 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
   const [firstName, ...rest] = (name || '').trim().split(' ');
   const lastName = rest.join(' ') || '';
 
-  /* Two representations of the call time:
-   *   - callDateIso  → machine-readable, ISO 8601. Goes into the Date-type
-   *     'Call Date' field in GHL so workflow "Wait until contact date field"
-   *     actions can fire at the right moment.
-   *   - callDateDisplay → human-readable, formatted in the attendee's
-   *     timezone. Optional fallback field "Call Date Display" for email
-   *     templates that want a pre-formatted string instead of relying on
-   *     GHL's automatic date rendering. Field is skipped silently if not
-   *     present in the GHL location. */
-  const callDateIso = new Date(startTime).toISOString();
-  const callDateDisplay = new Date(startTime).toLocaleString('en-US', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-    hour: 'numeric', minute: '2-digit', hour12: true,
-    timeZone: timeZone || 'UTC',
+  /* Call Date is back to a human-readable string for nicer email
+   * rendering via {{contact.call_date}}. Reminder timing is now driven
+   * by the native GHL appointment record (see ghlCreateAppointment),
+   * so this field no longer needs to be ISO/machine-parseable.
+   * Format example: "June 2, 2026 at 7:00 PM" */
+  const dateObj  = new Date(startTime);
+  const tz       = timeZone || 'UTC';
+  const datePart = dateObj.toLocaleDateString('en-US', {
+    month: 'long', day: 'numeric', year: 'numeric', timeZone: tz,
   });
+  const timePart = dateObj.toLocaleTimeString('en-US', {
+    hour: 'numeric', minute: '2-digit', hour12: true, timeZone: tz,
+  });
+  const callDate = datePart + ' at ' + timePart;
 
   /* The custom fields we want to populate. Display names should
    * match the GHL field names exactly; the code falls back to
    * fieldKey matching if names don't line up. */
   const desiredFields = {
-    'Call Date':            callDateIso,
-    'Call Date Display':    callDateDisplay,
-    'Call Timezone':        timeZone || 'UTC',
+    'Call Date':            callDate,
+    'Call Timezone':        tz,
     'Cal Booking UID':      String(bookingUid || ''),
     'Google Meet Link':     meetUrl || '',
     'Application Answers':  applicationSummary || '',
@@ -214,7 +212,6 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
    * field is found whose fieldKey matches the expected slug below. */
   const expectedKeyByName = {
     'Call Date':           'call_date',
-    'Call Date Display':   'call_date_display',
     'Call Timezone':       'call_timezone',
     'Cal Booking UID':     'cal_booking_uid',
     'Google Meet Link':    'google_meet_link',
