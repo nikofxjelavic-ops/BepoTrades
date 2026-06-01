@@ -57,6 +57,20 @@ function extractMeetUrl(booking) {
   return '';
 }
 
+/* ── Phone validation ─────────────────────────────────────────────────
+ * The frontend uses intl-tel-input (libphonenumber-js under the hood),
+ * but the API endpoint must defend itself. Accept only strict E.164:
+ * leading +, 7–15 digits, no spaces. Reject obvious fake patterns. */
+function isValidE164Phone(p) {
+  if (typeof p !== 'string') return false;
+  if (!/^\+[1-9]\d{6,14}$/.test(p)) return false;
+  const digits = p.slice(1);
+  if (/^(\d)\1+$/.test(digits)) return false;
+  const fakes = ['1234567890', '0123456789', '12345678', '11111111', '00000000', '01234567'];
+  if (fakes.indexOf(digits) !== -1) return false;
+  return true;
+}
+
 /* cached within the same serverless instance */
 let _eventTypeId           = null;
 let _ghlCustomFieldMap     = null;   // { [displayName]: fieldId }
@@ -564,6 +578,15 @@ module.exports = async function handler(req, res) {
 
   if (!name || !email || !startTime) {
     return res.status(400).json({ error: 'Missing required fields: name, email, startTime' });
+  }
+
+  /* Server-side phone validation — frontend uses intl-tel-input +
+   * libphonenumber-js, but never trust the client. Phone is optional;
+   * if present, it must be valid E.164. Catches fake numbers like
+   * 123456, 0000000000, 1111111111 etc. */
+  if (phone && !isValidE164Phone(phone)) {
+    console.warn('[book] rejecting invalid phone:', phone);
+    return res.status(400).json({ error: 'Please enter a valid phone number.' });
   }
 
   const { CAL_API_KEY, CAL_EVENT_TYPE_SLUG, GHL_API_KEY, GHL_LOCATION_ID, GHL_CALENDAR_ID } = process.env;

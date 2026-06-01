@@ -15,8 +15,37 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
+  <!-- intl-tel-input: international phone input w/ country dropdown,
+       IP-based country detection, libphonenumber-js validation, E.164
+       output. (Vanilla-JS equivalent of react-phone-number-input.) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInputWithUtils.min.js" defer></script>
   <style>
     html, body { background: #04081e; }
+
+    /* ── intl-tel-input dark theme overrides ─────────────────────── */
+    .qf-field .iti { width: 100%; display: block; }
+    .qf-field .iti__tel-input { width: 100%; }
+    .iti__country-list {
+      background: #0a1230 !important;
+      color: #fff !important;
+      border: 1px solid rgba(255,255,255,0.10) !important;
+      box-shadow: 0 12px 38px rgba(0,0,0,0.45) !important;
+    }
+    .iti__country.iti__highlight,
+    .iti__country:hover { background: rgba(96,165,250,0.16) !important; }
+    .iti__dial-code { color: rgba(255,255,255,0.55) !important; }
+    .iti__search-input {
+      background: #0a1230 !important; color: #fff !important;
+      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    }
+    .iti--separate-dial-code .iti__selected-dial-code { color: #fff; }
+    .qf-phone-error {
+      color: #f87171; font-size: 13px; margin-top: 6px;
+      font-family: var(--font-b); display: none;
+    }
+    .qf-phone-error.show { display: block; }
+    .qf-field input.qf-phone-invalid { border-color: rgba(248,113,113,0.55) !important; }
 
     /* ── NAVBAR ── */
     .navbar {
@@ -1899,7 +1928,11 @@
       <div class="qf-fields">
         <div class="qf-field"><label>Full Name</label><input type="text" id="qfName" placeholder="John Smith" autocomplete="name"/></div>
         <div class="qf-field"><label>Email Address</label><input type="email" id="qfEmail" placeholder="john@email.com" autocomplete="email"/></div>
-        <div class="qf-field"><label>Phone Number</label><input type="tel" id="qfPhone" placeholder="+1 555 000 0000" autocomplete="tel"/></div>
+        <div class="qf-field">
+          <label>Phone Number</label>
+          <input type="tel" id="qfPhone" autocomplete="tel"/>
+          <div id="qfPhoneError" class="qf-phone-error">Please enter a valid phone number.</div>
+        </div>
       </div>
       <div class="qf-nav"><button class="qf-btn-back" data-prev="3">← Back</button><button class="qf-btn-next" id="next4" disabled>Book My Call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
     </div>
@@ -2072,28 +2105,109 @@
   const nameInput=document.getElementById('qfName');
   const emailInput=document.getElementById('qfEmail');
   const phoneInput=document.getElementById('qfPhone');
+  const phoneError=document.getElementById('qfPhoneError');
   const submitBtn=document.getElementById('next4');
 
-  function validateContact(){
-    submitBtn.disabled=!(nameInput.value.trim().length>1&&/\S+@\S+\.\S+/.test(emailInput.value.trim())&&phoneInput.value.trim().length>5);
+  /* ── intl-tel-input init ─────────────────────────────────────────────
+   * Initialised lazily once the library finishes loading. Country is
+   * detected from the visitor's IP via ipapi.co (falls back to US).
+   * separateDialCode shows the +XX prefix outside the text input so
+   * users only type their national number. */
+  let iti=null;
+  function initPhone(){
+    if(iti||!window.intlTelInput)return;
+    iti=window.intlTelInput(phoneInput,{
+      initialCountry:'auto',
+      geoIpLookup:cb=>{
+        fetch('https://ipapi.co/json/')
+          .then(r=>r.json())
+          .then(d=>cb((d&&d.country_code)?d.country_code.toLowerCase():'us'))
+          .catch(()=>cb('us'));
+      },
+      separateDialCode:true,
+      strictMode:true,
+      autoPlaceholder:'aggressive',
+    });
+    phoneInput.addEventListener('blur',validatePhoneAndShowError);
+    phoneInput.addEventListener('countrychange',()=>{validatePhoneAndShowError();validateContact();});
   }
-  [nameInput,emailInput,phoneInput].forEach(el=>el.addEventListener('input',validateContact));
+  if(window.intlTelInput){initPhone();}
+  else{document.addEventListener('DOMContentLoaded',initPhone);window.addEventListener('load',initPhone);}
 
-  /* blocked region phone codes */
-  const BLOCKED_CODES=['91','92','62','20','27','212','213','216','218','220','221','222','223','224','225','226','227','228','229','230','231','232','233','234','235','236','237','238','239','240','241','242','243','244','245','248','249','250','251','252','253','254','255','256','257','258','260','261','262','263','264','265','266','267','268','269','291','211'];
-  function isBlockedPhone(phone){
-    const s=phone.replace(/[\s\-().+]/g,'');
-    for(const c of BLOCKED_CODES){if(s.startsWith(c)||s.startsWith('00'+c))return true;}
+  /* Obvious-fake guard: rejects all-same-digit, classic test sequences,
+   * and absurdly short numbers that still happen to parse. Runs on top
+   * of libphonenumber-js's per-country validation. */
+  function isFakeNumber(e164){
+    if(typeof e164!=='string')return true;
+    const digits=e164.replace(/[^0-9]/g,'');
+    if(digits.length<7)return true;
+    if(/^(\d)\1+$/.test(digits))return true;
+    const fakes=['1234567890','0123456789','12345678','11111111','00000000','01234567'];
+    if(fakes.indexOf(digits)!==-1)return true;
     return false;
   }
 
+  function phoneIsValid(){
+    if(!iti)return false;
+    if(!phoneInput.value.trim())return false;
+    if(!iti.isValidNumber())return false;
+    if(isFakeNumber(iti.getNumber()))return false;
+    return true;
+  }
+
+  function validatePhoneAndShowError(){
+    const empty=!phoneInput.value.trim();
+    const ok=phoneIsValid();
+    if(empty||ok){
+      phoneError.classList.remove('show');
+      phoneInput.classList.remove('qf-phone-invalid');
+    }else{
+      phoneError.classList.add('show');
+      phoneInput.classList.add('qf-phone-invalid');
+    }
+  }
+
+  function validateContact(){
+    submitBtn.disabled=!(nameInput.value.trim().length>1
+      &&/\S+@\S+\.\S+/.test(emailInput.value.trim())
+      &&phoneIsValid());
+  }
+  [nameInput,emailInput].forEach(el=>el.addEventListener('input',validateContact));
+  phoneInput.addEventListener('input',()=>{
+    /* clear error while typing — re-check on blur/submit */
+    phoneError.classList.remove('show');
+    phoneInput.classList.remove('qf-phone-invalid');
+    validateContact();
+  });
+
+  /* Country-block (India, Pakistan, Indonesia, all African countries).
+   * Old code matched dial-code substrings on free-text input — now we
+   * read the country directly off intl-tel-input. */
+  const BLOCKED_COUNTRIES=['in','pk','id',
+    'dz','ao','bj','bw','bf','bi','cv','cm','cf','td','km','cd','cg',
+    'ci','dj','eg','gq','er','sz','et','ga','gm','gh','gn','gw','ke',
+    'ls','lr','ly','mg','mw','ml','mr','mu','ma','mz','na','ne','ng',
+    'rw','st','sn','sc','sl','so','za','ss','sd','tz','tg','tn','ug',
+    'eh','zm','zw'];
+  function isBlockedPhone(){
+    if(!iti)return false;
+    const cc=(iti.getSelectedCountryData().iso2||'').toLowerCase();
+    return BLOCKED_COUNTRIES.indexOf(cc)!==-1;
+  }
+
   submitBtn.addEventListener('click',async()=>{
+    /* Final guard: never let an invalid phone through even if the
+     * disabled-state was bypassed somehow. */
+    if(!phoneIsValid()){
+      validatePhoneAndShowError();
+      return;
+    }
     answers.name=nameInput.value.trim();
     answers.email=emailInput.value.trim();
-    answers.phone=phoneInput.value.trim();
+    answers.phone=iti.getNumber(); /* E.164: +385912345678 */
 
     /* block restricted region */
-    if(isBlockedPhone(answers.phone)){
+    if(isBlockedPhone()){
       document.querySelectorAll('.qf-step').forEach(s=>s.style.display='none');
       document.getElementById('qfNotQualified').style.display='block';
       document.querySelector('.qf-progress')?.style.setProperty('display','none');

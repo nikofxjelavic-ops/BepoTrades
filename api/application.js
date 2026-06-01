@@ -8,6 +8,18 @@
  *   GHL_API_KEY       — Private Integration Token from GHL
  *   GHL_LOCATION_ID   — Your GHL sub-account Location ID
  */
+/* Phone validation — mirror of api/book.js so the application step and
+ * the booking step apply the same rules. E.164, no fake patterns. */
+function isValidE164Phone(p) {
+  if (typeof p !== 'string') return false;
+  if (!/^\+[1-9]\d{6,14}$/.test(p)) return false;
+  const digits = p.slice(1);
+  if (/^(\d)\1+$/.test(digits)) return false;
+  const fakes = ['1234567890', '0123456789', '12345678', '11111111', '00000000', '01234567'];
+  if (fakes.indexOf(digits) !== -1) return false;
+  return true;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -17,6 +29,11 @@ export default async function handler(req, res) {
 
   if (!name || !email || !phone) {
     return res.status(400).json({ error: 'Name, email and phone are required' });
+  }
+
+  if (!isValidE164Phone(phone)) {
+    console.warn('[application] rejecting invalid phone:', phone);
+    return res.status(400).json({ error: 'Please enter a valid phone number.' });
   }
 
   const [firstName, ...rest] = name.trim().split(' ');
