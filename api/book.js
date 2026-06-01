@@ -58,8 +58,9 @@ function extractMeetUrl(booking) {
 }
 
 /* cached within the same serverless instance */
-let _eventTypeId      = null;
-let _ghlCustomFieldMap = null;   // { [displayName]: fieldId }
+let _eventTypeId           = null;
+let _ghlCustomFieldMap     = null;   // { [displayName]: fieldId }
+let _ghlCalendarOwnerByCal = {};     // { [calendarId]: userId }
 
 async function getEventTypeId(apiKey, slug) {
   if (_eventTypeId) return _eventTypeId;
@@ -360,6 +361,53 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
   return contactId;
 }
 
+/* Fetch GHL calendar details and resolve the owner / first team-member
+ * userId. GHL appointments require assignedUserId (422 otherwise) and
+ * different calendar types expose the owner in different places:
+ *   Personal calendar  → calendar.userId
+ *   Round Robin / Team → calendar.teamMembers[0].userId
+ *   Some variants      → calendar.assignedUserId or assignedUserIds[0]
+ * Cached per-serverless-instance, keyed by calendarId. */
+async function getGhlCalendarOwnerUserId(apiKey, calendarId) {
+  if (_ghlCalendarOwnerByCal[calendarId]) return _ghlCalendarOwnerByCal[calendarId];
+
+  console.log('[book] fetching GHL calendar details for:', calendarId);
+  const r = await fetch(
+    `${GHL_BASE}/calendars/${calendarId}`,
+    { headers: ghlHeaders(apiKey) }
+  );
+  const raw = await r.text();
+  console.log('[book] GHL calendar GET status:', r.status);
+  console.log('[book] GHL calendar details:', raw);
+
+  if (!r.ok) {
+    throw new Error('GHL calendar lookup failed: ' + r.status + ' ' + raw);
+  }
+
+  const body = JSON.parse(raw);
+  const cal  = body.calendar || body.data || body;
+
+  /* Walk every documented location the user id might live in. */
+  const userId =
+    cal.userId ||
+    cal.assignedUserId ||
+    (Array.isArray(cal.assignedUserIds) && cal.assignedUserIds[0]) ||
+    (Array.isArray(cal.teamMembers) && cal.teamMembers[0]?.userId) ||
+    (Array.isArray(cal.teamMembers) && cal.teamMembers[0]?.id) ||
+    null;
+
+  if (!userId) {
+    throw new Error(
+      'Could not resolve owner userId from calendar — calendar payload had no ' +
+      'userId / assignedUserId / assignedUserIds / teamMembers[0].userId. ' +
+      'Raw calendar: ' + raw.slice(0, 500)
+    );
+  }
+
+  _ghlCalendarOwnerByCal[calendarId] = userId;
+  return userId;
+}
+
 /* ── GHL Appointment ─────────────────────────────────────────────────────
  * Creates a native GHL calendar event so workflow "Appointment Booked"
  * triggers fire and "Wait X hours before appointment" actions can do
@@ -378,10 +426,17 @@ async function ghlCreateAppointment({
   apiKey, locationId, calendarId, contactId,
   name, startIso, endIso, meetUrl,
 }) {
+  /* Resolve the calendar owner so GHL accepts the appointment.
+   * GHL returns 422 "A team member needs to be selected. assignedUserId
+   * is missing" if this isn't included. */
+  const assignedUserId = await getGhlCalendarOwnerUserId(apiKey, calendarId);
+  console.log('[book] resolved assignedUserId:', assignedUserId);
+
   const body = {
     calendarId,
     locationId,
     contactId,
+    assignedUserId,
     title:               'Mentorship Call — ' + name,
     appointmentStatus:   'confirmed',
     startTime:           startIso,
