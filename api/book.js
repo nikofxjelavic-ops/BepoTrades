@@ -108,10 +108,15 @@ function ghlHeaders(apiKey) {
   };
 }
 
-/* Fetch GHL custom fields for the location and return a map of
- * displayName → fieldId. Cached per-serverless-instance.
- * Logs the full custom-field inventory on first call so we can verify
- * Bepo's GHL has the field names this code expects. */
+/* Fetch GHL custom fields for the location and return TWO maps:
+ *   byName:    "Display Name" → { id, fieldKey }
+ *   byFieldKey: "field_key"   → { id, name }
+ * Cached per-serverless-instance.
+ *
+ * We need fieldKey (not just id) because email-template merge tags
+ * like {{contact.call_date}} resolve via fieldKey, NOT via id. If we
+ * write to a field whose key isn't 'call_date', the merge tag stays
+ * blank even though the field has data. */
 async function getGhlCustomFieldMap(apiKey, locationId) {
   if (_ghlCustomFieldMap) return _ghlCustomFieldMap;
 
@@ -131,13 +136,32 @@ async function getGhlCustomFieldMap(apiKey, locationId) {
 
   const body = JSON.parse(raw);
   const list = body.customFields || body.data || [];
-  const map  = {};
-  for (const f of list) {
-    if (f && f.name && f.id) map[f.name] = f.id;
+
+  /* Normalise GHL's fieldKey — it sometimes comes back prefixed
+   * ("contact.call_date") and sometimes not ("call_date"). Merge tags
+   * use the prefixed form, but the upsert API expects the bare slug. */
+  function stripPrefix(k) {
+    if (typeof k !== 'string') return '';
+    return k.startsWith('contact.') ? k.slice('contact.'.length) : k;
   }
-  console.log('[book] GHL custom field name → id map:', JSON.stringify(map, null, 2));
-  _ghlCustomFieldMap = map;
-  return map;
+
+  const byName     = {};
+  const byFieldKey = {};
+  for (const f of list) {
+    if (!f || !f.id) continue;
+    const bareKey = stripPrefix(f.fieldKey || f.key || '');
+    if (f.name) {
+      byName[f.name] = { id: f.id, fieldKey: bareKey, rawFieldKey: f.fieldKey || f.key || '' };
+    }
+    if (bareKey) {
+      byFieldKey[bareKey] = { id: f.id, name: f.name || '' };
+    }
+  }
+  console.log('[book] GHL field map by name:', JSON.stringify(byName, null, 2));
+  console.log('[book] GHL field map by fieldKey:', JSON.stringify(byFieldKey, null, 2));
+
+  _ghlCustomFieldMap = { byName, byFieldKey };
+  return _ghlCustomFieldMap;
 }
 
 async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startTime, timeZone, bookingUid, meetUrl, applicationSummary }) {
@@ -164,7 +188,7 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
     console.log('  ' + n + ' = ' + JSON.stringify(v));
   }
 
-  /* Resolve display names → field IDs from Bepo's GHL location. */
+  /* Resolve display names → { id, fieldKey } from Bepo's GHL location. */
   let fieldMap = null;
   try {
     fieldMap = await getGhlCustomFieldMap(apiKey, locationId);
@@ -172,10 +196,9 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
     console.error('[book] getGhlCustomFieldMap threw:', e.message);
   }
 
-  /* Build customFields array. Prefer id-based when we have a mapping;
-   * fall back to legacy key-based for any name we couldn't resolve. */
-  const customFields = [];
-  const keyByName = {
+  /* Fallback slugs — used if no field is found by display name AND no
+   * field is found whose fieldKey matches the expected slug below. */
+  const expectedKeyByName = {
     'Call Date':           'call_date',
     'Call Timezone':       'call_timezone',
     'Cal Booking UID':     'cal_booking_uid',
@@ -183,20 +206,44 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
     'Application Answers': 'application_answers',
   };
 
+  /* Build customFields array. We send id + key + field_value together so
+   * GHL accepts the payload regardless of which form its API expects.
+   *   - field_value: documented form for /contacts/upsert v2
+   *   - key:         the fieldKey (so {{contact.<key>}} merge tags resolve)
+   *   - id:          unambiguous reference to the field */
+  const customFields = [];
   for (const [displayName, value] of Object.entries(desiredFields)) {
     if (!value) {
       console.log('[book] skip "' + displayName + '" — empty value');
       continue;
     }
-    const id = fieldMap ? fieldMap[displayName] : null;
-    if (id) {
-      customFields.push({ id, value });
-      console.log('[book] cf → id "' + id + '" (' + displayName + ') = ' + JSON.stringify(value));
+
+    let resolved =
+      (fieldMap?.byName?.[displayName]) ||
+      (fieldMap?.byFieldKey?.[expectedKeyByName[displayName]] && {
+        id:       fieldMap.byFieldKey[expectedKeyByName[displayName]].id,
+        fieldKey: expectedKeyByName[displayName],
+      }) || null;
+
+    if (resolved && resolved.id) {
+      const entry = { id: resolved.id, field_value: value };
+      if (resolved.fieldKey) entry.key = resolved.fieldKey;
+      customFields.push(entry);
+      console.log(
+        '[book] cf → id=' + resolved.id +
+        ' key="' + (resolved.fieldKey || '(none)') + '"' +
+        ' name="' + displayName + '"' +
+        ' value=' + JSON.stringify(value)
+      );
     } else {
+      const key = expectedKeyByName[displayName];
       if (fieldMap) {
-        console.warn('[book] WARNING: no GHL field named "' + displayName + '" — falling back to key "' + keyByName[displayName] + '"');
+        console.warn(
+          '[book] WARNING: no GHL field matches name="' + displayName + '"' +
+          ' or fieldKey="' + key + '" — sending bare key form, merge tag may not resolve'
+        );
       }
-      customFields.push({ key: keyByName[displayName], field_value: value });
+      customFields.push({ key, field_value: value });
     }
   }
 
