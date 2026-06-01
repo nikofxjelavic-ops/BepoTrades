@@ -31,7 +31,16 @@
       color: #fff !important;
       border: 1px solid rgba(255,255,255,0.10) !important;
       box-shadow: 0 12px 38px rgba(0,0,0,0.45) !important;
+      /* Force scrollability — some browsers ignore the library's
+       * default max-height when the list is reparented to <body>. */
+      max-height: 260px !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
     }
+    /* When dropdownContainer is document.body the .iti--container
+     * wrapper is added at the top of <body>. Make sure it floats above
+     * the booking-funnel modal (z-index ~1000). */
+    .iti--container { z-index: 10000 !important; }
     .iti__country.iti__highlight,
     .iti__country:hover { background: rgba(96,165,250,0.16) !important; }
     .iti__dial-code { color: rgba(255,255,255,0.55) !important; }
@@ -2127,6 +2136,10 @@
       separateDialCode:true,
       strictMode:true,
       autoPlaceholder:'aggressive',
+      /* Attach the country dropdown to <body> instead of letting it
+       * render inside the .qf-card modal — the modal has overflow
+       * clipping that breaks scrolling through the country list. */
+      dropdownContainer:document.body,
     });
     phoneInput.addEventListener('blur',validatePhoneAndShowError);
     phoneInput.addEventListener('countrychange',()=>{validatePhoneAndShowError();validateContact();});
