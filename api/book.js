@@ -183,7 +183,7 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
     'Call Date':            callDate,
     'Call Timezone':        timeZone || 'UTC',
     'Cal Booking UID':      String(bookingUid || ''),
-    'Meeting Link':         meetUrl || '',
+    'Google Meet Link':     meetUrl || '',
     'Application Answers':  applicationSummary || '',
   };
 
@@ -206,7 +206,7 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
     'Call Date':           'call_date',
     'Call Timezone':       'call_timezone',
     'Cal Booking UID':     'cal_booking_uid',
-    'Meeting Link':        'meeting_link',
+    'Google Meet Link':    'google_meet_link',
     'Application Answers': 'application_answers',
   };
 
@@ -474,7 +474,7 @@ module.exports = async function handler(req, res) {
         answers?.investment ? 'Budget: '     + answers.investment : null,
       ].filter(Boolean).join('\n'),
       '',
-      'Meeting Link:',
+      'Google Meet Link:',
       meetUrl || 'Will appear in the calendar event',
     ].join('\n');
   }
