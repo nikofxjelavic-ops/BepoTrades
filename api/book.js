@@ -168,19 +168,28 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
   const [firstName, ...rest] = (name || '').trim().split(' ');
   const lastName = rest.join(' ') || '';
 
-  const callDate = new Date(startTime).toLocaleString('en-US', {
+  /* Two representations of the call time:
+   *   - callDateIso  → machine-readable, ISO 8601. Goes into the Date-type
+   *     'Call Date' field in GHL so workflow "Wait until contact date field"
+   *     actions can fire at the right moment.
+   *   - callDateDisplay → human-readable, formatted in the attendee's
+   *     timezone. Optional fallback field "Call Date Display" for email
+   *     templates that want a pre-formatted string instead of relying on
+   *     GHL's automatic date rendering. Field is skipped silently if not
+   *     present in the GHL location. */
+  const callDateIso = new Date(startTime).toISOString();
+  const callDateDisplay = new Date(startTime).toLocaleString('en-US', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
     hour: 'numeric', minute: '2-digit', hour12: true,
     timeZone: timeZone || 'UTC',
   });
 
-  /* The five custom fields we want to populate. Display names should
-   * match the GHL field names exactly; the code will fall back to
-   * fieldKey matching if names don't line up. "Meeting Link" is used
-   * instead of "Google Meet Link" because Bepo uses Cal Video
-   * (https://app.cal.com/video/…), not Google Meet. */
+  /* The custom fields we want to populate. Display names should
+   * match the GHL field names exactly; the code falls back to
+   * fieldKey matching if names don't line up. */
   const desiredFields = {
-    'Call Date':            callDate,
+    'Call Date':            callDateIso,
+    'Call Date Display':    callDateDisplay,
     'Call Timezone':        timeZone || 'UTC',
     'Cal Booking UID':      String(bookingUid || ''),
     'Google Meet Link':     meetUrl || '',
@@ -204,6 +213,7 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
    * field is found whose fieldKey matches the expected slug below. */
   const expectedKeyByName = {
     'Call Date':           'call_date',
+    'Call Date Display':   'call_date_display',
     'Call Timezone':       'call_timezone',
     'Cal Booking UID':     'cal_booking_uid',
     'Google Meet Link':    'google_meet_link',
