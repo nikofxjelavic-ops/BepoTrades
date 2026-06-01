@@ -360,6 +360,64 @@ async function ghlUpsertContact({ apiKey, locationId, name, email, phone, startT
   return contactId;
 }
 
+/* ── GHL Appointment ─────────────────────────────────────────────────────
+ * Creates a native GHL calendar event so workflow "Appointment Booked"
+ * triggers fire and "Wait X hours before appointment" actions can do
+ * minute-precision math against the appointment's startTime.
+ *
+ * Why this exists: GHL Date-Picker custom fields are date-only, and
+ * Bepo's GHL plan doesn't expose a DateTime field type. The contact's
+ * 'Call Date' field can't drive hour-precision reminders on its own.
+ * A native appointment record gives us that precision via GHL's built-in
+ * appointment-aware workflow actions.
+ *
+ * Requires env var: GHL_CALENDAR_ID — the ID of any calendar in the
+ * GHL sub-account. Type doesn't matter; the calendar just acts as a
+ * container for externally-booked events. */
+async function ghlCreateAppointment({
+  apiKey, locationId, calendarId, contactId,
+  name, startIso, endIso, meetUrl,
+}) {
+  const body = {
+    calendarId,
+    locationId,
+    contactId,
+    title:               'Mentorship Call — ' + name,
+    appointmentStatus:   'confirmed',
+    startTime:           startIso,
+    endTime:             endIso,
+    /* External meeting URL — surfaced in GHL UI as the join link. */
+    meetingLocationType: 'custom',
+    address:             meetUrl || '',
+    /* Don't reject the appointment for being outside the calendar's
+     * configured availability — this booking already went through
+     * Cal.com's availability checks. */
+    ignoreDateRange:     true,
+    /* Don't let GHL send its own auto-notification email — reminder
+     * workflows in GHL drive all customer-facing messages. */
+    toNotify:            false,
+  };
+
+  console.log('[book] FULL GHL appointment payload:', JSON.stringify(body, null, 2));
+
+  const r = await fetch(`${GHL_BASE}/calendars/events/appointments`, {
+    method:  'POST',
+    headers: ghlHeaders(apiKey),
+    body:    JSON.stringify(body),
+  });
+
+  const raw = await r.text();
+  console.log('[book] GHL appointment create status:', r.status);
+  console.log('[book] FULL GHL appointment response:', raw);
+
+  if (!r.ok) throw new Error('GHL appointment create failed: ' + r.status + ' ' + raw);
+
+  const data = JSON.parse(raw);
+  const apptId = data.id || data.appointment?.id || data.event?.id;
+  console.log('[book] GHL appointment created, id:', apptId);
+  return apptId;
+}
+
 async function ghlCreateOpportunity({ apiKey, locationId, contactId, name, startTime }) {
   /* fetch pipelines to resolve IDs by name */
   const pipelineRes = await fetch(
@@ -423,8 +481,9 @@ module.exports = async function handler(req, res) {
   const hasCalSlug  = !!process.env.CAL_EVENT_TYPE_SLUG;
   const hasGhlKey   = !!process.env.GHL_API_KEY;
   const hasGhlLoc   = !!process.env.GHL_LOCATION_ID;
+  const hasGhlCal   = !!process.env.GHL_CALENDAR_ID;
   console.log('[book] CAL_API_KEY:', hasCalKey, '| CAL_EVENT_TYPE_SLUG:', hasCalSlug);
-  console.log('[book] GHL_API_KEY:', hasGhlKey, '| GHL_LOCATION_ID:',   hasGhlLoc);
+  console.log('[book] GHL_API_KEY:', hasGhlKey, '| GHL_LOCATION_ID:',   hasGhlLoc, '| GHL_CALENDAR_ID:', hasGhlCal);
 
   res.setHeader('Cache-Control', 'no-store');
 
@@ -447,7 +506,7 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields: name, email, startTime' });
   }
 
-  const { CAL_API_KEY, CAL_EVENT_TYPE_SLUG, GHL_API_KEY, GHL_LOCATION_ID } = process.env;
+  const { CAL_API_KEY, CAL_EVENT_TYPE_SLUG, GHL_API_KEY, GHL_LOCATION_ID, GHL_CALENDAR_ID } = process.env;
 
   /* ── Notes builder — called twice: once without meetUrl, once with ──────── */
   function buildNotes(meetUrl) {
@@ -548,7 +607,15 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Booking failed', message: err.message });
   }
 
-  const bookingUid = booking.uid || String(booking.id);
+  const bookingUid    = booking.uid || String(booking.id);
+  /* Capture exact start/end from Cal.com — these become the GHL
+   * appointment's startTime/endTime. Fall back to the requested
+   * startTime + 30 min if Cal.com doesn't echo them. */
+  const bookingStart  = booking.start || booking.startTime || startTime;
+  const bookingEnd    = booking.end   || booking.endTime   ||
+    new Date(new Date(bookingStart).getTime() + 30 * 60 * 1000).toISOString();
+  console.log('[book] booking time window:', bookingStart, '→', bookingEnd);
+
   let   meetUrl    = extractMeetUrl(booking);
   console.log('[book] meetUrl after initial extraction:', meetUrl || '(empty)');
   console.log('[book] booking.location was:', JSON.stringify(booking.location));
@@ -601,6 +668,30 @@ module.exports = async function handler(req, res) {
       console.log('[book] GHL contact ID:', contactId);
 
       if (contactId) {
+        /* Native GHL appointment — drives "Wait X hours before
+         * appointment" reminder workflows. Independent of the
+         * opportunity create below; if appointment fails (e.g.
+         * missing GHL_CALENDAR_ID env var) we still want the
+         * opportunity to land. */
+        if (hasGhlCal) {
+          try {
+            await ghlCreateAppointment({
+              apiKey:     GHL_API_KEY,
+              locationId: GHL_LOCATION_ID,
+              calendarId: GHL_CALENDAR_ID,
+              contactId,
+              name,
+              startIso:   bookingStart,
+              endIso:     bookingEnd,
+              meetUrl,
+            });
+          } catch (apptErr) {
+            console.error('[book] GHL appointment create failed (non-fatal):', apptErr.message);
+          }
+        } else {
+          console.warn('[book] GHL_CALENDAR_ID missing — skipping appointment create; reminder workflows will not have an appointment to wait against');
+        }
+
         await ghlCreateOpportunity({
           apiKey:     GHL_API_KEY,
           locationId: GHL_LOCATION_ID,
