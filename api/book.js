@@ -389,13 +389,21 @@ async function ghlCreateAppointment({
     /* External meeting URL — surfaced in GHL UI as the join link. */
     meetingLocationType: 'custom',
     address:             meetUrl || '',
-    /* Don't reject the appointment for being outside the calendar's
-     * configured availability — this booking already went through
-     * Cal.com's availability checks. */
-    ignoreDateRange:     true,
+    /* Bypass GHL's own availability checks — Cal.com is the source of
+     * truth for scheduling, and this GHL appointment exists purely so
+     * reminder workflows have a datetime-precision object to wait
+     * against. Two separate flags must be set:
+     *   ignoreDateRange          — skip "is this within the calendar's
+     *                              bookable window?" check
+     *   ignoreFreeSlotValidation — skip "is this exact slot currently
+     *                              open on the calendar?" check
+     * Without the second flag GHL returns:
+     *   "The slot you have selected is no longer available." */
+    ignoreDateRange:          true,
+    ignoreFreeSlotValidation: true,
     /* Don't let GHL send its own auto-notification email — reminder
      * workflows in GHL drive all customer-facing messages. */
-    toNotify:            false,
+    toNotify:                 false,
   };
 
   console.log('[book] FULL GHL appointment payload:', JSON.stringify(body, null, 2));
