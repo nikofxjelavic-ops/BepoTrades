@@ -15,46 +15,76 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
-  <!-- intl-tel-input: international phone input w/ country dropdown,
-       IP-based country detection, libphonenumber-js validation, E.164
-       output. (Vanilla-JS equivalent of react-phone-number-input.) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInputWithUtils.min.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23/build/css/intlTelInput.css"/>
   <style>
     html, body { background: #04081e; }
 
-    /* ── intl-tel-input dark theme overrides ─────────────────────── */
-    .qf-field .iti { width: 100%; display: block; }
-    .qf-field .iti__tel-input { width: 100%; }
-    .iti__country-list {
-      background: #0a1230 !important;
+    /* ── intl-tel-input dark theme ── */
+    #qfPhoneField .iti {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 10px;
+      overflow: visible;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      display: block;
+      position: relative;
+    }
+    #qfPhoneField .iti:focus-within {
+      border-color: rgba(96,165,250,0.45);
+      box-shadow: 0 0 0 3px rgba(96,165,250,0.10);
+    }
+    #qfPhoneField .iti input[type="tel"] {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+      padding-top: 13px !important;
+      padding-bottom: 13px !important;
+      padding-right: 14px !important;
+      font-size: 14px !important;
       color: #fff !important;
-      border: 1px solid rgba(255,255,255,0.10) !important;
-      box-shadow: 0 12px 38px rgba(0,0,0,0.45) !important;
-      /* Force scrollability — some browsers ignore the library's
-       * default max-height when the list is reparented to <body>. */
-      max-height: 260px !important;
-      overflow-y: auto !important;
-      -webkit-overflow-scrolling: touch;
+      font-family: inherit !important;
+      width: 100%;
+      box-sizing: border-box;
     }
-    /* When dropdownContainer is document.body the .iti--container
-     * wrapper is added at the top of <body>. Make sure it floats above
-     * the booking-funnel modal (z-index ~1000). */
-    .iti--container { z-index: 10000 !important; }
-    .iti__country.iti__highlight,
-    .iti__country:hover { background: rgba(96,165,250,0.16) !important; }
-    .iti__dial-code { color: rgba(255,255,255,0.55) !important; }
-    .iti__search-input {
-      background: #0a1230 !important; color: #fff !important;
-      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    #qfPhoneField .iti input[type="tel"]::placeholder { color: rgba(255,255,255,0.22) !important; }
+    #qfPhoneField .iti__country-container,
+    #qfPhoneField .iti__selected-country {
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
+      -webkit-tap-highlight-color: transparent !important;
     }
-    .iti--separate-dial-code .iti__selected-dial-code { color: #fff; }
-    .qf-phone-error {
-      color: #f87171; font-size: 13px; margin-top: 6px;
-      font-family: var(--font-b); display: none;
+    #qfPhoneField .iti__selected-country {
+      background: transparent !important;
+      border: none !important;
+      border-right: 1px solid rgba(255,255,255,0.10) !important;
+      padding: 0 8px 0 12px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      height: 100% !important;
     }
-    .qf-phone-error.show { display: block; }
-    .qf-field input.qf-phone-invalid { border-color: rgba(248,113,113,0.55) !important; }
+    #qfPhoneField .iti__selected-country:hover,
+    #qfPhoneField .iti__selected-country[aria-expanded="true"] { background: rgba(255,255,255,0.06) !important; }
+    #qfPhoneField .iti__selected-dial-code { color: rgba(255,255,255,0.60) !important; font-size: 13px !important; }
+    #qfPhoneField .iti__arrow { border-top-color: rgba(255,255,255,0.40) !important; }
+    #qfPhoneField .iti__arrow--up { border-bottom-color: rgba(255,255,255,0.40) !important; border-top-color: transparent !important; }
+    #qfPhoneField .iti__flag-container, #qfPhoneField .iti__selected-flag { cursor: pointer !important; touch-action: manipulation !important; }
+    .iti__country-list, .iti__dropdown-content { background: #0b1220 !important; border: 1px solid rgba(96,165,250,0.22) !important; border-radius: 12px !important; box-shadow: 0 16px 48px rgba(0,0,0,0.70) !important; max-height: 240px !important; z-index: 2147483647 !important; overflow-y: auto !important; padding: 0 !important; overscroll-behavior: contain !important; }
+    .iti__search-input { display: block !important; width: 100% !important; background: #0b1220 !important; background-color: #0b1220 !important; border: none !important; border-bottom: 1px solid rgba(255,255,255,0.10) !important; border-radius: 12px 12px 0 0 !important; color: #fff !important; padding: 11px 14px !important; font-size: 13px !important; box-sizing: border-box !important; outline: none !important; box-shadow: none !important; -webkit-appearance: none !important; color-scheme: dark; }
+    .iti__search-input::placeholder { color: rgba(255,255,255,0.30) !important; }
+    .iti__search-input:focus, .iti__search-input:focus-visible { outline: none !important; border: none !important; border-bottom: 1px solid rgba(255,255,255,0.10) !important; box-shadow: none !important; background: #0b1220 !important; }
+    .iti__country-list .iti__country, .iti__dropdown-content li { padding: 9px 14px !important; border: none !important; }
+    .iti__country-list .iti__highlight, .iti__country-list li:hover,
+    .iti__dropdown-content .iti__highlight, .iti__dropdown-content li:hover { background: rgba(96,165,250,0.10) !important; }
+    .iti__country-list .iti__divider, .iti__dropdown-content .iti__divider { border-bottom: 1px solid rgba(255,255,255,0.08) !important; margin: 0 !important; padding: 0 !important; }
+    .iti__country-name { color: rgba(255,255,255,0.82) !important; font-size: 13px !important; }
+    .iti__dial-code { color: rgba(255,255,255,0.38) !important; font-size: 12px !important; }
+    #qfPhoneField.phone-error .iti { border-color: rgba(248,113,113,0.60) !important; box-shadow: 0 0 0 2px rgba(248,113,113,0.15) !important; }
+    .qf-phone-error { display: none; color: #f87171; font-size: 11px; margin-top: 6px; letter-spacing: 0.02em; }
+    #qfPhoneField.phone-error .qf-phone-error { display: block; }
 
     /* ── NAVBAR ── */
     .navbar {
@@ -1937,10 +1967,10 @@
       <div class="qf-fields">
         <div class="qf-field"><label>Full Name</label><input type="text" id="qfName" placeholder="John Smith" autocomplete="name"/></div>
         <div class="qf-field"><label>Email Address</label><input type="email" id="qfEmail" placeholder="john@email.com" autocomplete="email"/></div>
-        <div class="qf-field">
+        <div class="qf-field" id="qfPhoneField">
           <label>Phone Number</label>
           <input type="tel" id="qfPhone" autocomplete="tel"/>
-          <div id="qfPhoneError" class="qf-phone-error">Please enter a valid phone number.</div>
+          <div class="qf-phone-error">Please enter a valid phone number.</div>
         </div>
       </div>
       <div class="qf-nav"><button class="qf-btn-back" data-prev="3">← Back</button><button class="qf-btn-next" id="next4" disabled>Book My Call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
@@ -2114,38 +2144,13 @@
   const nameInput=document.getElementById('qfName');
   const emailInput=document.getElementById('qfEmail');
   const phoneInput=document.getElementById('qfPhone');
-  const phoneError=document.getElementById('qfPhoneError');
+  const phoneField=document.getElementById('qfPhoneField');
   const submitBtn=document.getElementById('next4');
 
-  /* ── intl-tel-input init ─────────────────────────────────────────────
-   * Initialised lazily once the library finishes loading. Country is
-   * detected from the visitor's IP via ipapi.co (falls back to US).
-   * separateDialCode shows the +XX prefix outside the text input so
-   * users only type their national number. */
-  let iti=null;
-  function initPhone(){
-    if(iti||!window.intlTelInput)return;
-    iti=window.intlTelInput(phoneInput,{
-      initialCountry:'auto',
-      geoIpLookup:cb=>{
-        fetch('https://ipapi.co/json/')
-          .then(r=>r.json())
-          .then(d=>cb((d&&d.country_code)?d.country_code.toLowerCase():'us'))
-          .catch(()=>cb('us'));
-      },
-      separateDialCode:true,
-      strictMode:true,
-      autoPlaceholder:'aggressive',
-      /* Attach the country dropdown to <body> instead of letting it
-       * render inside the .qf-card modal — the modal has overflow
-       * clipping that breaks scrolling through the country list. */
-      dropdownContainer:document.body,
-    });
-    phoneInput.addEventListener('blur',validatePhoneAndShowError);
-    phoneInput.addEventListener('countrychange',()=>{validatePhoneAndShowError();validateContact();});
-  }
-  if(window.intlTelInput){initPhone();}
-  else{document.addEventListener('DOMContentLoaded',initPhone);window.addEventListener('load',initPhone);}
+  /* iti instance lives on window._iti (created by the init script
+   * before </body>). Keep this validator agnostic of whether the
+   * library has loaded yet so the rest of the funnel still works. */
+  phoneInput.addEventListener('countrychange', validateContact);
 
   /* Obvious-fake guard: rejects all-same-digit, classic test sequences,
    * and absurdly short numbers that still happen to parse. Runs on top
@@ -2161,10 +2166,10 @@
   }
 
   function phoneIsValid(){
-    if(!iti)return false;
+    if(!window._iti)return false;
     if(!phoneInput.value.trim())return false;
-    if(!iti.isValidNumber())return false;
-    if(isFakeNumber(iti.getNumber()))return false;
+    if(!window._iti.isValidNumber())return false;
+    if(isFakeNumber(window._iti.getNumber()))return false;
     return true;
   }
 
@@ -2172,11 +2177,9 @@
     const empty=!phoneInput.value.trim();
     const ok=phoneIsValid();
     if(empty||ok){
-      phoneError.classList.remove('show');
-      phoneInput.classList.remove('qf-phone-invalid');
+      phoneField?.classList.remove('phone-error');
     }else{
-      phoneError.classList.add('show');
-      phoneInput.classList.add('qf-phone-invalid');
+      phoneField?.classList.add('phone-error');
     }
   }
 
@@ -2186,10 +2189,10 @@
       &&phoneIsValid());
   }
   [nameInput,emailInput].forEach(el=>el.addEventListener('input',validateContact));
+  phoneInput.addEventListener('blur',validatePhoneAndShowError);
   phoneInput.addEventListener('input',()=>{
     /* clear error while typing — re-check on blur/submit */
-    phoneError.classList.remove('show');
-    phoneInput.classList.remove('qf-phone-invalid');
+    phoneField?.classList.remove('phone-error');
     validateContact();
   });
 
@@ -2203,8 +2206,8 @@
     'rw','st','sn','sc','sl','so','za','ss','sd','tz','tg','tn','ug',
     'eh','zm','zw'];
   function isBlockedPhone(){
-    if(!iti)return false;
-    const cc=(iti.getSelectedCountryData().iso2||'').toLowerCase();
+    if(!window._iti)return false;
+    const cc=(window._iti.getSelectedCountryData().iso2||'').toLowerCase();
     return BLOCKED_COUNTRIES.indexOf(cc)!==-1;
   }
 
@@ -2217,7 +2220,7 @@
     }
     answers.name=nameInput.value.trim();
     answers.email=emailInput.value.trim();
-    answers.phone=iti.getNumber(); /* E.164: +385912345678 */
+    answers.phone=window._iti ? (window._iti.getNumber() || phoneInput.value.trim()) : phoneInput.value.trim();
 
     /* block restricted region */
     if(isBlockedPhone()){
@@ -2524,6 +2527,38 @@
   outer.addEventListener('touchend', function() {
     resumeTimer = setTimeout(function() { belt.classList.remove('paused'); }, 2000);
   }, { passive: true });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23/build/js/intlTelInputWithUtils.min.js"></script>
+<script>
+(function tryInitIti(){
+  if(!window.intlTelInput){setTimeout(tryInitIti,50);return;}
+  var el=document.getElementById('qfPhone');
+  if(!el||window._iti){return;}
+  window._iti=window.intlTelInput(el,{
+    initialCountry:'auto',
+    geoIpLookup:function(cb){fetch('https://ipapi.co/json/').then(function(r){return r.json();}).then(function(d){cb(d.country_code||'us');}).catch(function(){cb('us');});},
+    separateDialCode:true,
+    autoPlaceholder:'aggressive',
+    strictMode:true,
+  });
+  var itiWrap=el.closest('.iti')||el.parentElement;
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.iti__selected-country,.iti__selected-flag'))return;
+    setTimeout(function(){
+      var drop=document.querySelector('.iti__dropdown-content,.iti__country-list');
+      if(!drop)return;
+      drop.addEventListener('wheel',function(e){e.stopPropagation();},{passive:true});
+      drop.addEventListener('touchmove',function(e){e.stopPropagation();},{passive:true});
+      var search=drop.querySelector('.iti__search-input');
+      if(search){search.style.outline='none';search.style.boxShadow='none';}
+      if(drop.parentElement===document.body)return;
+      var rect=itiWrap.getBoundingClientRect();
+      document.body.appendChild(drop);
+      drop.style.cssText='position:fixed!important;top:'+(rect.bottom+2)+'px!important;left:'+rect.left+'px!important;width:'+rect.width+'px!important;z-index:2147483647!important;max-height:260px!important;overflow-y:auto!important;';
+    },20);
+  },true);
 })();
 </script>
 
