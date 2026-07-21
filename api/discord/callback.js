@@ -129,8 +129,12 @@ module.exports = async function handler(req, res) {
     const user = await userRes.json();
     console.log('[discord/callback] Connected:', user.username, user.id);
 
-    // 3. Push to GHL (fire and forget — don't block the redirect)
-    pushToGHL(user);
+    // 3. Push to GHL — must AWAIT on Vercel serverless. If we don't,
+    // the runtime terminates when we return the redirect and kills
+    // the in-flight fetch before it hits GHL. Fire-and-forget only
+    // works on long-lived servers, not on serverless functions.
+    // Extra ~200-500 ms latency on the OAuth redirect, worth it.
+    await pushToGHL(user);
 
     // 4. Set signed session cookie (7 days)
     const token = createToken({
