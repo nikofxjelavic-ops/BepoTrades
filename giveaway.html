@@ -18,6 +18,8 @@
     .gw-star { position:fixed;border-radius:50%;background:#fff;opacity:0;animation:gwTwinkle var(--d) ease-in-out infinite var(--delay); }
     @keyframes gwTwinkle { 0%,100%{opacity:0} 50%{opacity:var(--op)} }
     @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.72)} }
+    @keyframes gw-btn-pulse { 0%,100%{box-shadow:0 4px 20px rgba(88,101,242,0.38)} 50%{box-shadow:0 0 0 6px rgba(248,113,113,0.35),0 4px 24px rgba(248,113,113,0.55)} }
+    .gw-discord-btn.needs-connect { animation:gw-btn-pulse 0.7s ease-in-out 5; }
 
     /* ─── NAVBAR ─── */
     .gw-nav { position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;background:rgba(4,8,30,0.60);border-bottom:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:background 0.3s,border-color 0.3s,box-shadow 0.3s; }
@@ -600,7 +602,7 @@
       <svg width="20" height="15" viewBox="0 0 20 15" fill="none"><path d="M16.93 1.24A16.5 16.5 0 0012.73 0c-.18.34-.4.8-.54 1.17a15.26 15.26 0 00-4.57 0A10.3 10.3 0 007.08 0 16.54 16.54 0 002.87 1.25C.3 4.77-.19 8.18.07 11.55c1.72 1.27 3.39 2.05 5.04 2.57.41-.56.77-1.15 1.08-1.79a9.76 9.76 0 01-1.7-.83c.14-.1.28-.21.41-.32 3.27 1.53 6.82 1.53 10.06 0 .13.11.27.22.41.32-.55.31-1.12.59-1.71.83.31.64.67 1.23 1.09 1.79 1.65-.52 3.32-1.30 5.04-2.57.31-3.93-.53-7.3-2.25-10.31zM6.68 9.45c-.99 0-1.80-.92-1.80-2.05s.79-2.05 1.80-2.05c1.00 0 1.82.92 1.80 2.05 0 1.13-.80 2.05-1.80 2.05zm6.65 0c-.99 0-1.80-.92-1.80-2.05s.79-2.05 1.80-2.05c1.00 0 1.82.92 1.80 2.05 0 1.13-.79 2.05-1.80 2.05z" fill="white"/></svg>
       Connect Discord to Enter
     </a>
-    <p id="gwDiscordError" style="display:none;margin-top:10px;font-size:13px;color:#f87171;text-align:center;"></p>
+    <p id="gwDiscordError" style="display:none;margin-top:12px;font-size:13px;color:#f87171;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.22);border-radius:10px;padding:11px 14px;text-align:center;">⚠ Connect your Discord first to submit an entry.</p>
   </div>
 
   <!-- Connected state (hidden until OAuth complete) -->
@@ -983,6 +985,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (!data.connected) return;
+        gwDiscordIsConnected = true;
         // Show connected card
         document.getElementById('gwDiscordConnect').style.display = 'none';
         document.getElementById('gwDiscordConnected').style.display = 'block';
@@ -998,6 +1001,7 @@
   })();
 
   // ── Entry persistence (server-backed) ──
+  var gwDiscordIsConnected = false;
   var pendingCount = 0, totalCount = 0;
 
   function gwSetTotal(n) {
@@ -1020,6 +1024,21 @@
 
   document.getElementById('gwForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    if (!gwDiscordIsConnected) {
+      var errEl = document.getElementById('gwDiscordError');
+      errEl.style.display = 'block';
+      var connectBox = document.getElementById('gwDiscordConnect');
+      connectBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var btn = connectBox.querySelector('.gw-discord-btn');
+      if (btn) {
+        btn.classList.remove('needs-connect');
+        void btn.offsetWidth;
+        btn.classList.add('needs-connect');
+        setTimeout(function() { btn.classList.remove('needs-connect'); }, 3500);
+      }
+      return;
+    }
+    document.getElementById('gwDiscordError').style.display = 'none';
     // Optimistic UI update
     pendingCount++;
     gwSetTotal(totalCount + 1);
