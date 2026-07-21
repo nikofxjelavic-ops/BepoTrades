@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enter the Giveaways | Nico Trades</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <meta name="description" content="Submit your entries for a chance to win weekly prop firm prizes. Use code NICO on any partnered prop firm evaluation."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    html, body { background: #04081e; }
+
+    .gw-orb1 { position:fixed;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 70%);top:-300px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:0; }
+    .gw-orb2 { position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.06) 0%,transparent 70%);bottom:0;right:-100px;pointer-events:none;z-index:0; }
+    .gw-star { position:fixed;border-radius:50%;background:#fff;opacity:0;animation:gwTwinkle var(--d) ease-in-out infinite var(--delay); }
+    @keyframes gwTwinkle { 0%,100%{opacity:0} 50%{opacity:var(--op)} }
+    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.72)} }
+
+    /* ─── NAVBAR ─── */
+    .gw-nav { position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;background:rgba(4,8,30,0.60);border-bottom:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:background 0.3s,border-color 0.3s,box-shadow 0.3s; }
+    .gw-nav.scrolled { background:rgba(4,8,30,0.92);border-bottom-color:rgba(255,255,255,0.09);box-shadow:0 4px 32px rgba(0,0,0,0.40); }
+    .gw-nav-inner { width:100%;max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between; }
+    .gw-logo { font-family:var(--font-h);font-size:18px;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-0.01em; }
+    .gw-logo span { color:#60a5fa;text-shadow:0 0 20px rgba(96,165,250,0.45); }
+    .gw-nav-links { display:flex;align-items:center;gap:6px; }
+    .gw-nav-links a { font-size:13px;font-weight:500;color:rgba(255,255,255,0.50);text-decoration:none;transition:color 0.2s;padding:6px 12px;border-radius:8px;transition:all 0.2s; }
+    .gw-nav-links a:hover { color:rgba(255,255,255,0.90);background:rgba(255,255,255,0.05); }
+    .gw-nav-links a.active { color:#fff;background:rgba(96,165,250,0.10); }
+    .gw-nav-discord { display:inline-flex;align-items:center;gap:7px;padding:9px 18px;font-family:var(--font-b);font-size:13px;font-weight:700;color:#fff;background:linear-gradient(135deg,#4f46e5,#5865F2);border-radius:99px;transition:all 0.2s;text-decoration:none;box-shadow:0 2px 12px rgba(88,101,242,0.35);border:1px solid rgba(255,255,255,0.10); }
+    .gw-nav-discord:hover { transform:translateY(-1px);box-shadow:0 4px 20px rgba(88,101,242,0.55); }
+
+    /* ─── HERO ─── */
+    .gw-hero { padding:130px 0 60px;text-align:center;position:relative;z-index:2; }
+    .gw-hero-label { font-family:var(--font-m);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:18px; }
+    .gw-hero-h1 { font-family:var(--font-h);font-size:clamp(42px,7vw,88px);font-weight:800;letter-spacing:-0.035em;line-height:1.06;color:#fff;margin-bottom:18px; }
+    .gw-grad { background:linear-gradient(90deg,#60a5fa 0%,#a78bfa 55%,#c084fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .gw-hero-sub { font-size:17px;color:rgba(255,255,255,0.45);max-width:480px;margin:0 auto;line-height:1.75; }
+
+    /* ─── INTRO STRIP (full width, centered) ─── */
+    .gw-intro-strip { max-width:760px;margin:0 auto 48px;padding:0 40px;position:relative;z-index:2; }
+    .gw-discord-box { background:rgba(88,101,242,0.10);border:1px solid rgba(88,101,242,0.28);border-radius:16px;padding:18px 22px;margin-bottom:20px;display:flex;align-items:flex-start;gap:14px; }
+    .gw-discord-text { font-size:13px;color:rgba(255,255,255,0.55);line-height:1.65; }
+    .gw-discord-text strong { color:rgba(255,255,255,0.85); }
+    .gw-winner-banner { display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(135deg,rgba(99,102,241,0.10) 0%,rgba(139,92,246,0.08) 100%);border:1px solid rgba(139,92,246,0.22);border-radius:14px;padding:13px 18px;margin-bottom:14px; }
+    .gw-winner-banner-left { display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.70);line-height:1.4; }
+    .gw-winner-banner-left strong { color:#fff;font-weight:700; }
+    .gw-winner-banner-link { flex-shrink:0;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#5865F2;border-radius:8px;font-family:var(--font-b);font-size:12px;font-weight:700;color:#fff;text-decoration:none;white-space:nowrap;transition:background 0.2s,transform 0.15s; }
+    .gw-winner-banner-link:hover { background:#4752c4;transform:translateY(-1px); }
+    .gw-entry-counter { position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(15,23,55,0.95) 0%,rgba(10,16,40,0.98) 100%);border:1px solid rgba(96,165,250,0.18);border-radius:20px;padding:24px 26px;margin-bottom:20px; }
+    .gw-entry-counter::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(96,165,250,0.45) 40%,rgba(139,92,246,0.45) 60%,transparent); }
+    .gw-entry-counter::after { content:'';position:absolute;top:0;right:0;width:180px;height:100%;background:radial-gradient(ellipse 120px 80px at 100% 50%,rgba(59,130,246,0.08) 0%,transparent 100%);pointer-events:none; }
+    .gw-entry-ctr-inner { display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:1; }
+    .gw-entry-ctr-left { display:flex;align-items:center;gap:18px; }
+    .gw-entry-ctr-icon { width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(59,130,246,0.20),rgba(99,102,241,0.18));border:1px solid rgba(96,165,250,0.25);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 0 20px rgba(59,130,246,0.15); }
+    .gw-entry-ctr-text { }
+    .gw-entry-ctr-label { font-family:var(--font-m);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:5px; }
+    .gw-entry-ctr-num { font-family:var(--font-h);font-size:42px;font-weight:900;color:#fff;letter-spacing:-0.04em;line-height:1; }
+    .gw-entry-ctr-sub { font-size:12px;color:rgba(255,255,255,0.28);margin-top:4px; }
+    .gw-entry-ctr-link { flex-shrink:0;display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.20);border-radius:10px;font-family:var(--font-b);font-size:13px;font-weight:600;color:#60a5fa;text-decoration:none;transition:all 0.2s;white-space:nowrap; }
+    .gw-entry-ctr-link:hover { background:rgba(96,165,250,0.14);border-color:rgba(96,165,250,0.38);transform:translateY(-1px); }
+    .gw-discord-btn { width:100%;display:flex;align-items:center;justify-content:center;gap:11px;padding:15px;font-family:var(--font-b);font-size:15px;font-weight:700;color:#fff;background:#5865F2;border-radius:12px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(88,101,242,0.38);transition:background 0.2s,transform 0.15s;text-decoration:none; }
+    .gw-discord-btn:hover { background:#4752c4;transform:translateY(-1px); }
+    .gw-discord-connected-card { display:flex;align-items:center;gap:14px;background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.22);border-radius:12px;padding:14px 18px; }
+    .gw-discord-avatar { width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(74,222,128,0.35); }
+    .gw-discord-info { flex:1; }
+    .gw-discord-connected-label { font-family:var(--font-m);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#4ade80;margin-bottom:3px; }
+    .gw-discord-username { font-family:var(--font-h);font-size:15px;font-weight:700;color:#fff; }
+    .gw-discord-disconnect { font-size:12px;color:rgba(255,255,255,0.30);text-decoration:none;flex-shrink:0;transition:color 0.2s; }
+    .gw-discord-disconnect:hover { color:rgba(255,255,255,0.65); }
+
+    /* ─── PROP FIRM CARDS SECTION ─── */
+    .gw-firms-section { max-width:1100px;margin:0 auto 56px;padding:0 40px;position:relative;z-index:2; }
+    .gw-firms-header { text-align:center;margin-bottom:36px; }
+    .gw-firms-label { font-family:var(--font-m);font-size:11px;letter-spacing:0.20em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:10px; }
+    .gw-firms-h { font-family:var(--font-h);font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-0.025em;margin-bottom:8px; }
+    .gw-firms-sub { font-size:14px;color:rgba(255,255,255,0.38); }
+    .gw-firms-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:880px;margin:0 auto; }
+
+    /* ─── INDIVIDUAL FIRM CARD ─── */
+    .gw-fcard {
+      background:linear-gradient(160deg,rgba(12,20,50,0.95) 0%,rgba(8,13,35,0.98) 100%);
+      border:1px solid rgba(255,255,255,0.07);
+      border-radius:22px;padding:24px 26px 26px;
+      display:flex;flex-direction:column;gap:16px;
+      transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;
+      position:relative;overflow:hidden;
+      box-shadow:0 4px 24px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    /* subtle top shimmer line on all cards */
+    .gw-fcard::before {
+      content:'';position:absolute;inset:0;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.10) 50%,transparent 100%);
+      border-radius:22px 22px 0 0;pointer-events:none;
+    }
+    .gw-fcard:hover {
+      border-color:rgba(96,165,250,0.22);
+      transform:translateY(-3px);
+      box-shadow:0 8px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(96,165,250,0.10), inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+    /* ── FEATURED (Lucid Trading #1) ── */
+    .gw-fcard.featured {
+      background:linear-gradient(160deg,rgba(14,26,65,0.97) 0%,rgba(8,15,42,0.99) 100%);
+      border-color:rgba(96,165,250,0.40);
+      box-shadow:
+        0 0 0 1px rgba(96,165,250,0.18),
+        0 8px 48px rgba(59,130,246,0.18),
+        0 2px 12px rgba(0,0,0,0.50),
+        inset 0 1px 0 rgba(96,165,250,0.12);
+    }
+    .gw-fcard.featured:hover {
+      border-color:rgba(96,165,250,0.55);
+      box-shadow:
+        0 0 0 1px rgba(96,165,250,0.25),
+        0 12px 60px rgba(59,130,246,0.25),
+        0 4px 16px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(96,165,250,0.16);
+      transform:translateY(-4px);
+    }
+    /* top glow strip for featured */
+    .gw-fcard.featured::before {
+      background:linear-gradient(90deg,transparent 0%,rgba(96,165,250,0.30) 50%,transparent 100%);
+    }
+
+    .gw-fcard-badge {
+      position:absolute;top:18px;right:18px;
+      display:flex;align-items:center;gap:5px;
+      background:linear-gradient(135deg,rgba(59,130,246,0.22),rgba(99,102,241,0.20));
+      border:1px solid rgba(96,165,250,0.40);
+      border-radius:99px;padding:5px 13px;
+      font-family:var(--font-m);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+      color:#93c5fd;font-weight:700;
+      box-shadow:0 2px 14px rgba(59,130,246,0.22), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    /* Card header */
+    .gw-fcard-head { display:flex;align-items:center;gap:16px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.06); }
+    .gw-fcard-icon {
+      width:60px;height:60px;border-radius:16px;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      font-size:22px;font-weight:800;font-family:var(--font-h);
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 6px 18px rgba(0,0,0,0.50);
+    }
+    .gw-fcard.featured .gw-fcard-icon {
+      border-color:rgba(96,165,250,0.28);
+      box-shadow:0 6px 20px rgba(59,130,246,0.22);
+    }
+    .gw-fcard-info { flex:1;min-width:0; }
+    .gw-fcard-name { font-family:var(--font-h);font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.02em;margin-bottom:6px;line-height:1.2; }
+    .gw-fcard-rating { display:flex;align-items:center;gap:6px;flex-wrap:wrap; }
+    .gw-fcard-score { font-size:12px;color:rgba(255,255,255,0.75);font-weight:700; }
+    .gw-fcard-stars { color:#00b67a;font-size:12px;letter-spacing:1px; }
+    .gw-fcard-reviews { font-size:11px;color:rgba(255,255,255,0.22);padding-left:2px; }
+    .gw-fcard-tp { display:inline-flex;align-items:center;gap:3px;font-size:10px;color:#00b67a;font-weight:600;opacity:0.75;text-decoration:none;transition:opacity 0.2s; }
+    .gw-fcard-tp:hover { opacity:1; }
+
+    /* Coupon discount box */
+    .gw-fcard-coupon {
+      position:relative;
+      background:linear-gradient(160deg,rgba(59,130,246,0.07) 0%,rgba(99,102,241,0.05) 100%);
+      border:1px solid rgba(59,130,246,0.20);
+      border-radius:16px;
+      padding:22px 32px 18px;
+      text-align:center;
+      overflow:visible;
+    }
+    .gw-fcard.featured .gw-fcard-coupon {
+      background:linear-gradient(160deg,rgba(59,130,246,0.11) 0%,rgba(99,102,241,0.08) 100%);
+      border-color:rgba(96,165,250,0.32);
+    }
+    .gw-fcard-coupon-tag {
+      display:inline-block;
+      font-family:var(--font-m);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+      color:rgba(96,165,250,0.60);font-weight:700;
+      margin-bottom:8px;
+    }
+    /* notch circles */
+    .gw-fcard-coupon::before,
+    .gw-fcard-coupon::after {
+      content:'';position:absolute;top:50%;transform:translateY(-50%);
+      width:22px;height:22px;border-radius:50%;
+      background:#04081e;
+      border:1px solid rgba(59,130,246,0.22);
+      box-shadow:inset 0 1px 3px rgba(0,0,0,0.60);
+    }
+    .gw-fcard-coupon::before { left:-11px; }
+    .gw-fcard-coupon::after { right:-11px; }
+    .gw-fcard-pct {
+      font-family:var(--font-h);font-size:46px;font-weight:900;
+      letter-spacing:-0.04em;line-height:1;
+      background:linear-gradient(135deg,#38bdf8 0%,#818cf8 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      filter:drop-shadow(0 2px 12px rgba(59,130,246,0.28));
+    }
+    .gw-fcard.featured .gw-fcard-pct {
+      background:linear-gradient(135deg,#60a5fa 0%,#a78bfa 100%);
+      -webkit-background-clip:text;background-clip:text;
+      filter:drop-shadow(0 2px 16px rgba(96,165,250,0.35));
+    }
+    .gw-fcard-pct-label { font-size:11.5px;color:rgba(255,255,255,0.30);margin-top:7px;line-height:1.5;letter-spacing:0.01em; }
+
+    /* Code row */
+    @keyframes gw-flash {
+      0%   { background:rgba(74,222,128,0.28);box-shadow:0 0 36px rgba(74,222,128,0.40),inset 0 0 24px rgba(74,222,128,0.14); }
+      100% { background:rgba(74,222,128,0.10);box-shadow:0 0 20px rgba(74,222,128,0.18),inset 0 0 12px rgba(74,222,128,0.06); }
+    }
+    .gw-fcard-code {
+      display:flex;align-items:center;gap:10px;
+      background:rgba(59,130,246,0.05);
+      border:1.5px dashed rgba(96,165,250,0.24);
+      border-radius:14px;padding:14px 16px;
+      transition:background 0.35s,border-color 0.35s,box-shadow 0.35s;
+      position:relative;overflow:hidden;cursor:pointer;
+    }
+    .gw-fcard.featured .gw-fcard-code { border-color:rgba(96,165,250,0.34);background:rgba(59,130,246,0.08); }
+    .gw-fcard-code.copied {
+      animation:gw-flash 0.45s ease-out forwards;
+      border-color:rgba(74,222,128,0.55) !important;
+      border-style:solid !important;
+    }
+    .gw-fcard-code-left { flex-shrink:0; }
+    .gw-fcard-code-label {
+      font-family:var(--font-m);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+      color:rgba(96,165,250,0.60);background:rgba(96,165,250,0.09);
+      border:1px solid rgba(96,165,250,0.16);border-radius:99px;
+      padding:4px 10px;white-space:nowrap;flex-shrink:0;
+      transition:color 0.3s,border-color 0.3s,background 0.3s;
+    }
+    .gw-fcard-code.copied .gw-fcard-code-label { color:rgba(74,222,128,0.80);background:rgba(74,222,128,0.10);border-color:rgba(74,222,128,0.28); }
+    .gw-fcard-code-sep { display:none; }
+    .gw-fcard-code-val {
+      flex:1;text-align:center;
+      font-family:var(--font-h);font-size:21px;font-weight:900;color:#93c5fd;letter-spacing:0.12em;
+      transition:color 0.3s;
+    }
+    .gw-fcard.featured .gw-fcard-code-val { color:#a5b4fc; }
+    .gw-fcard-code.copied .gw-fcard-code-val { color:#4ade80; }
+    .gw-fcard-copy {
+      display:flex;align-items:center;gap:6px;flex-shrink:0;
+      background:rgba(96,165,250,0.10);border:1px solid rgba(96,165,250,0.20);
+      border-radius:9px;padding:8px 14px;
+      font-family:var(--font-m);font-size:10px;letter-spacing:0.10em;text-transform:uppercase;
+      color:rgba(96,165,250,0.80);cursor:pointer;
+      transition:background 0.2s,border-color 0.2s,color 0.2s;
+    }
+    .gw-fcard-copy:hover { background:rgba(96,165,250,0.20);border-color:rgba(96,165,250,0.38);color:#93c5fd; }
+    .gw-fcard-copy.copied { background:rgba(74,222,128,0.15);border-color:rgba(74,222,128,0.35);color:#4ade80; }
+
+    /* Buy Now button */
+    .gw-fcard-btn {
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      width:100%;padding:16px;
+      font-family:var(--font-b);font-size:14px;font-weight:700;color:#fff;letter-spacing:0.03em;
+      background:linear-gradient(135deg,#1d4ed8 0%,#3b82f6 60%,#6366f1 100%);
+      border-radius:13px;border:none;cursor:pointer;text-decoration:none;
+      box-shadow:0 4px 20px rgba(37,99,235,0.35), inset 0 1px 0 rgba(255,255,255,0.18);
+      transition:box-shadow 0.2s,transform 0.18s;
+      position:relative;overflow:hidden;
+    }
+    .gw-fcard-btn::before {
+      content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);
+      transition:left 0.5s ease;pointer-events:none;
+    }
+    .gw-fcard-btn:hover::before { left:150%; }
+    .gw-fcard-btn::after {
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(255,255,255,0.10) 0%,transparent 55%);
+      border-radius:13px;pointer-events:none;
+    }
+    .gw-fcard.featured .gw-fcard-btn {
+      background:linear-gradient(135deg,#1d4ed8 0%,#3b82f6 50%,#818cf8 100%);
+      box-shadow:0 4px 24px rgba(59,130,246,0.42), inset 0 1px 0 rgba(255,255,255,0.20);
+    }
+    .gw-fcard-btn:hover { transform:translateY(-2px);box-shadow:0 10px 36px rgba(37,99,235,0.52), inset 0 1px 0 rgba(255,255,255,0.18); }
+
+    /* ─── SOFTWARE SECTION ─── */
+    .gw-software-section { max-width:1100px;margin:0 auto 56px;padding:0 40px;position:relative;z-index:2; }
+    .gw-software-divider { display:flex;align-items:center;gap:16px;margin-bottom:28px; }
+    .gw-software-divider-line { flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,0.25),transparent); }
+    .gw-software-divider-text { font-family:var(--font-m);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.28);white-space:nowrap; }
+    .gw-software-entry-note {
+      text-align:center;margin-bottom:28px;
+      font-size:13px;color:rgba(255,255,255,0.38);
+      display:flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .gw-software-entry-note span { display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(99,102,241,0.20);border:1px solid rgba(99,102,241,0.35);font-size:10px;color:#a5b4fc;flex-shrink:0; }
+    .gw-software-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:880px;margin:0 auto; }
+    /* software cards inherit .gw-fcard but with purple accent */
+    .gw-scard {
+      background:linear-gradient(160deg,rgba(12,12,48,0.95) 0%,rgba(8,8,35,0.98) 100%);
+      border:1px solid rgba(99,102,241,0.14);
+      border-radius:22px;padding:26px;
+      display:flex;flex-direction:column;gap:18px;
+      transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;
+      position:relative;overflow:hidden;
+      box-shadow:0 4px 24px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .gw-scard::before {
+      content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent 0%,rgba(99,102,241,0.22) 50%,transparent 100%);
+      pointer-events:none;
+    }
+    .gw-scard:hover {
+      border-color:rgba(99,102,241,0.30);
+      transform:translateY(-3px);
+      box-shadow:0 8px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(99,102,241,0.14), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .gw-scard-head { display:flex;align-items:center;gap:16px; }
+    .gw-scard-icon {
+      width:56px;height:56px;border-radius:15px;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      font-size:26px;border:1px solid rgba(99,102,241,0.18);
+      box-shadow:0 4px 14px rgba(0,0,0,0.35);
+    }
+    .gw-scard-info { flex:1;min-width:0; }
+    .gw-scard-name { font-family:var(--font-h);font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.01em;margin-bottom:4px; }
+    .gw-scard-desc { font-size:12px;color:rgba(255,255,255,0.38);line-height:1.5; }
+    .gw-scard-coupon {
+      position:relative;background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.18);
+      border-radius:14px;padding:16px 28px;text-align:center;overflow:visible;
+    }
+    .gw-scard-coupon::before,.gw-scard-coupon::after {
+      content:'';position:absolute;top:50%;transform:translateY(-50%);
+      width:20px;height:20px;border-radius:50%;background:#04081e;border:1px solid rgba(99,102,241,0.18);
+    }
+    .gw-scard-coupon::before { left:-10px; }
+    .gw-scard-coupon::after { right:-10px; }
+    .gw-scard-pct-label { font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px; }
+    .gw-scard-discount {
+      font-family:var(--font-h);font-size:34px;font-weight:900;letter-spacing:-0.04em;line-height:1;
+      background:linear-gradient(135deg,#818cf8 0%,#a78bfa 60%,#c084fc 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .gw-scard-code {
+      display:flex;align-items:center;gap:10px;
+      background:rgba(99,102,241,0.05);
+      border:1.5px dashed rgba(99,102,241,0.24);
+      border-radius:14px;padding:14px 16px;
+      transition:background 0.35s,border-color 0.35s,box-shadow 0.35s;
+      position:relative;overflow:hidden;cursor:pointer;
+    }
+    .gw-scard-code.copied {
+      animation:gw-flash 0.45s ease-out forwards;
+      border-color:rgba(74,222,128,0.55) !important;
+      border-style:solid !important;
+    }
+    .gw-scard-code.copied .gw-scard-code-label { color:rgba(74,222,128,0.80);background:rgba(74,222,128,0.10);border-color:rgba(74,222,128,0.28); }
+    .gw-scard-code.copied .gw-scard-code-val { color:#4ade80; }
+    .gw-scard-copy.copied { background:rgba(74,222,128,0.15);border-color:rgba(74,222,128,0.35);color:#4ade80; }
+    .gw-scard-code-left { flex-shrink:0; }
+    .gw-scard-code-label {
+      font-family:var(--font-m);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+      color:rgba(99,102,241,0.65);background:rgba(99,102,241,0.10);
+      border:1px solid rgba(99,102,241,0.18);border-radius:99px;
+      padding:4px 10px;white-space:nowrap;
+    }
+    .gw-scard-code-val { flex:1;text-align:center;font-family:var(--font-h);font-size:19px;font-weight:900;color:#a5b4fc;letter-spacing:0.10em; }
+    .gw-scard-copy {
+      display:flex;align-items:center;gap:6px;flex-shrink:0;
+      background:rgba(99,102,241,0.10);border:1px solid rgba(99,102,241,0.20);
+      border-radius:9px;padding:8px 14px;
+      font-family:var(--font-m);font-size:10px;letter-spacing:0.10em;text-transform:uppercase;
+      color:rgba(99,102,241,0.80);cursor:pointer;
+      transition:background 0.2s,border-color 0.2s,color 0.2s;
+    }
+    .gw-scard-copy:hover { background:rgba(99,102,241,0.20);border-color:rgba(99,102,241,0.35);color:#a5b4fc; }
+    .gw-scard-copy.copied { background:rgba(74,222,128,0.12);border-color:rgba(74,222,128,0.28);color:#4ade80; }
+    .gw-scard-btn {
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      width:100%;padding:15px;
+      font-family:var(--font-b);font-size:14px;font-weight:700;color:#fff;letter-spacing:0.01em;
+      background:linear-gradient(135deg,#4338ca 0%,#6366f1 55%,#8b5cf6 100%);
+      border-radius:12px;border:none;cursor:pointer;text-decoration:none;
+      box-shadow:0 4px 20px rgba(99,102,241,0.32), inset 0 1px 0 rgba(255,255,255,0.14);
+      transition:box-shadow 0.2s,transform 0.18s;position:relative;overflow:hidden;
+    }
+    .gw-scard-btn::after { content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.08) 0%,transparent 60%);border-radius:12px;pointer-events:none; }
+    .gw-scard-btn:hover { transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,102,241,0.48), inset 0 1px 0 rgba(255,255,255,0.14); }
+
+    /* ─── MAIN 2-COL LAYOUT (form + sidebar) ─── */
+    .gw-body { max-width:720px;margin:0 auto;padding:0 40px 80px;position:relative;z-index:2; }
+
+    /* ─── DIVIDER ─── */
+    .gw-divider { display:flex;align-items:center;gap:12px;margin-bottom:28px; }
+    .gw-divider-line { flex:1;height:1px;background:rgba(255,255,255,0.07); }
+    .gw-divider-text { font-family:var(--font-m);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.22);white-space:nowrap; }
+
+    /* ─── ENTRY FORM ─── */
+    @keyframes gw-shimmer { 0%{left:-80%} 60%,100%{left:140%} }
+    @keyframes gw-success-in { 0%{opacity:0;transform:scale(0.90) translateY(12px)} 100%{opacity:1;transform:scale(1) translateY(0)} }
+    @keyframes gw-count-pop { 0%{transform:scale(1)} 50%{transform:scale(1.18)} 100%{transform:scale(1)} }
+    @keyframes gw-ring { 0%{transform:scale(0.8);opacity:0} 50%{opacity:1} 100%{transform:scale(1.6);opacity:0} }
+    .gw-form-card { background:rgba(10,16,36,0.70);border:1px solid rgba(255,255,255,0.10);border-radius:24px;padding:40px;box-shadow:0 0 0 1px rgba(96,165,250,0.06),0 32px 80px rgba(0,0,0,0.55),0 0 60px rgba(59,130,246,0.05);position:relative;overflow:hidden;backdrop-filter:blur(12px); }
+    .gw-form-card::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(96,165,250,0.55) 35%,rgba(139,92,246,0.55) 65%,transparent 100%); }
+    .gw-form-card::after { content:'';position:absolute;top:0;left:0;right:0;height:200px;background:radial-gradient(ellipse 60% 100px at 50% 0%,rgba(59,130,246,0.07) 0%,transparent 100%);pointer-events:none; }
+    .gw-form-heading { margin-bottom:28px; }
+    .gw-form-eyebrow { font-family:var(--font-m);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(96,165,250,0.65);margin-bottom:8px; }
+    .gw-form-title { font-family:var(--font-h);font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1.25; }
+    .gw-form-title span { color:#4ade80; }
+    .gw-field { margin-bottom:22px; }
+    .gw-label { display:block;font-family:var(--font-m);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:10px; }
+    .gw-select-wrap { position:relative; }
+    .gw-select { width:100%;padding:14px 44px 14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:12px;font-family:var(--font-b);font-size:14px;color:#fff;outline:none;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none;appearance:none;cursor:pointer; }
+    .gw-select:focus { border-color:rgba(96,165,250,0.55);box-shadow:0 0 0 3px rgba(96,165,250,0.10); }
+    .gw-select option { background:#0b1220; }
+    .gw-select-wrap::after { content:'';position:absolute;right:16px;top:50%;transform:translateY(-50%);width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid rgba(255,255,255,0.30);pointer-events:none; }
+    .gw-input { width:100%;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:12px;font-family:var(--font-b);font-size:14px;color:#fff;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box; }
+    .gw-input:focus { border-color:rgba(96,165,250,0.55);box-shadow:0 0 0 3px rgba(96,165,250,0.10); }
+    .gw-input::placeholder { color:rgba(255,255,255,0.22); }
+    .gw-radio-grid { display:grid;grid-template-columns:repeat(5,1fr);gap:8px; }
+    .gw-radio-label { display:flex;align-items:center;justify-content:center;padding:13px 6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;cursor:pointer;font-family:var(--font-h);font-size:13px;font-weight:700;color:rgba(255,255,255,0.45);transition:all 0.18s;user-select:none; }
+    .gw-radio-label:hover { border-color:rgba(96,165,250,0.40);color:rgba(255,255,255,0.85);background:rgba(96,165,250,0.07); }
+    .gw-radio-input { display:none; }
+    .gw-radio-input:checked + .gw-radio-label { background:rgba(59,130,246,0.20);border-color:rgba(96,165,250,0.65);color:#fff;box-shadow:0 0 16px rgba(59,130,246,0.22),inset 0 1px 0 rgba(255,255,255,0.10); }
+    .gw-add-btn { width:100%;padding:16px;font-family:var(--font-b);font-size:15px;font-weight:700;color:#fff;background:linear-gradient(135deg,#2563eb 0%,#4f46e5 50%,#7c3aed 100%);border-radius:14px;border:none;box-shadow:0 4px 24px rgba(59,130,246,0.40),inset 0 1px 0 rgba(255,255,255,0.15);cursor:pointer;transition:box-shadow 0.2s,transform 0.15s;margin-top:6px;position:relative;overflow:hidden; }
+    .gw-add-btn::after { content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);animation:gw-shimmer 3.5s infinite; }
+    .gw-add-btn:hover { transform:translateY(-2px);box-shadow:0 10px 36px rgba(59,130,246,0.56),inset 0 1px 0 rgba(255,255,255,0.15); }
+    .gw-add-btn:active { transform:translateY(0); }
+    .gw-submit-section { margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;gap:16px; }
+    .gw-to-submit { display:flex;align-items:center;gap:10px; }
+    .gw-to-submit-badge { display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);font-family:var(--font-h);font-size:16px;font-weight:800;color:rgba(255,255,255,0.35);transition:all 0.3s; }
+    .gw-to-submit-badge.has-entries { background:rgba(59,130,246,0.18);border-color:rgba(96,165,250,0.40);color:#60a5fa;box-shadow:0 0 14px rgba(59,130,246,0.20); }
+    .gw-to-submit-label { font-family:var(--font-m);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.30);line-height:1.4; }
+    .gw-submit-btn { padding:13px 28px;font-family:var(--font-b);font-size:14px;font-weight:700;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;cursor:pointer;transition:all 0.25s;white-space:nowrap; }
+    .gw-submit-btn.ready { color:#fff;background:linear-gradient(135deg,#2563eb 0%,#4f46e5 100%);border-color:transparent;box-shadow:0 4px 20px rgba(59,130,246,0.44);position:relative;overflow:hidden; }
+    .gw-submit-btn.ready:hover { transform:translateY(-1px);box-shadow:0 8px 30px rgba(59,130,246,0.58); }
+    .gw-form-note { font-size:12px;color:rgba(255,255,255,0.22);line-height:1.70;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.05); }
+    /* success state */
+    .gw-success-wrap { animation:gw-success-in 0.45s cubic-bezier(0.34,1.56,0.64,1) both;text-align:center;padding:32px 0 16px; }
+    .gw-success-icon-ring { position:relative;width:88px;height:88px;margin:0 auto 24px;display:flex;align-items:center;justify-content:center; }
+    .gw-success-icon-ring::before,.gw-success-icon-ring::after { content:'';position:absolute;inset:0;border-radius:50%;border:2px solid rgba(74,222,128,0.35);animation:gw-ring 1.8s ease-out infinite; }
+    .gw-success-icon-ring::after { animation-delay:0.6s; }
+    .gw-success-emoji { font-size:46px;line-height:1;position:relative;z-index:1; }
+    .gw-success-title { font-family:var(--font-h);font-size:24px;font-weight:900;color:#fff;letter-spacing:-0.025em;margin-bottom:8px; }
+    .gw-success-sub { font-size:14px;color:rgba(255,255,255,0.42);line-height:1.72;margin-bottom:28px;max-width:340px;margin-left:auto;margin-right:auto; }
+    .gw-success-count-box { background:linear-gradient(135deg,rgba(59,130,246,0.12) 0%,rgba(99,102,241,0.12) 100%);border:1px solid rgba(96,165,250,0.22);border-radius:18px;padding:24px 32px;margin:0 auto 28px;display:inline-block;min-width:180px; }
+    .gw-success-count { font-family:var(--font-h);font-size:52px;font-weight:900;color:#60a5fa;letter-spacing:-0.04em;line-height:1;animation:gw-count-pop 0.5s 0.3s cubic-bezier(0.34,1.56,0.64,1) both; }
+    .gw-success-count-label { font-family:var(--font-m);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.30);margin-top:6px; }
+    .gw-success-reset { display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:99px;color:rgba(255,255,255,0.50);font-size:13px;font-family:var(--font-b);cursor:pointer;transition:all 0.2s; }
+    .gw-success-reset:hover { border-color:rgba(255,255,255,0.20);color:rgba(255,255,255,0.80); }
+
+    /* ─── HAVEN'T ENTERED CTA ─── */
+    .gw-cta-box { background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.18);border-radius:20px;padding:32px;margin-top:24px;text-align:center; }
+    .gw-cta-box h3 { font-family:var(--font-h);font-size:22px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-0.02em; }
+    .gw-cta-box p { font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:20px;line-height:1.7; }
+    .gw-cta-eval-btn { display:inline-flex;align-items:center;gap:8px;padding:14px 28px;font-family:var(--font-b);font-size:14px;font-weight:700;color:#fff;background:linear-gradient(135deg,#3b82f6 0%,#6366f1 100%);border-radius:99px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(59,130,246,0.40);transition:box-shadow 0.2s,transform 0.2s;text-decoration:none; }
+    .gw-cta-eval-btn:hover { transform:translateY(-1px);box-shadow:0 8px 28px rgba(59,130,246,0.55); }
+
+    /* ─── HOW IT WORKS ─── */
+    .gw-how-section { margin-top:40px; }
+    .gw-how-header { font-family:var(--font-m);font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:24px; }
+    .gw-steps-list { display:flex;flex-direction:column;gap:14px; }
+    .gw-step-row { display:flex;align-items:flex-start;gap:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:18px 20px; }
+    .gw-step-n { width:34px;height:34px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,rgba(59,130,246,0.20),rgba(99,102,241,0.20));border:1px solid rgba(96,165,250,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:15px;font-weight:800;color:#60a5fa; }
+    .gw-step-title { font-family:var(--font-h);font-size:14px;font-weight:700;color:#fff;margin-bottom:4px; }
+    .gw-step-desc { font-size:13px;color:rgba(255,255,255,0.40);line-height:1.65; }
+    .gw-key-points { margin-top:18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:10px; }
+    .gw-key-point { display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,255,255,0.42);line-height:1.60; }
+    .gw-key-dot { width:6px;height:6px;border-radius:50%;background:#60a5fa;flex-shrink:0;margin-top:6px; }
+    .gw-tos { margin-top:18px;border:1px solid rgba(255,255,255,0.07);border-radius:14px;overflow:hidden; }
+    .gw-tos-toggle { display:flex;align-items:center;justify-content:space-between;padding:16px 22px;cursor:pointer;font-family:var(--font-m);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.02);user-select:none;transition:color 0.2s; }
+    .gw-tos-toggle:hover { color:rgba(255,255,255,0.60); }
+    .gw-tos-chevron { transition:transform 0.3s; }
+    .gw-tos.open .gw-tos-chevron { transform:rotate(180deg); }
+    .gw-tos-body { max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1);font-size:12px;color:rgba(255,255,255,0.35);line-height:1.80; }
+    .gw-tos.open .gw-tos-body { max-height:800px; }
+    .gw-tos-inner { padding:20px 22px; }
+    .gw-tos-inner p { margin-bottom:12px; }
+    .gw-tos-inner p:last-child { margin-bottom:0; }
+    .gw-tos-inner strong { color:rgba(255,255,255,0.55); }
+
+    /* ─── SIDEBAR ─── */
+    .gw-sidebar-inner { position:sticky;top:80px; }
+    .gw-sidebar-card { background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:24px;margin-bottom:20px; }
+    .gw-sidebar-title { font-family:var(--font-h);font-size:14px;font-weight:700;color:rgba(255,255,255,0.80);margin-bottom:16px;letter-spacing:-0.01em; }
+    .gw-winner-list { display:flex;flex-direction:column;gap:8px; }
+    .gw-winner-row { display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:border-color 0.2s; }
+    .gw-winner-row:hover { border-color:rgba(96,165,250,0.20); }
+    .gw-winner-av { width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:11px;font-weight:700;color:#fff; }
+    .gw-winner-handle { font-size:13px;color:rgba(255,255,255,0.65);font-weight:500; }
+    .gw-winners-cta-card { background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:24px;text-align:center; }
+    .gw-winners-cta-h { font-family:var(--font-h);font-size:17px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.3;letter-spacing:-0.02em; }
+    .gw-winners-cta-p { font-size:13px;color:rgba(255,255,255,0.38);margin-bottom:18px;line-height:1.65; }
+    .gw-winners-cta-btn { display:inline-flex;align-items:center;gap:7px;padding:12px 22px;font-family:var(--font-b);font-size:13px;font-weight:700;color:#fff;background:linear-gradient(135deg,#3b82f6 0%,#6366f1 100%);border-radius:99px;border:none;cursor:pointer;box-shadow:0 4px 18px rgba(59,130,246,0.38);transition:box-shadow 0.2s,transform 0.2s;text-decoration:none; }
+    .gw-winners-cta-btn:hover { transform:translateY(-1px);box-shadow:0 7px 24px rgba(59,130,246,0.52); }
+
+    /* ─── FAQ ─── */
+    .gw-faq-section { max-width:1100px;margin:0 auto;padding:0 40px 80px;position:relative;z-index:2; }
+    .gw-faq-h { font-family:var(--font-h);font-size:clamp(26px,3.5vw,40px);font-weight:800;color:#fff;text-align:center;letter-spacing:-0.025em;margin-bottom:10px; }
+    .gw-faq-sub { font-size:15px;color:rgba(255,255,255,0.38);text-align:center;margin-bottom:40px;line-height:1.7; }
+    .gw-faq-grid { max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px; }
+    .gw-faq-item { background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:16px;overflow:hidden;transition:border-color 0.2s; }
+    .gw-faq-item.open { border-color:rgba(96,165,250,0.22); }
+    .gw-faq-q { display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;gap:16px;font-family:var(--font-h);font-size:15px;font-weight:600;color:rgba(255,255,255,0.82);user-select:none;transition:color 0.2s; }
+    .gw-faq-q:hover { color:#fff; }
+    .gw-faq-chevron { flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.40);display:flex;align-items:center;justify-content:center;transition:transform 0.3s,background 0.2s,color 0.2s; }
+    .gw-faq-item.open .gw-faq-chevron { transform:rotate(180deg);background:rgba(96,165,250,0.16);color:#60a5fa; }
+    .gw-faq-a { max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1),padding 0.25s;font-size:14px;color:rgba(255,255,255,0.46);line-height:1.78; }
+    .gw-faq-item.open .gw-faq-a { max-height:300px;padding:0 24px 22px; }
+
+    /* ─── FOOTER ─── */
+    .gw-footer { border-top:1px solid rgba(255,255,255,0.06);padding:40px 0;text-align:center;position:relative;z-index:2; }
+    .gw-footer-logo { font-family:var(--font-h);font-size:17px;font-weight:800;color:#fff;display:block;margin-bottom:10px;text-decoration:none; }
+    .gw-footer-logo span { color:#60a5fa; }
+    .gw-footer-links { display:flex;align-items:center;justify-content:center;gap:24px;margin-bottom:16px;flex-wrap:wrap; }
+    .gw-footer-links a { font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s; }
+    .gw-footer-links a:hover { color:rgba(255,255,255,0.65); }
+    .gw-footer-copy { font-size:12px;color:rgba(255,255,255,0.22);margin-bottom:8px; }
+    .gw-footer-disc { font-size:11px;color:rgba(255,255,255,0.16);max-width:540px;margin:0 auto;line-height:1.65; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width:900px) {
+      .gw-body { grid-template-columns:1fr; }
+      .gw-sidebar-inner { position:static; }
+      .gw-firms-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width:700px) {
+      .gw-firms-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width:600px) {
+      .gw-nav-inner { padding:0 20px; }
+      .gw-nav-links { display:none; }
+      .gw-hero { padding:100px 0 50px; }
+      .gw-intro-strip { padding:0 20px; }
+      .gw-firms-section { padding:0 20px; }
+      .gw-body { padding:0 20px 60px; }
+      .gw-faq-section { padding:0 20px 60px; }
+      .gw-firms-grid { grid-template-columns:1fr; }
+      .gw-software-grid { grid-template-columns:1fr; }
+      .gw-software-section { padding:0 20px; }
+      .gw-radio-grid { grid-template-columns:repeat(3,1fr); }
+      .gw-dt-row { grid-template-columns:1fr; }
+      .gw-submit-section { flex-direction:column;align-items:stretch; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="gw-orb1"></div>
+<div class="gw-orb2"></div>
+<div id="gwStars"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="gw-nav" id="gwNav">
+  <div class="gw-nav-inner">
+    <a href="/" class="gw-logo">NICO<span>TRADES</span></a>
+    <nav class="gw-nav-links">
+      <a href="/mentorship.html">Mentorship</a>
+      <a href="/index.html">Free Course</a>
+      <a href="/giveaway.html" class="active">Giveaways</a>
+    </nav>
+    <a href="https://discord.gg/4bK2vTNenD" target="_blank" rel="noopener" class="gw-nav-discord">
+      <svg width="17" height="13" viewBox="0 0 20 15" fill="none"><path d="M16.93 1.24A16.5 16.5 0 0012.73 0c-.18.34-.4.8-.54 1.17a15.26 15.26 0 00-4.57 0A10.3 10.3 0 007.08 0 16.54 16.54 0 002.87 1.25C.3 4.77-.19 8.18.07 11.55c1.72 1.27 3.39 2.05 5.04 2.57.41-.56.77-1.15 1.08-1.79a9.76 9.76 0 01-1.7-.83c.14-.1.28-.21.41-.32 3.27 1.53 6.82 1.53 10.06 0 .13.11.27.22.41.32-.55.31-1.12.59-1.71.83.31.64.67 1.23 1.09 1.79 1.65-.52 3.32-1.30 5.04-2.57.31-3.93-.53-7.3-2.25-10.31zM6.68 9.45c-.99 0-1.80-.92-1.80-2.05s.79-2.05 1.80-2.05c1.00 0 1.82.92 1.80 2.05 0 1.13-.80 2.05-1.80 2.05zm6.65 0c-.99 0-1.80-.92-1.80-2.05s.79-2.05 1.80-2.05c1.00 0 1.82.92 1.80 2.05 0 1.13-.79 2.05-1.80 2.05z" fill="white"/></svg>
+      Join Discord
+    </a>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="gw-hero">
+  <div class="container" style="max-width:860px;">
+    <div class="gw-hero-label">NicoTrades · Weekly Giveaways</div>
+    <h1 class="gw-hero-h1">ENTER THE<br><span class="gw-grad">GIVEAWAYS</span></h1>
+    <p class="gw-hero-sub">Submit your entries for a chance to win weekly prizes.</p>
+  </div>
+</section>
+
+<!-- ═══ INTRO STRIP: My Entries + Discord Connect ═══ -->
+<div class="gw-intro-strip">
+  <div class="gw-winner-banner">
+    <div class="gw-winner-banner-left">
+      🏆 <span><strong>Winners announced every Sunday</strong> — join the Discord to see if you won</span>
+    </div>
+    <a href="https://discord.gg/4bK2vTNenD" target="_blank" rel="noopener" class="gw-winner-banner-link">
+      <svg width="16" height="12" viewBox="0 0 20 15" fill="none"><path d="M16.93 1.24A16.5 16.5 0 0012.73 0c-.18.34-.4.8-.54 1.17a15.26 15.26 0 00-4.57 0A10.3 10.3 0 007.08 0 16.54 16.54 0 002.87 1.25C.3 4.77-.19 8.18.07 11.55c1.72 1.27 3.39 2.05 5.04 2.57.41-.56.77-1.15 1.08-1.79a9.76 9.76 0 01-1.7-.83c.14-.1.28-.21.41-.32 3.27 1.53 6.82 1.53 10.06 0 .13.11.27.22.41.32-.55.31-1.12.59-1.71.83.31.64.67 1.23 1.09 1.79 1.65-.52 3.32-1.30 5.04-2.57.31-3.93-.53-7.3-2.25-10.31zM6.68 9.45c-.99 0-1.80-.92-1.80-2.05s.79-2.05 1.80-2.05c1.00 0 1.82.92 1.80 2.05 0 1.13-.80 2.05-1.80 2.05zm6.65 0c-.99 0-1.80-.92-1.80-2.05s.79-2.05 1.80-2.05c1.00 0 1.82.92 1.80 2.05 0 1.13-.79 2.05-1.80 2.05z" fill="white"/></svg>
+      Join Discord
+    </a>
+  </div>
+  <div class="gw-entry-counter">
+    <div class="gw-entry-ctr-inner">
+      <div class="gw-entry-ctr-left">
+        <div class="gw-entry-ctr-icon">🎟️</div>
+        <div class="gw-entry-ctr-text">
+          <div class="gw-entry-ctr-label">My Entries This Week</div>
+          <div class="gw-entry-ctr-num" id="gwEntryCount">0</div>
+          <div class="gw-entry-ctr-sub">Each eval with code NICO = 1 entry</div>
+        </div>
+      </div>
+      <a href="#enter" class="gw-entry-ctr-link">+ Add Entry</a>
+    </div>
+  </div>
+
+  <!-- Not connected state -->
+  <div id="gwDiscordConnect">
+    <a class="gw-discord-btn" href="/api/discord/login">
+      <svg width="20" height="15" viewBox="0 0 20 15" fill="none"><path d="M16.93 1.24A16.5 16.5 0 0012.73 0c-.18.34-.4.8-.54 1.17a15.26 15.26 0 00-4.57 0A10.3 10.3 0 007.08 0 16.54 16.54 0 002.87 1.25C.3 4.77-.19 8.18.07 11.55c1.72 1.27 3.39 2.05 5.04 2.57.41-.56.77-1.15 1.08-1.79a9.76 9.76 0 01-1.7-.83c.14-.1.28-.21.41-.32 3.27 1.53 6.82 1.53 10.06 0 .13.11.27.22.41.32-.55.31-1.12.59-1.71.83.31.64.67 1.23 1.09 1.79 1.65-.52 3.32-1.30 5.04-2.57.31-3.93-.53-7.3-2.25-10.31zM6.68 9.45c-.99 0-1.80-.92-1.80-2.05s.79-2.05 1.80-2.05c1.00 0 1.82.92 1.80 2.05 0 1.13-.80 2.05-1.80 2.05zm6.65 0c-.99 0-1.80-.92-1.80-2.05s.79-2.05 1.80-2.05c1.00 0 1.82.92 1.80 2.05 0 1.13-.79 2.05-1.80 2.05z" fill="white"/></svg>
+      Connect Discord to Enter
+    </a>
+    <p id="gwDiscordError" style="display:none;margin-top:10px;font-size:13px;color:#f87171;text-align:center;"></p>
+  </div>
+
+  <!-- Connected state (hidden until OAuth complete) -->
+  <div id="gwDiscordConnected" style="display:none;">
+    <div class="gw-discord-connected-card">
+      <img id="gwDiscordAvatar" class="gw-discord-avatar" src="" alt=""/>
+      <div class="gw-discord-info">
+        <div class="gw-discord-connected-label">Discord Connected</div>
+        <div class="gw-discord-username" id="gwDiscordUsername"></div>
+      </div>
+      <a href="/api/discord/logout" class="gw-discord-disconnect">Disconnect</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROP FIRM CARDS ═══ -->
+<div class="gw-firms-section" id="firms">
+  <div class="gw-firms-header">
+    <div class="gw-firms-label">Partnered Prop Firms</div>
+    <div class="gw-firms-h">Get an Eval with Code <span style="color:#4ade80">NICO</span></div>
+    <div class="gw-firms-sub">Every evaluation purchased = 1 giveaway entry</div>
+  </div>
+  <div class="gw-firms-grid">
+
+    <!-- Lucid Trading -->
+    <div class="gw-fcard featured">
+      <div class="gw-fcard-badge">★ #1 PARTNER</div>
+      <div class="gw-fcard-head">
+        <div class="gw-fcard-icon" style="background:#000;overflow:hidden;padding:0;"><img src="images/lucid-trading.png" alt="Lucid Trading" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="gw-fcard-info">
+          <div class="gw-fcard-name">Lucid Trading</div>
+          <div class="gw-fcard-rating">
+            <span class="gw-fcard-stars">★★★★★</span>
+            <span class="gw-fcard-score">4.6</span>
+            <span class="gw-fcard-reviews">· 4.8K reviews</span>
+            <a href="https://www.trustpilot.com/review/lucidtrading.com" target="_blank" rel="noopener" class="gw-fcard-tp">Trustpilot</a>
+          </div>
+        </div>
+      </div>
+      <div class="gw-fcard-coupon">
+        <div class="gw-fcard-coupon-tag">Exclusive Deal</div>
+        <div class="gw-fcard-pct">40% OFF</div>
+        <div class="gw-fcard-pct-label">Highest available discount with code NICO</div>
+      </div>
+      <div class="gw-fcard-code" onclick="gwCopy(this.querySelector('.gw-fcard-copy'),'NICO')">
+        <div class="gw-fcard-code-left"><span class="gw-fcard-code-label">Code</span></div>
+        <span class="gw-fcard-code-val">NICO</span>
+        <button class="gw-fcard-copy" onclick="event.stopPropagation();gwCopy(this,'NICO')" title="Copy code">
+          <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 9H2a1 1 0 01-1-1V2a1 1 0 011-1h6a1 1 0 011 1v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <span class="gw-fcard-copy-text">Copy</span>
+        </button>
+      </div>
+      <a href="https://lucidtrading.com/ref/nicotrades" target="_blank" rel="noopener" class="gw-fcard-btn">Get 40% Off →</a>
+    </div>
+
+    <!-- Tradeify -->
+    <div class="gw-fcard">
+      <div class="gw-fcard-head">
+        <div class="gw-fcard-icon" style="background:#00c27a;overflow:hidden;padding:0;"><img src="images/tradeify.png" alt="Tradeify" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="gw-fcard-info">
+          <div class="gw-fcard-name">Tradeify</div>
+          <div class="gw-fcard-rating">
+            <span class="gw-fcard-stars">★★★★★</span>
+            <span class="gw-fcard-score">4.6</span>
+            <span class="gw-fcard-reviews">· 3.5K reviews</span>
+            <a href="https://www.trustpilot.com/review/tradeify.co" target="_blank" rel="noopener" class="gw-fcard-tp">Trustpilot</a>
+          </div>
+        </div>
+      </div>
+      <div class="gw-fcard-coupon">
+        <div class="gw-fcard-coupon-tag">Exclusive Deal</div>
+        <div class="gw-fcard-pct">40% OFF</div>
+        <div class="gw-fcard-pct-label">Highest available discount with code NICO</div>
+      </div>
+      <div class="gw-fcard-code" onclick="gwCopy(this.querySelector('.gw-fcard-copy'),'NICO')">
+        <div class="gw-fcard-code-left"><span class="gw-fcard-code-label">Code</span></div>
+        <span class="gw-fcard-code-val">NICO</span>
+        <button class="gw-fcard-copy" onclick="event.stopPropagation();gwCopy(this,'NICO')" title="Copy code">
+          <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 9H2a1 1 0 01-1-1V2a1 1 0 011-1h6a1 1 0 011 1v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <span class="gw-fcard-copy-text">Copy</span>
+        </button>
+      </div>
+      <a href="https://tradeify.co/?ref=NICO" target="_blank" rel="noopener" class="gw-fcard-btn">Get 40% Off →</a>
+    </div>
+
+    <!-- Top One Futures -->
+    <div class="gw-fcard">
+      <div class="gw-fcard-head">
+        <div class="gw-fcard-icon" style="background:#fff;overflow:hidden;padding:4px;"><img src="images/toponefutures.webp" alt="Top One Futures" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        <div class="gw-fcard-info">
+          <div class="gw-fcard-name">Top One Futures</div>
+          <div class="gw-fcard-rating">
+            <span class="gw-fcard-stars">★★★★★</span>
+            <span class="gw-fcard-score">4.8</span>
+            <span class="gw-fcard-reviews">· 4K reviews</span>
+            <a href="https://www.trustpilot.com/review/toponefutures.com" target="_blank" rel="noopener" class="gw-fcard-tp">Trustpilot</a>
+          </div>
+        </div>
+      </div>
+      <div class="gw-fcard-coupon">
+        <div class="gw-fcard-coupon-tag">Exclusive Deal</div>
+        <div class="gw-fcard-pct">35% OFF</div>
+        <div class="gw-fcard-pct-label">Highest available discount with code NICO10</div>
+      </div>
+      <div class="gw-fcard-code" onclick="gwCopy(this.querySelector('.gw-fcard-copy'),'NICO10')">
+        <div class="gw-fcard-code-left"><span class="gw-fcard-code-label">Code</span></div>
+        <span class="gw-fcard-code-val">NICO10</span>
+        <button class="gw-fcard-copy" onclick="event.stopPropagation();gwCopy(this,'NICO10')" title="Copy code">
+          <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 9H2a1 1 0 01-1-1V2a1 1 0 011-1h6a1 1 0 011 1v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <span class="gw-fcard-copy-text">Copy</span>
+        </button>
+      </div>
+      <a href="https://toponefutures.com/?linkId=lp_707970&sourceId=nicotrades&tenantId=toponefutures" target="_blank" rel="noopener" class="gw-fcard-btn">Get 35% Off →</a>
+    </div>
+
+    <!-- Funded Next -->
+    <div class="gw-fcard">
+      <div class="gw-fcard-head">
+        <div class="gw-fcard-icon" style="background:#fff;overflow:hidden;padding:4px;"><img src="images/fundednext.png" alt="Funded Next" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        <div class="gw-fcard-info">
+          <div class="gw-fcard-name">Funded Next</div>
+          <div class="gw-fcard-rating">
+            <span class="gw-fcard-stars">★★★★★</span>
+            <span class="gw-fcard-score">4.5</span>
+            <span class="gw-fcard-reviews">· 73K reviews</span>
+            <a href="https://www.trustpilot.com/review/fundednext.com" target="_blank" rel="noopener" class="gw-fcard-tp">Trustpilot</a>
+          </div>
+        </div>
+      </div>
+      <div class="gw-fcard-coupon">
+        <div class="gw-fcard-coupon-tag">Exclusive Deal</div>
+        <div class="gw-fcard-pct">50% OFF</div>
+        <div class="gw-fcard-pct-label">Highest available discount with code NICOTRADES</div>
+      </div>
+      <div class="gw-fcard-code" onclick="gwCopy(this.querySelector('.gw-fcard-copy'),'NICOTRADES')">
+        <div class="gw-fcard-code-left"><span class="gw-fcard-code-label">Code</span></div>
+        <span class="gw-fcard-code-val">NICOTRADES</span>
+        <button class="gw-fcard-copy" onclick="event.stopPropagation();gwCopy(this,'NICOTRADES')" title="Copy code">
+          <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 9H2a1 1 0 01-1-1V2a1 1 0 011-1h6a1 1 0 011 1v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <span class="gw-fcard-copy-text">Copy</span>
+        </button>
+      </div>
+      <a href="https://fundednext.com/?fpr=niko71" target="_blank" rel="noopener" class="gw-fcard-btn">Get 50% Off →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ SOFTWARE / TOOLS ═══ -->
+<div class="gw-software-section">
+  <div class="gw-software-divider">
+    <div class="gw-software-divider-line"></div>
+    <div class="gw-software-divider-text">Affiliated Trading Tools</div>
+    <div class="gw-software-divider-line"></div>
+  </div>
+  <div class="gw-software-entry-note">
+    <span>+</span>
+    Purchases of these tools also count as a giveaway entry
+  </div>
+  <div class="gw-software-grid">
+
+    <!-- Tradezella -->
+    <div class="gw-scard">
+      <div class="gw-scard-head">
+        <div class="gw-scard-icon" style="background:#fff;overflow:hidden;padding:0;"><img src="images/tradezella.png" alt="Tradezella" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="gw-scard-info">
+          <div class="gw-scard-name">Tradezella</div>
+          <div class="gw-scard-desc">Backtesting &amp; trade journaling — review, analyse and improve your edge</div>
+        </div>
+      </div>
+      <div class="gw-scard-coupon">
+        <div class="gw-scard-discount">20% OFF</div>
+        <div class="gw-scard-pct-label">Use code NICO for the best available deal</div>
+      </div>
+      <div class="gw-scard-code" onclick="gwCopy(this.querySelector('.gw-scard-copy'),'NICO')">
+        <div class="gw-scard-code-left"><span class="gw-scard-code-label">Code</span></div>
+        <span class="gw-scard-code-val">NICO</span>
+        <button class="gw-scard-copy" onclick="event.stopPropagation();gwCopy(this,'NICO')" title="Copy code">
+          <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 9H2a1 1 0 01-1-1V2a1 1 0 011-1h6a1 1 0 011 1v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <span class="gw-scard-copy-text">Copy</span>
+        </button>
+      </div>
+      <a href="https://refer.tradezella.com/niko" target="_blank" rel="noopener" class="gw-scard-btn">Get Tradezella →</a>
+    </div>
+
+    <!-- Tradecopia -->
+    <div class="gw-scard">
+      <div class="gw-scard-head">
+        <div class="gw-scard-icon" style="background:#fff;overflow:hidden;padding:4px;"><img src="images/tradecopia.png" alt="Tradecopia" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        <div class="gw-scard-info">
+          <div class="gw-scard-name">Tradecopia</div>
+          <div class="gw-scard-desc">Copy trade across multiple accounts simultaneously with ease</div>
+        </div>
+      </div>
+      <div class="gw-scard-coupon">
+        <div class="gw-scard-discount">20% OFF</div>
+        <div class="gw-scard-pct-label">Use code NICO for the best available deal</div>
+      </div>
+      <div class="gw-scard-code" onclick="gwCopy(this.querySelector('.gw-scard-copy'),'NICO')">
+        <div class="gw-scard-code-left"><span class="gw-scard-code-label">Code</span></div>
+        <span class="gw-scard-code-val">NICO</span>
+        <button class="gw-scard-copy" onclick="event.stopPropagation();gwCopy(this,'NICO')" title="Copy code">
+          <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 9H2a1 1 0 01-1-1V2a1 1 0 011-1h6a1 1 0 011 1v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <span class="gw-scard-copy-text">Copy</span>
+        </button>
+      </div>
+      <a href="https://tradecopia.com/" target="_blank" rel="noopener" class="gw-scard-btn">Get Tradecopia →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ MAIN 2-COL: Form + Sidebar ═══ -->
+<div class="gw-body" id="enter">
+  <div class="gw-main">
+
+    <div class="gw-form-card">
+      <div class="gw-form-heading">
+        <div class="gw-form-eyebrow">Submit Your Entry</div>
+        <div class="gw-form-title">Which firm did you use code <span>NICO</span> on?</div>
+      </div>
+      <form id="gwForm">
+        <div class="gw-field">
+          <label class="gw-label">Prop Firm</label>
+          <div class="gw-select-wrap">
+            <select class="gw-select" id="gwFirm" required>
+              <option value="" disabled selected>Select a firm...</option>
+              <option>Lucid Trading</option>
+              <option>Tradeify</option>
+              <option>Top One Futures</option>
+              <option>Funded Next</option>
+            </select>
+          </div>
+        </div>
+        <div class="gw-field">
+          <label class="gw-label">Account Size</label>
+          <div class="gw-radio-grid">
+            <input type="radio" name="gwSize" id="s25" value="25K" class="gw-radio-input" required/>
+            <label for="s25" class="gw-radio-label">25K</label>
+            <input type="radio" name="gwSize" id="s50" value="50K" class="gw-radio-input"/>
+            <label for="s50" class="gw-radio-label">50K</label>
+            <input type="radio" name="gwSize" id="s75" value="75K" class="gw-radio-input"/>
+            <label for="s75" class="gw-radio-label">75K</label>
+            <input type="radio" name="gwSize" id="s100" value="100K" class="gw-radio-input"/>
+            <label for="s100" class="gw-radio-label">100K</label>
+            <input type="radio" name="gwSize" id="s150" value="150K" class="gw-radio-input"/>
+            <label for="s150" class="gw-radio-label">150K</label>
+          </div>
+        </div>
+        <div class="gw-field">
+          <label class="gw-label">Order Number</label>
+          <input class="gw-input" type="text" id="gwOrder" placeholder="Enter your order number" required/>
+        </div>
+        <div class="gw-field">
+          <label class="gw-label">First name on account</label>
+          <input class="gw-input" type="text" id="gwFirst" placeholder="First name" required/>
+        </div>
+        <button type="submit" class="gw-add-btn">Add Entry</button>
+        <div class="gw-submit-section">
+          <div class="gw-to-submit">
+            <div class="gw-to-submit-badge" id="gwPendingBadge">0</div>
+            <div class="gw-to-submit-label">entries<br>pending</div>
+          </div>
+          <button type="button" class="gw-submit-btn" id="gwSubmitBtn" onclick="gwSubmitAll()">Submit Entries</button>
+        </div>
+        <p class="gw-form-note">All entries are verified against prop firm records. Fake entries don't work and will be disqualified. Entries reset weekly (Sunday–Saturday).</p>
+      </form>
+      <div id="gwSuccess" style="display:none;">
+        <div class="gw-success-wrap">
+          <div class="gw-success-icon-ring">
+            <div class="gw-success-emoji">🎉</div>
+          </div>
+          <div class="gw-success-title">You're in the draw!</div>
+          <div class="gw-success-sub">Winners are announced every Sunday in the <a href="https://discord.gg/4bK2vTNenD" target="_blank" style="color:#60a5fa;text-decoration:none;font-weight:600;">NicoTrades Discord</a>. Good luck!</div>
+          <div class="gw-success-count-box">
+            <div class="gw-success-count" id="gwFinalCount">0</div>
+            <div class="gw-success-count-label">Total Entries This Week</div>
+          </div>
+          <br>
+          <button onclick="gwReset()" class="gw-success-reset">Submit More Entries</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="gw-cta-box">
+      <h3>Haven't entered yet?</h3>
+      <p>Buy an evaluation from any partnered firm using code <strong style="color:#fff">NICO</strong> and earn entries. Every eval = 1 entry. No cap.</p>
+      <a href="#firms" class="gw-cta-eval-btn">Get an eval with code NICO →</a>
+    </div>
+
+    <div class="gw-how-section">
+      <div class="gw-how-header">Real Traders, Real Prizes</div>
+      <div class="gw-steps-list">
+        <div class="gw-step-row"><div class="gw-step-n">1</div><div><div class="gw-step-title">Purchase an evaluation using code NICO</div><p class="gw-step-desc">Buy any evaluation from a partnered prop firm and enter code <strong style="color:rgba(255,255,255,0.75)">NICO</strong> at checkout.</p></div></div>
+        <div class="gw-step-row"><div class="gw-step-n">2</div><div><div class="gw-step-title">Every evaluation equals one entry</div><p class="gw-step-desc">Each qualifying evaluation with code NICO counts as one entry. Stack multiple for better odds.</p></div></div>
+        <div class="gw-step-row"><div class="gw-step-n">3</div><div><div class="gw-step-title">Connect Discord and submit order numbers</div><p class="gw-step-desc">Verify your Discord account above, then submit your order details using the form.</p></div></div>
+        <div class="gw-step-row"><div class="gw-step-n">4</div><div><div class="gw-step-title">Winners drawn weekly, announced in Discord</div><p class="gw-step-desc">Winners are drawn every Sunday from all eligible entries and announced in the Discord server.</p></div></div>
+      </div>
+      <div class="gw-key-points">
+        <div class="gw-key-point"><div class="gw-key-dot"></div>Fake entries don't work. Everything is verified against prop firm records.</div>
+        <div class="gw-key-point"><div class="gw-key-dot"></div>Entries reset weekly. Eligibility window: Sunday 12:00 AM – Saturday 11:59 PM ET.</div>
+        <div class="gw-key-point"><div class="gw-key-dot"></div>All entries have equal odds — random selection, no favourites.</div>
+        <div class="gw-key-point"><div class="gw-key-dot"></div>No purchase necessary — see Discord for free entry details.</div>
+      </div>
+      <div class="gw-tos" id="gwTos">
+        <div class="gw-tos-toggle" onclick="document.getElementById('gwTos').classList.toggle('open')">
+          Terms of Service
+          <svg class="gw-tos-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="gw-tos-body">
+          <div class="gw-tos-inner">
+            <p><strong>1. No Purchase Necessary.</strong> No purchase is necessary to enter or win. A free method of entry is available. See Discord for details. Void where prohibited.</p>
+            <p><strong>2. Entries.</strong> Each qualifying evaluation purchased using code NICO from a partnered prop firm equals one (1) entry. Entries may be stacked with no cap. Entries reset weekly (Sunday 12:00 AM ET – Saturday 11:59 PM ET).</p>
+            <p><strong>3. Eligibility.</strong> Must be the age of majority in your jurisdiction. Void where prohibited by law.</p>
+            <p><strong>4. Drawing.</strong> Winners are drawn randomly every Sunday from all eligible entries submitted for that week. All entries have equal odds. Winners are announced in the NicoTrades Discord server.</p>
+            <p><strong>5. Prizes.</strong> Prizes are funded evaluation accounts from partnered prop firms. Winners are solely responsible for any applicable taxes.</p>
+            <p><strong>6. Verification.</strong> All entries are verified against prop firm records. Fraudulent or fake entries result in immediate disqualification.</p>
+            <p><strong>7. One Account.</strong> One Discord account per person maximum. Multiple accounts will result in disqualification.</p>
+            <p><strong>8. Modification.</strong> NicoTrades reserves the right to modify, suspend, or cancel the giveaway at any time without notice.</p>
+            <p><strong>9. Privacy.</strong> Information submitted will be used solely to verify entries and contact winners. <em>Last updated: July 2025.</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.gw-main -->
+
+</div>
+
+<!-- ═══ FAQ ═══ -->
+<div class="gw-faq-section">
+  <h2 class="gw-faq-h">Frequently Asked Questions</h2>
+  <p class="gw-faq-sub">Everything you need to know about the giveaway.</p>
+  <div class="gw-faq-grid">
+    <div class="gw-faq-item"><div class="gw-faq-q" onclick="gwFaq(this)">How do I enter the giveaways?<span class="gw-faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="gw-faq-a">Buy an evaluation from any partnered prop firm using code <strong style="color:rgba(255,255,255,0.80)">NICO</strong> at checkout. Then connect your Discord above and submit your order number using the form on this page.</div></div>
+    <div class="gw-faq-item"><div class="gw-faq-q" onclick="gwFaq(this)">How many entries can I have?<span class="gw-faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="gw-faq-a">There is no cap. One evaluation equals one entry, so the more evals you buy with code NICO, the more entries you stack and the better your chances of winning.</div></div>
+    <div class="gw-faq-item"><div class="gw-faq-q" onclick="gwFaq(this)">When are winners picked?<span class="gw-faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="gw-faq-a">Every single week. Winners are drawn every Sunday from all eligible entries submitted during that week (Sunday 12:00 AM – Saturday 11:59 PM ET).</div></div>
+    <div class="gw-faq-item"><div class="gw-faq-q" onclick="gwFaq(this)">How do I know if I won?<span class="gw-faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="gw-faq-a">Winners are announced in the #announcements channel in the NicoTrades Discord server every Sunday. Make sure your Discord notifications are on so you don't miss it.</div></div>
+    <div class="gw-faq-item"><div class="gw-faq-q" onclick="gwFaq(this)">Is there a free way to enter?<span class="gw-faq-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="gw-faq-a">Yes. No purchase is necessary. A free entry option is available with the same odds as purchase entries. Open a support ticket in the NicoTrades Discord for details.</div></div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="gw-footer">
+  <div class="container">
+    <a href="/" class="gw-footer-logo">NICO<span>TRADES</span></a>
+    <div class="gw-footer-links">
+      <a href="/mentorship.html">Mentorship</a>
+      <a href="/index.html">Free Course</a>
+      <a href="/giveaway.html">Giveaways</a>
+      <a href="https://discord.gg/4bK2vTNenD" target="_blank" rel="noopener">Discord</a>
+    </div>
+    <p class="gw-footer-copy">© 2025 Nico Trades. All rights reserved.</p>
+    <p class="gw-footer-disc">Trading involves substantial risk. Past performance is not indicative of future results. Prop firm giveaway prizes are evaluation accounts only. Winners are solely responsible for applicable taxes. No purchase necessary. Void where prohibited.</p>
+  </div>
+</footer>
+
+<script>
+  (function(){var w=document.getElementById('gwStars');for(var i=0;i<70;i++){var s=document.createElement('div');s.className='gw-star';var sz=Math.random()*1.8+0.8;s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;--d:'+(Math.random()*4+2)+'s;--delay:-'+(Math.random()*6)+'s;--op:'+(Math.random()*0.5+0.1)+';';w.appendChild(s);}})();
+  var gwNav=document.getElementById('gwNav');
+  window.addEventListener('scroll',function(){gwNav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+  function gwFaq(el){var item=el.closest('.gw-faq-item'),isOpen=item.classList.contains('open');document.querySelectorAll('.gw-faq-item.open').forEach(function(i){i.classList.remove('open');});if(!isOpen)item.classList.add('open');}
+  // ── Discord session check ──
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var errEl = document.getElementById('gwDiscordError');
+    if (params.get('discord_error') === 'cancelled') {
+      errEl.textContent = 'Connection cancelled. Try again.';
+      errEl.style.display = 'block';
+    } else if (params.get('discord_error')) {
+      errEl.textContent = 'Something went wrong. Please try again.';
+      errEl.style.display = 'block';
+    }
+    // Clean up query params without reloading
+    if (params.has('discord_error')) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+
+    fetch('/api/discord/user')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.connected) return;
+        // Show connected card
+        document.getElementById('gwDiscordConnect').style.display = 'none';
+        document.getElementById('gwDiscordConnected').style.display = 'block';
+        document.getElementById('gwDiscordUsername').textContent = data.displayName || data.username;
+        var avatarEl = document.getElementById('gwDiscordAvatar');
+        avatarEl.src = (data.avatar && data.id)
+          ? 'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '.png?size=80'
+          : 'https://cdn.discordapp.com/embed/avatars/0.png';
+        // Load entry count from server (cross-device)
+        gwLoadEntries();
+      })
+      .catch(function() {});
+  })();
+
+  // ── Entry persistence (server-backed) ──
+  var pendingCount = 0, totalCount = 0;
+
+  function gwSetTotal(n) {
+    totalCount = n;
+    document.getElementById('gwEntryCount').textContent = totalCount;
+  }
+
+  function gwLoadEntries() {
+    fetch('/api/giveaway/entries')
+      .then(function(r) { return r.json(); })
+      .then(function(d) { if (typeof d.total === 'number') gwSetTotal(d.total); })
+      .catch(function() {});
+  }
+
+  function gwUpdateBadge() {
+    var b = document.getElementById('gwPendingBadge');
+    b.textContent = pendingCount;
+    b.classList.toggle('has-entries', pendingCount > 0);
+  }
+
+  document.getElementById('gwForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Optimistic UI update
+    pendingCount++;
+    gwSetTotal(totalCount + 1);
+    gwUpdateBadge();
+    document.getElementById('gwSubmitBtn').classList.add('ready');
+    document.getElementById('gwFirm').value = '';
+    document.querySelectorAll('.gw-radio-input').forEach(function(r) { r.checked = false; });
+    document.getElementById('gwOrder').value = '';
+    document.getElementById('gwFirst').value = '';
+    // Persist to server
+    fetch('/api/giveaway/entries', { method: 'POST' })
+      .then(function(r) { return r.json(); })
+      .then(function(d) { if (typeof d.total === 'number') gwSetTotal(d.total); })
+      .catch(function() {});
+  });
+
+  function gwSubmitAll() {
+    if (pendingCount === 0) return;
+    document.getElementById('gwFinalCount').textContent = totalCount;
+    document.getElementById('gwForm').style.display = 'none';
+    document.getElementById('gwSuccess').style.display = 'block';
+    pendingCount = 0;
+    document.getElementById('gwSubmitBtn').classList.remove('ready');
+    gwUpdateBadge();
+  }
+
+  function gwReset() {
+    document.getElementById('gwSuccess').style.display = 'none';
+    document.getElementById('gwForm').style.display = 'block';
+    gwUpdateBadge();
+  }
+  function gwCopy(btn,code){
+    var box=btn.closest('.gw-fcard-code,.gw-scard-code')||btn;
+    navigator.clipboard.writeText(code).then(function(){
+      btn.classList.add('copied');
+      box.classList.add('copied');
+      var t=btn.querySelector('.gw-fcard-copy-text,.gw-scard-copy-text');
+      if(t){var orig=t.textContent;t.textContent='Copied!';}
+      setTimeout(function(){
+        btn.classList.remove('copied');
+        box.classList.remove('copied');
+        if(t){t.textContent=orig;}
+      },2000);
+    });
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=this.getAttribute('href').slice(1),el=document.getElementById(id);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}});});
+</script>
+</body>
+</html>
