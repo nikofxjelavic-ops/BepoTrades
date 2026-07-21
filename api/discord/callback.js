@@ -25,7 +25,34 @@ function createToken(data, secret) {
 async function pushToGHL(user) {
   const apiKey = process.env.GHL_API_KEY;
   const locationId = process.env.GHL_LOCATION_ID;
-  if (!apiKey || !locationId || !user.email) return;
+
+  console.log('[discord/callback] pushToGHL called for user:', {
+    id: user.id, username: user.username, email: user.email,
+    verified: user.verified, global_name: user.global_name,
+  });
+  console.log('[discord/callback] GHL env vars — has GHL_API_KEY:', !!apiKey, '| has GHL_LOCATION_ID:', !!locationId);
+
+  if (!apiKey || !locationId) {
+    console.warn('[discord/callback] SKIP GHL — missing GHL_API_KEY or GHL_LOCATION_ID');
+    return;
+  }
+  if (!user.email) {
+    console.warn('[discord/callback] SKIP GHL — user.email is null. Discord account has no verified email or email scope was denied.');
+    return;
+  }
+
+  const payload = {
+    locationId,
+    email: user.email,
+    firstName: user.global_name || user.username,
+    tags: ['giveaway-entrant', 'discord-connected'],
+    source: 'bepotrades-giveaway',
+    customFields: [
+      { key: 'discord_username', field_value: user.username },
+      { key: 'discord_id',       field_value: user.id },
+    ],
+  };
+  console.log('[discord/callback] GHL upsert payload:', JSON.stringify(payload));
 
   try {
     const r = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
@@ -35,22 +62,15 @@ async function pushToGHL(user) {
         'Version': '2021-07-28',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        locationId,
-        email: user.email,
-        firstName: user.global_name || user.username,
-        tags: ['giveaway-entrant', 'discord-connected'],
-        source: 'bepotrades-giveaway',
-        customFields: [
-          { key: 'discord_username', field_value: user.username },
-          { key: 'discord_id', field_value: user.id },
-        ],
-      }),
+      body: JSON.stringify(payload),
     });
-    if (!r.ok) console.error('[discord/callback] GHL upsert failed:', r.status, await r.text());
-    else console.log('[discord/callback] GHL contact upserted for', user.email);
+    const raw = await r.text();
+    console.log('[discord/callback] GHL upsert status:', r.status);
+    console.log('[discord/callback] FULL GHL upsert response:', raw);
+    if (!r.ok) console.error('[discord/callback] GHL upsert FAILED');
+    else       console.log('[discord/callback] GHL contact upserted for', user.email);
   } catch (err) {
-    console.error('[discord/callback] GHL error:', err.message);
+    console.error('[discord/callback] GHL fetch threw:', err.message);
   }
 }
 
