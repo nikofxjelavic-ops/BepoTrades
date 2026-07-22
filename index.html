@@ -22,6 +22,27 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.css">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <style>
+    html { background: #04081e; }
+    body {
+      background-color: #04081e;
+      background-image:
+        radial-gradient(circle 560px at 50% -300px, rgba(59,130,246,0.08) 0%, transparent 100%),
+        radial-gradient(circle 350px at calc(100% + 150px) 100%, rgba(139,92,246,0.06) 0%, transparent 100%);
+      background-attachment: fixed;
+    }
+    .hero-bg { display:none !important; }
+    .hero-star { display:none !important; }
+    /* Normal scroll — override GSAP fixed-section experience */
+    html, body { height: auto !important; }
+    .page-section {
+      position: relative !important;
+      inset: auto !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transform: none !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -428,5 +449,22 @@
   <script src="https://cdn.jsdelivr.net/npm/motion@12.0.0/dist/motion.js"></script>
   <script src="script.js"></script>
   <script src="bg.js"></script>
+<script>
+;(function(){
+  document.body.style.height = 'auto';
+  window.addEventListener('resize', function(){ document.body.style.height = 'auto'; });
+  if (window.gsap) {
+    document.querySelectorAll('.tf-card, .testi-card').forEach(function(el){
+      gsap.set(el, { clearProps: 'all' });
+    });
+    document.querySelectorAll('.mod-pair').forEach(function(el){
+      gsap.set(el, { clearProps: 'all' });
+    });
+    document.querySelectorAll('.mod-card').forEach(function(el){
+      gsap.set(el, { clearProps: 'all' });
+    });
+  }
+})();
+</script>
 </body>
 </html>
