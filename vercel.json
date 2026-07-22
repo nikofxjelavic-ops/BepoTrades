@@ -20,6 +20,8 @@
     { "src": "/course", "dest": "/course.html" },
     { "src": "/confirm", "dest": "/confirm.html" },
     { "src": "/mentorship", "dest": "/mentorship.html" },
+    { "src": "/propfirms", "dest": "/propfirms.html" },
+    { "src": "/giveaway", "dest": "/giveaway.html" },
     { "src": "/(.*\\.(css|js|png|jpg|jpeg|svg|ico|woff|woff2|mp4|webm))", "dest": "/$1" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
