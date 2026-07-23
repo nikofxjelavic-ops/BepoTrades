@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Trading Checklist — Bepo Trades</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <meta name="description" content="Get the exact setup rating checklist Bepo uses every session. Free — enter your name and email.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #04081e;
+      --blue: #60a5fa;
+      --purple: #a78bfa;
+      --font-h: 'Space Grotesk', sans-serif;
+      --font-b: 'Inter', sans-serif;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: #fff;
+      font-family: var(--font-b);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── BACKGROUND ORBS ─── */
+    .bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    }
+    .bg::before {
+      content: '';
+      position: absolute;
+      width: 900px; height: 900px;
+      top: -300px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(59,130,246,0.13) 0%, transparent 70%);
+    }
+    .bg::after {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      bottom: -100px; right: -150px;
+      background: radial-gradient(circle, rgba(139,92,246,0.09) 0%, transparent 70%);
+    }
+
+    /* ─── PAGE ─── */
+    .page {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ─── LOGO ─── */
+    .logo {
+      padding: 28px 0 0;
+      font-family: var(--font-h);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+    }
+    .logo span { color: var(--blue); }
+
+    /* ─── HERO ─── */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 80px;
+      max-width: 700px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-h);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(96,165,250,0.90);
+      background: rgba(96,165,250,0.08);
+      border: 1px solid rgba(96,165,250,0.22);
+      border-radius: 99px;
+      padding: 8px 18px;
+      margin-bottom: 28px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #60a5fa;
+      box-shadow: 0 0 7px rgba(96,165,250,0.9);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { box-shadow: 0 0 5px rgba(96,165,250,0.7); }
+      50%      { box-shadow: 0 0 14px rgba(96,165,250,1); }
+    }
+
+    h1 {
+      font-family: var(--font-h);
+      font-size: clamp(38px, 7vw, 68px);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      margin-bottom: 22px;
+    }
+    h1 .grad {
+      background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 55%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.55);
+      max-width: 480px;
+      margin: 0 auto 48px;
+    }
+
+    /* ─── CHECKLIST PREVIEW CARDS ─── */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 520px;
+      margin-bottom: 48px;
+    }
+    .cl-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 14px 18px;
+      text-align: left;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cl-card:hover {
+      background: rgba(96,165,250,0.05);
+      border-color: rgba(96,165,250,0.18);
+    }
+    .cl-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(96,165,250,0.10);
+      border: 1px solid rgba(96,165,250,0.22);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cl-icon svg { display: block; }
+    .cl-text { flex: 1; }
+    .cl-title {
+      font-family: var(--font-h);
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.90);
+      margin-bottom: 2px;
+    }
+    .cl-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.5;
+    }
+    .cl-num {
+      font-family: var(--font-h);
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(96,165,250,0.50);
+    }
+
+    /* ─── CTA BUTTON ─── */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+      color: #fff;
+      border: none;
+      border-radius: 16px;
+      padding: 18px 36px;
+      font-family: var(--font-h);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      box-shadow: 0 4px 32px rgba(59,130,246,0.40), 0 0 0 1px rgba(96,165,250,0.20);
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(59,130,246,0.50), 0 0 0 1px rgba(96,165,250,0.30);
+    }
+    .btn-cta:active { transform: translateY(0); }
+
+    .btn-arrow {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .trust {
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.28);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+    }
+    .trust-sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 24px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.18);
+      text-align: center;
+    }
+    footer a { color: rgba(255,255,255,0.28); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,0.50); }
+
+    /* ═══════════════════════════════════════
+       MODAL
+    ═══════════════════════════════════════ */
+    .overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(2,5,18,0.80);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 440px;
+      background: #080e28;
+      border: 1px solid rgba(96,165,250,0.18);
+      border-radius: 28px;
+      padding: 40px 36px 36px;
+      box-shadow: 0 0 0 1px rgba(96,165,250,0.08), 0 32px 100px rgba(0,0,0,0.70);
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.34, 1.36, 0.64, 1);
+      position: relative;
+    }
+    .overlay.open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.50);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.10); color: #fff; }
+
+    .modal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-h);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(96,165,250,0.85);
+      background: rgba(96,165,250,0.08);
+      border: 1px solid rgba(96,165,250,0.20);
+      border-radius: 99px;
+      padding: 6px 14px;
+      margin-bottom: 18px;
+    }
+
+    .modal h2 {
+      font-family: var(--font-h);
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+    .modal h2 span {
+      background: linear-gradient(90deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .modal-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.60;
+      margin-bottom: 28px;
+    }
+
+    /* ─── FORM ─── */
+    .form { display: flex; flex-direction: column; gap: 14px; }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 7px;
+    }
+    .field input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: var(--font-b);
+      font-size: 14px;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+    .field input::placeholder { color: rgba(255,255,255,0.20); }
+    .field input:focus {
+      border-color: rgba(96,165,250,0.50);
+      box-shadow: 0 0 0 3px rgba(96,165,250,0.12);
+    }
+    .field input.err {
+      border-color: rgba(248,113,113,0.55);
+      box-shadow: 0 0 0 3px rgba(248,113,113,0.10);
+    }
+
+    .form-error {
+      display: none;
+      font-size: 12px;
+      color: #f87171;
+      background: rgba(248,113,113,0.07);
+      border: 1px solid rgba(248,113,113,0.20);
+      border-radius: 10px;
+      padding: 10px 14px;
+      text-align: center;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 15px 20px;
+      font-family: var(--font-h);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.35);
+      transition: opacity 0.2s, transform 0.15s;
+      margin-top: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-submit::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .btn-submit:hover:not(:disabled) { opacity: 0.88; transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.50; cursor: not-allowed; transform: none; }
+
+    .privacy {
+      font-size: 11px;
+      color: rgba(255,255,255,0.24);
+      text-align: center;
+      line-height: 1.55;
+      margin-top: 4px;
+    }
+
+    /* ─── SUCCESS ─── */
+    .success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      padding: 12px 0;
+    }
+    .success-ring {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      background: rgba(96,165,250,0.10);
+      border: 1px solid rgba(96,165,250,0.30);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 40px rgba(96,165,250,0.25);
+    }
+    .success-state h3 {
+      font-family: var(--font-h);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .success-state p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.50);
+      line-height: 1.65;
+      max-width: 290px;
+    }
+    .success-email { color: var(--blue); font-weight: 600; }
+    .spam-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      margin-top: -4px;
+    }
+
+    @media (max-width: 480px) {
+      .modal { padding: 32px 22px 28px; border-radius: 22px; }
+      h1 { font-size: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="page">
+
+  <a href="/" class="logo">BEPO<span>TRADES</span></a>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+
+    <div class="badge"><span class="badge-dot"></span> 100% Free · Instant Access</div>
+
+    <h1>The Setup Rating<br>Checklist That<br><span class="grad">Separates Winners.</span></h1>
+
+    <p class="hero-sub">The exact framework used to rate every trade setup before entering. Never guess on a trade again.</p>
+
+    <!-- Checklist preview cards -->
+    <div class="cards">
+      <div class="cl-card">
+        <div class="cl-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8.5L6 12.5L14 4" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cl-text">
+          <div class="cl-title">Market Structure</div>
+          <div class="cl-desc">Direction bias confirmed before any entry</div>
+        </div>
+        <div class="cl-num">01</div>
+      </div>
+      <div class="cl-card">
+        <div class="cl-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8.5L6 12.5L14 4" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cl-text">
+          <div class="cl-title">Liquidity & Key Levels</div>
+          <div class="cl-desc">Where price wants to go and why</div>
+        </div>
+        <div class="cl-num">02</div>
+      </div>
+      <div class="cl-card">
+        <div class="cl-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8.5L6 12.5L14 4" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cl-text">
+          <div class="cl-title">Setup Quality Score</div>
+          <div class="cl-desc">Rate every entry from 1–10 before you touch a position</div>
+        </div>
+        <div class="cl-num">03</div>
+      </div>
+      <div class="cl-card">
+        <div class="cl-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8.5L6 12.5L14 4" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cl-text">
+          <div class="cl-title">Risk & Execution Plan</div>
+          <div class="cl-desc">Entry, stop, and target locked before the trade</div>
+        </div>
+        <div class="cl-num">04</div>
+      </div>
+    </div>
+
+    <button class="btn-cta" id="btnOpen">
+      Get the Free Checklist
+      <span class="btn-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </button>
+
+    <div class="trust">
+      <span>Free forever</span>
+      <span class="trust-sep"></span>
+      <span>No credit card</span>
+      <span class="trust-sep"></span>
+      <span>Sent instantly</span>
+    </div>
+
+  </section>
+
+  <footer>© 2025 BepoTrades · <a href="/">Home</a></footer>
+
+</div>
+
+<!-- ══ MODAL ══ -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Get the checklist">
+  <div class="modal" id="modal">
+
+    <button class="modal-close" id="btnClose" aria-label="Close">✕</button>
+
+    <!-- Form state -->
+    <div id="formState">
+      <div class="modal-badge"><span class="badge-dot"></span> Free Download</div>
+      <h2>Send me the<br><span>Checklist →</span></h2>
+      <p class="modal-sub">Enter your details below and we'll send it straight to your inbox.</p>
+
+      <form class="form" id="clForm" novalidate>
+        <div class="field">
+          <label for="clName">First Name</label>
+          <input type="text" id="clName" placeholder="Your first name" autocomplete="given-name" required>
+        </div>
+        <div class="field">
+          <label for="clEmail">Email Address</label>
+          <input type="email" id="clEmail" placeholder="your@email.com" autocomplete="email" required>
+        </div>
+        <div class="form-error" id="clError"></div>
+        <button type="submit" class="btn-submit" id="clBtn">Send Me the Checklist →</button>
+        <p class="privacy">No spam, ever. Unsubscribe any time.</p>
+      </form>
+    </div>
+
+    <!-- Success state -->
+    <div class="success-state" id="successState">
+      <div class="success-ring">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <path d="M6 15L12 21L24 9" stroke="#60a5fa" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>You're in!</h3>
+      <p>The checklist is heading to<br><span class="success-email" id="successEmail"></span></p>
+      <p class="spam-note">Check your spam if you don't see it within 2 minutes.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var overlay  = document.getElementById('overlay');
+  var btnOpen  = document.getElementById('btnOpen');
+  var btnClose = document.getElementById('btnClose');
+  var form     = document.getElementById('clForm');
+  var btn      = document.getElementById('clBtn');
+  var errEl    = document.getElementById('clError');
+  var nameEl   = document.getElementById('clName');
+  var emailEl  = document.getElementById('clEmail');
+
+  function openModal() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() { nameEl.focus(); }, 350);
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  btnOpen.addEventListener('click', openModal);
+  btnClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function showErr(msg) { errEl.textContent = msg; errEl.style.display = 'block'; }
+  function clearErr()   { errEl.style.display = 'none'; }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    clearErr();
+
+    var firstName = nameEl.value.trim();
+    var email     = emailEl.value.trim();
+
+    if (!firstName) { nameEl.classList.add('err'); nameEl.focus(); showErr('Please enter your first name.'); return; }
+    nameEl.classList.remove('err');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { emailEl.classList.add('err'); emailEl.focus(); showErr('Please enter a valid email address.'); return; }
+    emailEl.classList.remove('err');
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      var res = await fetch('/api/checklist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName: firstName, email: email }),
+      });
+      if (!res.ok) throw new Error();
+
+      document.getElementById('successEmail').textContent = email;
+      document.getElementById('formState').style.display = 'none';
+      var s = document.getElementById('successState');
+      s.style.display = 'flex';
+
+    } catch (_) {
+      btn.disabled = false;
+      btn.textContent = 'Send Me the Checklist →';
+      showErr('Something went wrong. Please try again.');
+    }
+  });
+
+  [nameEl, emailEl].forEach(function(el) {
+    el.addEventListener('input', function() { el.classList.remove('err'); clearErr(); });
+  });
+})();
+</script>
+</body>
+</html>
